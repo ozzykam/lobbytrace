@@ -8,8 +8,9 @@
 
 # Node
 /node_modules
-npm-debug.log
-yarn-error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # IDEs and editors
 .idea/
@@ -19,6 +20,9 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+*.swp
+*.swo
+*~
 
 # Visual Studio Code
 .vscode/*
@@ -27,6 +31,18 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
 
 # Miscellaneous
 /.angular/cache
@@ -37,6 +53,66 @@ yarn-error.log
 testem.log
 /typings
 
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Build files
+*.tgz
+*.tar.gz
+
+# Coverage directory
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+temp/
+
+# Claude Code files
+.claude
+CLAUDE.md
+
+# Project documentation and guides
+project-checklist.md
+structure-guide.md
+
+# Firebase config (if contains sensitive keys)
+src/environments/environment.prod.ts
+
 # System files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
