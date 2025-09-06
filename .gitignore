@@ -38,6 +38,8 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.environment.ts
+.environment.prod.ts
 
 # Firebase
 .firebase/
@@ -105,8 +107,8 @@ CLAUDE.md
 project-checklist.md
 structure-guide.md
 
-# Firebase config (if contains sensitive keys)
-src/environments/environment.prod.ts
+# Firebase config and environment files (contains sensitive API keys)
+src/environments/
 
 # System files
 .DS_Store
