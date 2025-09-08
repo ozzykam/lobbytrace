@@ -1,0 +1,121 @@
+// Features Preview Section (brief overview with link to full features page)
+.features {
+  padding: 80px 0;
+  background: var(--color-surface);
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--color-text-primary);
+      
+      @media (max-width: 768px) {
+        font-size: 2.1rem;
+      }
+    }
+    
+    p {
+      font-size: 1.125rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin-bottom: 50px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    
+    .feature-card {
+      background: var(--color-background);
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+        
+        &::before {
+          transform: scaleX(1);
+        }
+      }
+      
+      .feature-icon {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        box-shadow: 0 8px 20px rgba(63, 81, 181, 0.3);
+        
+        .material-icons {
+          color: white;
+          font-size: 32px;
+        }
+      }
+      
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: var(--color-text-primary);
+      }
+      
+      p {
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  // Link to full features page
+  .features-cta {
+    text-align: center;
+    
+    .btn-outline {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+// Responsive Design
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  section {
+    padding: 60px 0 !important;
+  }
+  
+  .section-header {
+    margin-bottom: 40px;
+    
+    h2 {
+      font-size: 1.8rem !important;
+    }
+    
+    p {
+      font-size: 1rem !important;
+    }
+  }
+  
+  .hero {
+    padding: 80px 0 60px !important;
+    
+    .hero-title {
+      font-size: 2rem !important;
+    }
+    
+    .hero-subtitle {
+      font-size: 1rem !important;
+    }
+    
+    .hero-stats {
+      gap: 20px !important;
+      
+      .stat-number {
+        font-size: 2rem !important;
+      }
+    }
+  }
+}

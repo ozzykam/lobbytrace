@@ -1,0 +1,200 @@
+/* Image Upload Component Styles */
+
+.image-upload-container {
+  @apply w-full;
+}
+
+.upload-area {
+  @apply relative border-2 border-dashed border-gray-300 rounded-lg transition-all duration-300 cursor-pointer;
+  @apply hover:border-primary hover:bg-primary/5;
+  min-height: 200px;
+
+  &.drag-over {
+    @apply border-primary bg-primary/10 scale-105;
+  }
+
+  &.disabled {
+    @apply opacity-50 cursor-not-allowed;
+    @apply hover:border-gray-300 hover:bg-transparent hover:scale-100;
+  }
+
+  &.uploading {
+    @apply cursor-not-allowed;
+  }
+
+  &.has-image {
+    @apply border-solid border-gray-200;
+    min-height: auto;
+  }
+}
+
+/* Image Preview */
+.image-preview {
+  @apply relative w-full;
+  
+  .preview-image {
+    @apply w-full h-auto max-h-64 object-cover rounded-lg;
+  }
+
+  .remove-button {
+    @apply absolute top-2 right-2 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full;
+    @apply flex items-center justify-center transition-colors duration-200;
+    @apply shadow-lg hover:shadow-xl;
+
+    .material-icons {
+      @apply text-sm;
+    }
+  }
+}
+
+/* Upload Prompt */
+.upload-prompt {
+  @apply flex items-center justify-center h-full min-h-[200px] p-6;
+}
+
+.idle-state {
+  @apply text-center;
+
+  .upload-icon {
+    @apply text-4xl text-gray-400 mb-4;
+  }
+
+  .upload-text {
+    @apply text-gray-600 font-medium mb-2;
+  }
+
+  .upload-hint {
+    @apply text-sm text-gray-400;
+  }
+}
+
+.uploading-state {
+  @apply text-center;
+
+  .uploading-icon {
+    @apply text-4xl text-primary mb-4 animate-bounce;
+  }
+
+  .uploading-text {
+    @apply text-gray-600 font-medium mb-4;
+  }
+
+  .progress-bar {
+    @apply w-full max-w-xs mx-auto h-2 bg-gray-200 rounded-full overflow-hidden mb-2;
+
+    .progress-fill {
+      @apply h-full bg-primary transition-all duration-300 ease-out;
+    }
+  }
+
+  .progress-percentage {
+    @apply text-sm text-gray-500 font-medium;
+  }
+}
+
+/* Upload Progress Overlay */
+.upload-overlay {
+  @apply absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center;
+
+  .progress-container {
+    @apply text-center;
+  }
+
+  .progress-circle {
+    @apply relative inline-block;
+
+    .progress-ring {
+      @apply transform -rotate-90;
+      
+      .progress-ring-background {
+        @apply text-white/20;
+      }
+
+      .progress-ring-progress {
+        @apply text-white transition-all duration-300 ease-out;
+        transform-origin: center;
+      }
+    }
+
+    .progress-text {
+      @apply absolute inset-0 flex items-center justify-center text-white font-bold;
+    }
+  }
+}
+
+/* Error Message */
+.error-message {
+  @apply mt-3 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center;
+
+  .error-icon {
+    @apply text-red-500 mr-2 text-lg;
+  }
+
+  .error-text {
+    @apply text-red-700 text-sm;
+  }
+}
+
+/* Upload Info */
+.upload-info {
+  @apply mt-3 p-3 bg-gray-50 border border-gray-200 rounded-lg space-y-1;
+
+  .info-item {
+    @apply flex justify-between items-center text-sm;
+
+    .info-label {
+      @apply text-gray-500 font-medium;
+    }
+
+    .info-value {
+      @apply text-gray-700;
+    }
+  }
+}
+
+/* Responsive Design */
+@screen sm {
+  .upload-area {
+    min-height: 250px;
+  }
+
+  .preview-image {
+    @apply max-h-80;
+  }
+}
+
+@screen lg {
+  .upload-area {
+    min-height: 300px;
+  }
+
+  .preview-image {
+    @apply max-h-96;
+  }
+}
+
+/* Animation for drag over effect */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.upload-area.drag-over {
+  animation: bounce-in 0.3s ease-out;
+}
+
+/* Focus states for accessibility */
+.upload-area:focus-within {
+  @apply outline-none ring-2 ring-primary ring-opacity-50;
+}
+
+.remove-button:focus {
+  @apply outline-none ring-2 ring-red-400 ring-opacity-50;
+}

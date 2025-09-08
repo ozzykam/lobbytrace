@@ -32,8 +32,8 @@ service cloud.firestore {
       allow create, update, delete: if isSignedIn() && userRole() in ['admin','superadmin'];
     }
 
-    // Collection: recipes
-    match /recipes/{recipeId} {
+    // Collection: products
+    match /products/{recipeId} {
       allow read: if isSignedIn();
       allow create, update, delete: if isSignedIn() && userRole() in ['admin','superadmin'];
     }
@@ -83,7 +83,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent), canActivate: [canActivateAuthGuard] },
   { path: 'inventory', loadComponent: () => import('./features/inventory/inventory.component').then(m => m.InventoryComponent), canActivate: [canActivateAuthGuard] },
-  { path: 'recipes', loadComponent: () => import('./features/recipes/recipes.component').then(m => m.RecipesComponent), canActivate: [canActivateAuthGuard] },
+  { path: 'products', loadComponent: () => import('./features/products/products.component').then(m => m.ProdcutsComponent), canActivate: [canActivateAuthGuard] },
   { path: 'orders', loadComponent: () => import('./features/orders/orders.component').then(m => m.OrdersComponent), canActivate: [canActivateAuthGuard] },
   { path: 'tasks', loadComponent: () => import('./features/tasks/tasks.component').then(m => m.TasksComponent), canActivate: [canActivateAuthGuard] },
   { path: 'expenses', loadComponent: () => import('./features/expenses/expenses.component').then(m => m.ExpensesComponent), canActivate: [canActivateAuthGuard] },
@@ -105,9 +105,9 @@ src/app/
     inventory/
       inventory.component.ts
       inventory.component.html
-    recipes/
-      recipes.component.ts
-      recipes.component.html
+    products/
+      products.component.ts
+      products.component.html
     orders/
       orders.component.ts
       orders.component.html
@@ -210,3 +210,5 @@ interface ExpenseItem {
 
 ---
 
+## Notes
+- use Angular’s new @ control flow syntax (@if, @else, @for, etc.) instead of the legacy *ngIf, *ngFor, and *ngElse.

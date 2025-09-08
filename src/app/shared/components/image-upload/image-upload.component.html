@@ -1,0 +1,118 @@
+<!-- Image Upload Component -->
+<div class="image-upload-container">
+  <!-- Upload Area -->
+  <div 
+    class="upload-area"
+    [class.drag-over]="isDragOver()"
+    [class.disabled]="disabled"
+    [class.uploading]="isUploading()"
+    [class.has-image]="previewUrl()"
+    (click)="onUploadAreaClick()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <!-- Image Preview -->
+    @if (previewUrl()) {
+      <div class="image-preview">
+        <img 
+          [src]="previewUrl()" 
+          alt="Preview"
+          class="preview-image"
+        >
+        
+        <!-- Remove Button -->
+        @if (!disabled && !isUploading()) {
+          <button 
+            type="button"
+            class="remove-button"
+            (click)="onRemoveImage(); $event.stopPropagation()"
+            title="Remove image"
+          >
+            <span class="material-icons">close</span>
+          </button>
+        }
+
+        <!-- Upload Progress Overlay -->
+        @if (isUploading()) {
+          <div class="upload-overlay">
+            <div class="progress-container">
+              <div class="progress-circle">
+                <svg class="progress-ring" width="60" height="60">
+                  <circle
+                    class="progress-ring-background"
+                    stroke="currentColor"
+                    stroke-width="4"
+                    fill="transparent"
+                    r="26"
+                    cx="30"
+                    cy="30"
+                  />
+                  <circle
+                    class="progress-ring-progress"
+                    stroke="currentColor"
+                    stroke-width="4"
+                    fill="transparent"
+                    r="26"
+                    cx="30"
+                    cy="30"
+                    [style.stroke-dasharray]="163.36 + ' ' + 163.36"
+                    [style.stroke-dashoffset]="163.36 - (uploadProgress() / 100) * 163.36"
+                  />
+                </svg>
+                <span class="progress-text">{{ uploadProgress() }}%</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Upload Prompt -->
+      <div class="upload-prompt">
+        @if (isUploading()) {
+          <div class="uploading-state">
+            <span class="material-icons uploading-icon">cloud_upload</span>
+            <p class="uploading-text">Uploading...</p>
+            <div class="progress-bar">
+              <div 
+                class="progress-fill"
+                [style.width.%]="uploadProgress()"
+              ></div>
+            </div>
+            <p class="progress-percentage">{{ uploadProgress() }}%</p>
+          </div>
+        } @else {
+          <div class="idle-state">
+            <span class="material-icons upload-icon">cloud_upload</span>
+            <p class="upload-text">{{ placeholder }}</p>
+            @if (config.maxSizeInMB) {
+              <p class="upload-hint">Max size: {{ config.maxSizeInMB }}MB</p>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Error Message -->
+  @if (errorMessage()) {
+    <div class="error-message">
+      <span class="material-icons error-icon">error</span>
+      <span class="error-text">{{ errorMessage() }}</span>
+    </div>
+  }
+
+  <!-- Upload Info -->
+  @if (currentResult()) {
+    <div class="upload-info">
+      <div class="info-item">
+        <span class="info-label">File:</span>
+        <span class="info-value">{{ currentResult()?.fileName }}</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Size:</span>
+        <span class="info-value">{{ formatFileSize(currentResult()?.size || 0) }}</span>
+      </div>
+    </div>
+  }
+</div>

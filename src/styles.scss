@@ -1,1 +1,371 @@
-/* You can add global styles to this file, and also import other style files */
+/* LobbyTrace Global Styles */
+
+/* Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tailwind Components Layer - Custom Components */
+@layer components {
+  /* Button Components using Tailwind classes */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary-dark transition-all duration-200 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-md hover:-translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-white bg-secondary hover:bg-secondary-dark transition-all duration-200 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-accent {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-gray-500 bg-accent hover:bg-accent-dark transition-all duration-200 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-primary bg-transparent border-2 border-primary hover:bg-primary hover:text-white transition-all duration-200 min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-gray-500 hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  /* Form Components */
+  .form-input {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg text-sm transition-colors focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10;
+    
+    &.error {
+      @apply border-error focus:border-error focus:ring-error/10;
+    }
+  }
+  
+  .form-label {
+    @apply block mb-2 text-sm font-semibold text-gray-500;
+  }
+  
+  .form-error {
+    @apply text-error text-xs mt-1;
+  }
+  
+  /* Card Component */
+  .card {
+    @apply bg-white rounded-xl p-6 shadow-md border border-gray-200;
+  }
+  
+  .card-header {
+    @apply mb-6 pb-4 border-b border-gray-100;
+  }
+  
+  .card-title {
+    @apply text-xl font-semibold text-gray-500 mb-2;
+  }
+  
+  .card-subtitle {
+    @apply text-sm text-gray-400;
+  }
+  
+  /* Loading Spinner */
+  .spinner {
+    @apply inline-block w-5 h-5 border-2 border-gray-200 border-t-primary rounded-full animate-spin;
+  }
+  
+  /* Mobile-first responsive navigation */
+  .nav-link {
+    @apply flex items-center px-4 py-2 text-sm font-medium text-gray-400 hover:text-gray-500 hover:bg-gray-50 rounded-lg transition-colors;
+  }
+  
+  .nav-link.active {
+    @apply text-primary bg-primary/5;
+  }
+  
+  /* App layout helpers */
+  .app-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-menu-overlay {
+    @apply fixed inset-0 z-50 bg-black/50 backdrop-blur-sm;
+  }
+}
+
+/* Color Palette Variables - Now synced with Tailwind */
+:root {
+  /* Primary Colors */
+  --color-primary: #3F51B5;           /* Slate Blue */
+  --color-primary-light: #757ce8;     /* Lighter variant */
+  --color-primary-dark: #303f9f;      /* Darker variant */
+  
+  /* Secondary Colors */
+  --color-secondary: #5C6BC0;         /* Indigo Gray */
+  --color-secondary-light: #8e99f3;   /* Lighter variant */
+  --color-secondary-dark: #26418f;    /* Darker variant */
+  
+  /* Accent Colors */
+  --color-accent: #81C784;            /* Mint Green */
+  --color-accent-light: #b2fab4;      /* Lighter variant */
+  --color-accent-dark: #519657;       /* Darker variant */
+  
+  /* Status Colors */
+  --color-error: #E53935;             /* Tomato Red */
+  --color-error-light: #ff6659;       /* Lighter variant */
+  --color-error-dark: #ab000d;        /* Darker variant */
+  
+  --color-warning: #FF9800;           /* Orange for warnings */
+  --color-success: var(--color-accent); /* Use mint green for success */
+  
+  /* Background & Surface Colors */
+  --color-background: #FFFFFF;        /* White */
+  --color-surface: #FAFAFA;           /* Light gray for cards */
+  --color-surface-dark: #F5F5F5;      /* Darker surface */
+  
+  /* Text Colors */
+  --color-text-primary: #212121;      /* Dark gray */
+  --color-text-secondary: #757575;    /* Medium gray */
+  --color-text-disabled: #BDBDBD;     /* Light gray */
+  --color-text-inverse: #FFFFFF;      /* White text */
+  
+  /* Border Colors */
+  --color-border: #E0E0E0;            /* Light border */
+  --color-border-dark: #BDBDBD;       /* Darker border */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* Material Icons Support */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility Classes */
+.text-primary { color: var(--color-primary) !important; }
+.text-secondary { color: var(--color-secondary) !important; }
+.text-accent { color: var(--color-accent) !important; }
+.text-error { color: var(--color-error) !important; }
+.text-success { color: var(--color-success) !important; }
+.text-warning { color: var(--color-warning) !important; }
+
+.bg-primary { background-color: var(--color-primary) !important; }
+.bg-secondary { background-color: var(--color-secondary) !important; }
+.bg-accent { background-color: var(--color-accent) !important; }
+.bg-error { background-color: var(--color-error) !important; }
+.bg-surface { background-color: var(--color-surface) !important; }
+
+/* Button Base Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-height: 44px;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-inverse);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-secondary-dark);
+  }
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-accent-dark);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out;
+  background-color: var(--color-background);
+  
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
+  }
+  
+  &.error {
+    border-color: var(--color-error);
+  }
+}
+
+.form-error {
+  color: var(--color-error);
+  font-size: 12px;
+  margin-top: 0.25rem;
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--color-background);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+/* Loading Spinner */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Material Dialog Overrides */
+.cdk-overlay-container {
+  .cdk-overlay-backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+}
+
+.custom-dialog {
+  .mat-mdc-dialog-container {
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-xl) !important;
+    
+    .mat-mdc-dialog-surface {
+      border-radius: 12px;
+      background: var(--color-background);
+    }
+    
+    .mat-mdc-dialog-title {
+      color: var(--color-text-primary);
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+    
+    .mat-mdc-dialog-content {
+      color: var(--color-text-secondary);
+    }
+  }
+}
+
+.confirmation-dialog {
+  .mat-mdc-dialog-container {
+    .mat-mdc-dialog-surface {
+      padding: 24px;
+    }
+  }
+}
+
+.alert-dialog {
+  .mat-mdc-dialog-container {
+    .mat-mdc-dialog-surface {
+      padding: 24px;
+    }
+  }
+  
+  &.alert-error .mat-mdc-dialog-title {
+    color: var(--color-error);
+  }
+  
+  &.alert-warning .mat-mdc-dialog-title {
+    color: var(--color-warning);
+  }
+  
+  &.alert-success .mat-mdc-dialog-title {
+    color: var(--color-accent);
+  }
+}
+
+/* Dialog Button Overrides */
+.mat-mdc-dialog-actions {
+  .mat-mdc-button {
+    &.btn {
+      min-height: 40px;
+      border-radius: 8px;
+    }
+  }
+}

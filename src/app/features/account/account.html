@@ -1,0 +1,258 @@
+<!-- Account Management Page -->
+<div class="account-container">
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1 class="page-title">Account Settings</h1>
+    <p class="page-description">Manage your profile information and account preferences</p>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner-large"></div>
+      <p>Loading your profile...</p>
+    </div>
+  } @else {
+    <!-- Success/Error Messages -->
+    @if (successMessage()) {
+      <div class="alert alert-success mb-6">
+        <span class="material-icons">check_circle</span>
+        <span>{{ successMessage() }}</span>
+      </div>
+    }
+
+    @if (errorMessage()) {
+      <div class="alert alert-error mb-6">
+        <span class="material-icons">error</span>
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
+
+    <!-- Account Content -->
+    <div class="account-content">
+      
+      <!-- Profile Section -->
+      <div class="account-section">
+        <div class="section-header">
+          <h2 class="section-title">Profile Information</h2>
+          <p class="section-description">Update your personal information and profile picture</p>
+        </div>
+
+        <div class="section-content">
+          <!-- Avatar Upload -->
+          <div class="avatar-section">
+            <div class="avatar-info">
+              <h3 class="avatar-title">Profile Picture</h3>
+              <p class="avatar-description">Upload a profile picture to personalize your account</p>
+            </div>
+            
+            <div class="avatar-upload">
+              <app-image-upload
+                [config]="avatarUploadConfig"
+                [existingImageUrl]="userProfile()?.photoURL"
+                placeholder="Upload your profile picture"
+                (uploadEvent)="onAvatarUpload($event)"
+                (deleteEvent)="onAvatarRemoved()"
+              ></app-image-upload>
+            </div>
+          </div>
+
+          <!-- Profile Form -->
+          <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()" class="profile-form">
+            <!-- Name Fields (Read-only) -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  formControlName="firstName"
+                  class="form-input"
+                  placeholder="First name from account creation"
+                  readonly
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input
+                  id="lastName"
+                  type="text"
+                  formControlName="lastName"
+                  class="form-input"
+                  placeholder="Last name from account creation"
+                  readonly
+                >
+              </div>
+            </div>
+
+            <!-- Contact Fields -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  class="form-input"
+                  [class.error]="isFieldInvalid(profileForm, 'email')"
+                  placeholder="Enter your email"
+                >
+                @if (isFieldInvalid(profileForm, 'email')) {
+                  <p class="form-error">{{ getFieldError(profileForm, 'email') }}</p>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="phoneNumber" class="form-label">Phone Number (Optional)</label>
+                <input
+                  id="phoneNumber"
+                  type="tel"
+                  formControlName="phoneNumber"
+                  class="form-input"
+                  [class.error]="isFieldInvalid(profileForm, 'phoneNumber')"
+                  placeholder="Enter your phone number"
+                >
+                @if (isFieldInvalid(profileForm, 'phoneNumber')) {
+                  <p class="form-error">{{ getFieldError(profileForm, 'phoneNumber') }}</p>
+                }
+              </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="form-actions">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="profileForm.invalid || isSaving()"
+              >
+                @if (isSaving()) {
+                  <span class="spinner-small mr-2"></span>
+                  Saving...
+                } @else {
+                  <span class="material-icons mr-2">save</span>
+                  Save Changes
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Password Section -->
+      <div class="account-section">
+        <div class="section-header">
+          <h2 class="section-title">Password & Security</h2>
+          <p class="section-description">Change your password to keep your account secure</p>
+        </div>
+
+        <div class="section-content">
+          <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="password-form">
+            <!-- Current Password -->
+            <div class="form-group">
+              <label for="currentPassword" class="form-label">Current Password</label>
+              <input
+                id="currentPassword"
+                type="password"
+                formControlName="currentPassword"
+                class="form-input"
+                [class.error]="isFieldInvalid(passwordForm, 'currentPassword')"
+                placeholder="Enter your current password"
+              >
+              @if (isFieldInvalid(passwordForm, 'currentPassword')) {
+                <p class="form-error">{{ getFieldError(passwordForm, 'currentPassword') }}</p>
+              }
+            </div>
+
+            <!-- New Password Fields -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input
+                  id="newPassword"
+                  type="password"
+                  formControlName="newPassword"
+                  class="form-input"
+                  [class.error]="isFieldInvalid(passwordForm, 'newPassword')"
+                  placeholder="Enter new password"
+                >
+                @if (isFieldInvalid(passwordForm, 'newPassword')) {
+                  <p class="form-error">{{ getFieldError(passwordForm, 'newPassword') }}</p>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  formControlName="confirmPassword"
+                  class="form-input"
+                  [class.error]="isFieldInvalid(passwordForm, 'confirmPassword') || (!passwordsMatch && passwordForm.get('confirmPassword')?.touched)"
+                  placeholder="Confirm new password"
+                >
+                @if (isFieldInvalid(passwordForm, 'confirmPassword')) {
+                  <p class="form-error">{{ getFieldError(passwordForm, 'confirmPassword') }}</p>
+                }
+                @if (!passwordsMatch && passwordForm.get('confirmPassword')?.touched && passwordForm.get('confirmPassword')?.value) {
+                  <p class="form-error">Passwords do not match.</p>
+                }
+              </div>
+            </div>
+
+            <!-- Change Password Button -->
+            <div class="form-actions">
+              <button
+                type="submit"
+                class="btn btn-secondary"
+                [disabled]="passwordForm.invalid || isChangingPassword()"
+              >
+                @if (isChangingPassword()) {
+                  <span class="spinner-small mr-2"></span>
+                  Changing Password...
+                } @else {
+                  <span class="material-icons mr-2">lock_reset</span>
+                  Change Password
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Account Info Section -->
+      @if (userProfile()) {
+        <div class="account-section">
+          <div class="section-header">
+            <h2 class="section-title">Account Information</h2>
+            <p class="section-description">Read-only information about your account</p>
+          </div>
+
+          <div class="section-content">
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">User ID</span>
+                <span class="info-value">{{ userProfile()?.uid }}</span>
+              </div>
+              
+              @if (userProfile()?.role) {
+                <div class="info-item">
+                  <span class="info-label">Role</span>
+                  <span class="info-value role-badge">{{ userProfile()?.role }}</span>
+                </div>
+              }
+
+              @if (userProfile()?.createdAt) {
+                <div class="info-item">
+                  <span class="info-label">Account Created</span>
+                  <span class="info-value">{{ userProfile()?.createdAt | date:'medium' }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+
+    </div>
+  }
+</div>

@@ -1,0 +1,185 @@
+// Pricing Preview Section (brief overview with link to full pricing page)
+.pricing {
+  padding: 80px 0;
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--color-text-primary);
+      
+      @media (max-width: 768px) {
+        font-size: 2.1rem;
+      }
+    }
+    
+    p {
+      font-size: 1.125rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      gap: 28px;
+    }
+    
+    .pricing-card {
+      background: var(--color-background);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      border: 2px solid var(--color-border);
+      position: relative;
+      transition: all 0.3s ease;
+      text-align: center;
+      
+      &.popular {
+        border-color: var(--color-primary);
+        transform: scale(1.05);
+        box-shadow: var(--shadow-xl);
+        
+        .popular-badge {
+          position: absolute;
+          top: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+          color: white;
+          padding: 8px 24px;
+          border-radius: 20px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          box-shadow: 0 4px 12px rgba(63, 81, 181, 0.3);
+        }
+      }
+      
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+        
+        &.popular {
+          transform: scale(1.05) translateY(-4px);
+        }
+      }
+      
+      .plan-header {
+        margin-bottom: 32px;
+        
+        .plan-name {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--color-text-primary);
+          margin-bottom: 8px;
+        }
+        
+        .plan-price {
+          margin-bottom: 16px;
+          
+          .currency {
+            font-size: 1.5rem;
+            color: var(--color-text-secondary);
+            vertical-align: top;
+          }
+          
+          .amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+          }
+          
+          .period {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+          }
+        }
+        
+        .plan-description {
+          color: var(--color-text-secondary);
+          line-height: 1.5;
+        }
+      }
+      
+      .plan-features {
+        margin-bottom: 32px;
+        text-align: left;
+        
+        .feature {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 12px;
+          
+          .feature-check {
+            color: var(--color-accent-dark);
+            font-size: 20px;
+            flex-shrink: 0;
+          }
+          
+          span:not(.feature-check) {
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+          }
+        }
+      }
+      
+      .plan-cta {
+        .btn {
+          width: 100%;
+          padding: 16px;
+          font-size: 1rem;
+          font-weight: 600;
+          border-radius: 12px;
+          transition: all 0.3s ease;
+          
+          &:hover {
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+  
+  .pricing-footer {
+    text-align: center;
+    margin-bottom: 30px;
+    
+    p {
+      color: var(--color-text-secondary);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+  }
+  
+  // Link to full pricing page
+  .pricing-cta {
+    text-align: center;
+    
+    .btn-outline {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+}

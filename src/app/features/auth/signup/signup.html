@@ -1,0 +1,172 @@
+<!-- Signup Page -->
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="text-center">
+      <h2 class="text-3xl font-bold text-gray-500 mb-2">Join LobbyTrace</h2>
+      <p class="text-gray-400">Create your coffee shop management account</p>
+    </div>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="card">
+      <!-- Error Message -->
+      @if (errorMessage) {
+        <div class="mb-6 p-4 rounded-lg bg-error/10 border border-error/20">
+          <div class="flex items-center">
+            <span class="material-icons text-error text-sm mr-2">error</span>
+            <p class="text-error text-sm">{{ errorMessage }}</p>
+          </div>
+        </div>
+      }
+
+      <!-- Signup Form -->
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        
+        <!-- First Name -->
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name</label>
+          <input
+            id="firstName"
+            type="text"
+            formControlName="firstName"
+            class="form-input"
+            [class.error]="isFieldInvalid('firstName')"
+            placeholder="Enter your first name"
+          >
+          @if (isFieldInvalid('firstName')) {
+            <p class="form-error">{{ getFieldError('firstName') }}</p>
+          }
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+            class="form-input"
+            [class.error]="isFieldInvalid('lastName')"
+            placeholder="Enter your last name"
+          >
+          @if (isFieldInvalid('lastName')) {
+            <p class="form-error">{{ getFieldError('lastName') }}</p>
+          }
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-input"
+            [class.error]="isFieldInvalid('email')"
+            placeholder="Enter your email"
+          >
+          @if (isFieldInvalid('email')) {
+            <p class="form-error">{{ getFieldError('email') }}</p>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-input"
+            [class.error]="isFieldInvalid('password')"
+            placeholder="Create a strong password"
+          >
+          @if (isFieldInvalid('password')) {
+            <p class="form-error">{{ getFieldError('password') }}</p>
+          }
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            formControlName="confirmPassword"
+            class="form-input"
+            [class.error]="isFieldInvalid('confirmPassword') || (!passwordsMatch && f['confirmPassword'].touched)"
+            placeholder="Confirm your password"
+          >
+          @if (isFieldInvalid('confirmPassword')) {
+            <p class="form-error">{{ getFieldError('confirmPassword') }}</p>
+          }
+          @if (!passwordsMatch && f['confirmPassword'].touched && f['confirmPassword'].value) {
+            <p class="form-error">Passwords do not match.</p>
+          }
+        </div>
+
+        <!-- Admin Toggle Section -->
+        
+
+        <!-- Terms and Conditions -->
+        <div class="flex items-start">
+          <input
+            id="agreesToTerms"
+            type="checkbox"
+            formControlName="agreesToTerms"
+            class="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary focus:ring-offset-0 mt-0.5"
+          >
+          <label for="agreesToTerms" class="ml-3 text-sm text-gray-400">
+            I agree to the 
+            <a href="/terms" class="text-primary hover:text-primary-dark underline">Terms of Service</a> 
+            and 
+            <a href="/privacy" class="text-primary hover:text-primary-dark underline">Privacy Policy</a>
+          </label>
+        </div>
+        @if (isFieldInvalid('agreesToTerms')) {
+          <p class="form-error">You must agree to the terms and conditions.</p>
+        }
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          [disabled]="signupForm.invalid || isLoading"
+          class="btn-primary w-full"
+        >
+          @if (isLoading) {
+            <span class="spinner mr-2"></span>
+            @if (isCreatingSuperAdmin) {
+              Creating Administrator...
+            } @else {
+              Creating Account...
+            }
+          } @else {
+            @if (isCreatingSuperAdmin) {
+              Create Administrator Account
+            } @else {
+              Create Account
+            }
+          }
+        </button>
+
+        <!-- Sign In Link -->
+        <div class="text-center">
+          <p class="text-sm text-gray-400">
+            Already have an account? 
+            <a routerLink="/login" class="text-primary hover:text-primary-dark font-medium">
+              Sign in here
+            </a>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="mt-8 text-center">
+      <p class="text-xs text-gray-300">
+        By creating an account, you'll be able to manage your coffee shop inventory, 
+        track expenses, and analyze your business performance.
+      </p>
+    </div>
+  </div>
+</div>

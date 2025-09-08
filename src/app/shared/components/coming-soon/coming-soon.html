@@ -1,0 +1,48 @@
+<div class="coming-soon-container">
+  <div class="coming-soon-content">
+    <!-- Logo/Brand Icon -->
+    <div class="brand-section">
+      <div class="brand-icon">
+        <span class="material-icons">local_cafe</span>
+      </div>
+      <div class="brand-text">LobbyTrace</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="message-section">
+      <div class="construction-icon">
+        <span class="material-icons">construction</span>
+      </div>
+      
+      <h1 class="coming-soon-title">{{ featureName }} Coming Soon</h1>
+      
+      <p class="coming-soon-description">
+        {{ description }}
+      </p>
+
+      <!-- Progress Indicator -->
+      <div class="progress-section">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <p class="progress-text">Building something great...</p>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-section">
+      @if (showBackButton) {
+        <a [routerLink]="backButtonLink" class="btn btn-primary back-btn">
+          <span class="material-icons btn-icon">arrow_back</span>
+          {{ backButtonText }}
+        </a>
+      }
+
+    </div>
+
+    <!-- Footer Note -->
+    <div class="footer-note">
+      <p>Have questions? <a routerLink="/about">Contact us</a> for updates.</p>
+    </div>
+  </div>
+</div>

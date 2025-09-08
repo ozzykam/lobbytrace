@@ -1,0 +1,89 @@
+<nav class="main-nav">
+  <div class="nav-container">
+    <!-- Logo/Brand -->
+    <div class="nav-brand">
+      <a routerLink="/" class="brand-link">
+        <span class="material-icons brand-icon">local_cafe</span>
+        <span class="brand-text">LobbyTrace</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation Links -->
+    <div class="nav-links desktop-only">
+      <!-- Public Navigation (when not authenticated) -->
+      @if (!(isAuthenticated$ | async)) {
+        @for (link of publicNavLinks; track link.path) {
+          <a 
+            [routerLink]="link.path"
+            [routerLinkActiveOptions]="{ exact: link.exact || false }"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            {{ link.label }}
+          </a>
+        }
+      }
+
+      <!-- App Navigation (when authenticated) -->
+      @if (isAuthenticated$ | async) {
+        @for (link of appNavLinks; track link.path) {
+          <a 
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            {{ link.label }}
+          </a>
+        }
+      }
+    </div>
+
+    <!-- Desktop Actions -->
+    <div class="nav-actions desktop-only">
+      <!-- Not Authenticated Actions -->
+      @if (!(isAuthenticated$ | async)) {
+        <button 
+          (click)="navigateToLogin()" 
+          class="btn btn-outline nav-btn"
+        >
+          Sign In
+        </button>
+        <button 
+          (click)="navigateToSignup()" 
+          class="btn btn-primary nav-btn"
+        >
+          Get Started
+        </button>
+      }
+
+      <!-- Authenticated Actions -->
+      @if (isAuthenticated$ | async) {
+        <div class="user-menu">
+          @if (userProfile$ | async; as profile) {
+            <div class="user-info">
+              <span class="user-name">{{ profile.firstName || profile.displayName }}</span>
+              <span class="user-role">{{ profile.role }} </span>
+            </div>
+          }
+          <button 
+            (click)="onSignOut()" 
+            class="btn btn-outline nav-btn sign-out-btn"
+          >
+            Sign Out
+          </button>
+        </div>
+      }
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button 
+      class="mobile-menu-toggle mobile-only"
+      (click)="onMobileMenuToggle()"
+      aria-label="Toggle mobile menu"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</nav>

@@ -1,0 +1,112 @@
+<!-- Mobile Navigation Overlay -->
+<div 
+  class="mobile-nav-overlay" 
+  [class.open]="isOpen"
+  [attr.aria-hidden]="!isOpen"
+>
+  <!-- Backdrop -->
+  <div class="mobile-nav-backdrop" (click)="onCloseMenu()"></div>
+  
+  <!-- Mobile Menu Panel -->
+  <div class="mobile-nav-panel">
+    <!-- Header -->
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">
+        <span class="material-icons brand-icon">local_cafe</span>
+        <span class="brand-text">LobbyTrace</span>
+      </div>
+      <button 
+        class="close-button"
+        (click)="onCloseMenu()"
+        aria-label="Close menu"
+      >
+        <span class="material-icons">close</span>
+      </button>
+    </div>
+
+    <!-- User Info (when authenticated) -->
+    @if (isAuthenticated$ | async) {
+      @if (userProfile$ | async; as profile) {
+        <div class="mobile-user-info">
+          <div class="user-avatar">
+            <span class="material-icons avatar-icon">account_circle</span>
+          </div>
+          <div class="user-details">
+            <div class="user-name">{{ profile.displayName || profile.email }}</div>
+            <div class="user-role">{{ profile.role }}</div>
+          </div>
+        </div>
+      }
+    }
+
+    <!-- Navigation Links -->
+    <nav class="mobile-nav-content">
+      <!-- Public Navigation (when not authenticated) -->
+      @if (!(isAuthenticated$ | async)) {
+        <div class="nav-section">
+          @for (link of publicNavLinks; track link.path) {
+            <a 
+              [routerLink]="link.path"
+              [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+              routerLinkActive="active"
+              class="mobile-nav-link"
+              (click)="onNavLinkClick()"
+            >
+              <span class="material-icons link-icon">{{ link.icon }}</span>
+              <span class="link-text">{{ link.label }}</span>
+            </a>
+          }
+        </div>
+      }
+
+      <!-- App Navigation (when authenticated) -->
+      @if (isAuthenticated$ | async) {
+        <div class="nav-section">
+          @for (link of appNavLinks; track link.path) {
+            <a 
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              class="mobile-nav-link"
+              (click)="onNavLinkClick()"
+            >
+              <span class="material-icons link-icon">{{ link.icon }}</span>
+              <span class="link-text">{{ link.label }}</span>
+            </a>
+          }
+        </div>
+      }
+    </nav>
+
+    <!-- Actions -->
+    <div class="mobile-nav-actions">
+      <!-- Not Authenticated Actions -->
+      @if (!(isAuthenticated$ | async)) {
+        <button 
+          (click)="navigateToLogin()" 
+          class="btn btn-outline mobile-action-btn"
+        >
+          <span class="material-icons btn-icon">login</span>
+          Sign In
+        </button>
+        <button 
+          (click)="navigateToSignup()" 
+          class="btn btn-primary mobile-action-btn"
+        >
+          <span class="material-icons btn-icon">rocket_launch</span>
+          Get Started
+        </button>
+      }
+
+      <!-- Authenticated Actions -->
+      @if (isAuthenticated$ | async) {
+        <button 
+          (click)="onSignOut()" 
+          class="btn btn-outline mobile-action-btn sign-out-btn"
+        >
+          <span class="material-icons btn-icon">logout</span>
+          Sign Out
+        </button>
+      }
+    </div>
+  </div>
+</div>
