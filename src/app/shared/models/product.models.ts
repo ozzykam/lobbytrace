@@ -2,15 +2,35 @@
 
 export interface InventoryItem {
   id: string;
-  name: string;
-  description?: string;
-  unit: string; // 'g', 'ml', 'pieces', 'oz', etc.
-  category: string; // 'coffee', 'cups', 'lids', 'sleeves', 'milk', etc.
-  currentStock: number;
-  minStockLevel: number;
-  maxStockLevel?: number;
-  costPerUnit: number;
-  supplier?: string;
+  name: string; // CommonName from CSV - display name
+  description?: string; // VendorProductDescriptionOrName from CSV
+  category: InventoryCategory;
+  supplier?: string; // Vendor from CSV
+  
+  // Physical unit tracking (what staff count during audits)
+  physicalUnit: string; // 'carton', 'bag', 'bottle', 'case', etc.
+  currentPhysicalStock: number; // 12.5 (cartons, supports partial units)
+  minPhysicalStockLevel: number; // 6 (cartons)
+  maxPhysicalStockLevel?: number; // 24 (cartons)
+  
+  // Recipe unit tracking (what recipes consume)
+  recipeUnit: string; // 'fl oz', 'oz', 'g', 'ml', 'each'
+  unitsPerPhysicalItem: number; // 32 (fl oz per carton)
+  
+  // Cost tracking
+  costPerPhysicalUnit: number; // Cost per carton/bag/etc.
+  costPerRecipeUnit: number; // Cost per fl oz/oz/etc.
+  
+  // Admin settings for stock levels
+  useCustomStockLevel: boolean; // If true, use item-specific levels instead of global default
+  customStockLevelPercentage?: number; // Override global default (e.g., 0.3 for 30%)
+  
+  // Reference data from CSV
+  vendorProductId?: string; // InventoryID from CSV
+  packaging?: string; // Packaging info from CSV  
+  brand?: string; // Brand from CSV
+  
+  // Metadata
   lastRestocked?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -100,6 +120,61 @@ export interface CsvProductRow {
   ToGo?: string; // Optional empty columns in CSV
   Categories: string;
   Price: string;
+}
+
+// For inventory CSV import
+export interface CsvInventoryRow {
+  InventoryID: string;
+  Vendor: string;
+  CommonName: string;
+  VendorProductDescriptionOrName: string;
+  Brand: string;
+  Packaging: string;
+  ManufacturerName: string;
+  CostPerCase: string;
+  ItemCategory: string;
+  OuterPackCount: string;
+  InnerPackCount: string;
+  UnitSizeValue: string;
+  UnitSizeUnit: string;
+  BaseUnit: string;
+  UnitsPerCase: string;
+  TotalBaseQty: string;
+  TotalBaseQtyWithMetric: string;
+  CostPerSmallestUnit: string;
+  CostPerBaseUnit: string;
+}
+
+// For creating inventory items from CSV
+export interface CreateInventoryItemRequest {
+  name: string;
+  description?: string;
+  category: InventoryCategory;
+  supplier?: string;
+  physicalUnit: string;
+  currentPhysicalStock: number;
+  minPhysicalStockLevel: number;
+  maxPhysicalStockLevel?: number;
+  recipeUnit: string;
+  unitsPerPhysicalItem: number;
+  costPerPhysicalUnit: number;
+  costPerRecipeUnit: number;
+  useCustomStockLevel: boolean;
+  customStockLevelPercentage?: number;
+  vendorProductId?: string;
+  packaging?: string;
+  brand?: string;
+}
+
+export interface UpdateInventoryItemRequest extends Partial<CreateInventoryItemRequest> {
+  id: string;
+}
+
+// Global inventory settings interface
+export interface InventorySettings {
+  defaultStockLevelPercentage: number; // Default 0.5 for 50%
+  updatedAt: Date;
+  updatedBy: string;
 }
 
 // Product category definitions

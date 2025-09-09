@@ -1,0 +1,155 @@
+:host {
+  display: block;
+}
+
+.dialog-container {
+  width: 800px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0;
+}
+
+.dialog-content {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.upload-section {
+  margin-bottom: 24px;
+}
+
+.upload-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+  border-color: #3f51b5;
+  background: #f3f4f6;
+}
+
+.upload-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.upload-area h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.upload-area p {
+  margin: 4px 0;
+  color: #666;
+}
+
+.file-info {
+  font-size: 12px;
+  color: #999 !important;
+}
+
+.instructions {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.instructions h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.instructions ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.instructions li {
+  margin-bottom: 6px;
+  color: #666;
+}
+
+.preview-section {
+  margin-bottom: 24px;
+}
+
+.preview-section h4 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.preview-section p {
+  margin: 0 0 16px 0;
+  color: #666;
+}
+
+.preview-table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.preview-table {
+  width: 100%;
+}
+
+.progress-section {
+  text-align: center;
+  padding: 24px;
+}
+
+.progress-section h4 {
+  margin: 0 0 24px 0;
+  color: #333;
+}
+
+.progress-info {
+  margin-bottom: 24px;
+}
+
+.progress-info p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.error-text {
+  color: #f44336 !important;
+}
+
+.dialog-actions {
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Material table styling */
+::ng-deep .mat-mdc-table {
+  background: white;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  background: #f5f5f5;
+  font-weight: 600;
+}

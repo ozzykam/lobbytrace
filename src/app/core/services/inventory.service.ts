@@ -19,25 +19,13 @@ import {
   InventoryCategory,
   INVENTORY_CATEGORIES,
   MeasurementUnit,
-  MEASUREMENT_UNITS
+  MEASUREMENT_UNITS,
+  CreateInventoryItemRequest,
+  UpdateInventoryItemRequest,
+  CsvInventoryRow,
+  InventorySettings
 } from '../../shared/models/product.models';
 import { AuthService } from './auth.service';
-
-export interface CreateInventoryItemRequest {
-  name: string;
-  description?: string;
-  unit: MeasurementUnit;
-  category: InventoryCategory;
-  currentStock: number;
-  minStockLevel: number;
-  maxStockLevel?: number;
-  costPerUnit: number;
-  supplier?: string;
-}
-
-export interface UpdateInventoryItemRequest extends Partial<CreateInventoryItemRequest> {
-  id: string;
-}
 
 export interface StockMovement {
   id: string;
@@ -138,9 +126,9 @@ export class InventoryService {
         inventoryItemId: docRef.id,
         inventoryItemName: itemData.name,
         type: 'IN',
-        quantity: itemData.currentStock,
+        quantity: itemData.currentPhysicalStock,
         previousStock: 0,
-        newStock: itemData.currentStock,
+        newStock: itemData.currentPhysicalStock,
         reason: 'Initial stock',
         notes: 'Item created with initial stock'
       }, userId);
@@ -198,8 +186,8 @@ export class InventoryService {
 
   // STOCK MANAGEMENT
 
-  // Update stock level
-  updateStock(
+  // Update physical stock level
+  updatePhysicalStock(
     itemId: string, 
     newQuantity: number, 
     type: 'IN' | 'OUT' | 'ADJUSTMENT',
@@ -211,12 +199,12 @@ export class InventoryService {
         if (!user) {
           throw new Error('User not authenticated');
         }
-        return from(this.updateStockAsync(itemId, newQuantity, type, reason, notes, user.uid));
+        return from(this.updatePhysicalStockAsync(itemId, newQuantity, type, reason, notes, user.uid));
       })
     );
   }
 
-  private async updateStockAsync(
+  private async updatePhysicalStockAsync(
     itemId: string, 
     newQuantity: number, 
     type: 'IN' | 'OUT' | 'ADJUSTMENT',
@@ -231,7 +219,7 @@ export class InventoryService {
         throw new Error('Inventory item not found');
       }
 
-      const previousStock = item.currentStock;
+      const previousStock = item.currentPhysicalStock;
       let finalQuantity: number;
 
       // Calculate new stock based on type
@@ -252,7 +240,7 @@ export class InventoryService {
       // Update the inventory item
       const docRef = doc(this.inventoryCollection, itemId);
       await updateDoc(docRef, {
-        currentStock: finalQuantity,
+        currentPhysicalStock: finalQuantity,
         lastRestocked: type === 'IN' ? new Date() : item.lastRestocked,
         updatedAt: new Date()
       });
@@ -270,7 +258,7 @@ export class InventoryService {
       }, userId);
 
     } catch (error) {
-      console.error('Error updating stock:', error);
+      console.error('Error updating physical stock:', error);
       throw error;
     }
   }
@@ -320,7 +308,7 @@ export class InventoryService {
   // Get low stock items
   getLowStockItems(): Observable<InventoryItem[]> {
     return this.getInventoryItems().pipe(
-      map(items => items.filter(item => item.currentStock <= item.minStockLevel))
+      map(items => items.filter(item => item.currentPhysicalStock <= item.minPhysicalStockLevel))
     );
   }
 
@@ -351,9 +339,20 @@ export class InventoryService {
   calculateTotalInventoryValue(): Observable<number> {
     return this.getInventoryItems().pipe(
       map(items => 
-        items.reduce((total, item) => total + (item.currentStock * item.costPerUnit), 0)
+        items.reduce((total, item) => total + (item.currentPhysicalStock * item.costPerPhysicalUnit), 0)
       )
     );
+  }
+
+  // Calculate recipe units available for consumption
+  calculateRecipeUnitsAvailable(item: InventoryItem): number {
+    return item.currentPhysicalStock * item.unitsPerPhysicalItem;
+  }
+
+  // Get current stock level percentage
+  getCurrentStockLevelPercentage(item: InventoryItem): number {
+    if (!item.minPhysicalStockLevel) return 100;
+    return (item.currentPhysicalStock / item.minPhysicalStockLevel) * 100;
   }
 
   // DATA CONVERSION HELPERS
@@ -363,13 +362,33 @@ export class InventoryService {
       id,
       name: data.name,
       description: data.description,
-      unit: data.unit,
       category: data.category,
-      currentStock: data.currentStock,
-      minStockLevel: data.minStockLevel,
-      maxStockLevel: data.maxStockLevel,
-      costPerUnit: data.costPerUnit,
       supplier: data.supplier,
+      
+      // Physical unit tracking
+      physicalUnit: data.physicalUnit,
+      currentPhysicalStock: data.currentPhysicalStock || 0,
+      minPhysicalStockLevel: data.minPhysicalStockLevel || 0,
+      maxPhysicalStockLevel: data.maxPhysicalStockLevel,
+      
+      // Recipe unit tracking
+      recipeUnit: data.recipeUnit,
+      unitsPerPhysicalItem: data.unitsPerPhysicalItem || 1,
+      
+      // Cost tracking
+      costPerPhysicalUnit: data.costPerPhysicalUnit || 0,
+      costPerRecipeUnit: data.costPerRecipeUnit || 0,
+      
+      // Admin settings
+      useCustomStockLevel: data.useCustomStockLevel || false,
+      customStockLevelPercentage: data.customStockLevelPercentage,
+      
+      // Reference data
+      vendorProductId: data.vendorProductId,
+      packaging: data.packaging,
+      brand: data.brand,
+      
+      // Metadata
       lastRestocked: this.convertTimestampToDate(data.lastRestocked),
       createdAt: this.convertTimestampToDate(data.createdAt),
       updatedAt: this.convertTimestampToDate(data.updatedAt),
@@ -395,6 +414,17 @@ export class InventoryService {
 
   private convertToFirestore(data: any): any {
     const result = { ...data };
+    
+    // Set defaults for undefined optional fields
+    if (result.customStockLevelPercentage === undefined) {
+      result.customStockLevelPercentage = 0;
+    }
+    if (result.maxPhysicalStockLevel === undefined) {
+      result.maxPhysicalStockLevel = 0;
+    }
+    if (result.createdBy === undefined) {
+      result.createdBy = 'system';
+    }
     
     // Convert Date objects to Firestore Timestamps
     if (result.createdAt instanceof Date) {
