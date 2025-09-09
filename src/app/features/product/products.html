@@ -1,7 +1,260 @@
-<app-coming-soon 
-  featureName="Products"
-  description="This feature is coming soon! Stay tuned for updates on our product management system."
-  [showBackButton]="true"
-  backButtonText="Back to Home"
-  backButtonLink="/">
-</app-coming-soon>
+<div class="products-container p-6 max-w-7xl mx-auto">
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Product Management</h1>
+      <p class="text-gray-600 mt-1">Manage your coffee shop products and ingredient specifications</p>
+    </div>
+    
+    <div class="flex gap-3">
+      <button 
+        mat-raised-button 
+        color="accent"
+        (click)="importFromCsv()"
+        class="flex items-center gap-2">
+        <mat-icon>upload</mat-icon>
+        Import CSV
+      </button>
+      
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="createProduct()"
+        class="flex items-center gap-2">
+        <mat-icon>add</mat-icon>
+        Add Product
+      </button>
+    </div>
+  </div>
+
+  <!-- Search and Filters -->
+  <mat-card class="mb-6">
+    <mat-card-content class="pt-4">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <!-- Search Input -->
+        <mat-form-field class="flex-1">
+          <mat-label>Search products...</mat-label>
+          <input 
+            matInput 
+            placeholder="Search by name, variation, or description"
+            (input)="onSearch($event)"
+            [value]="searchTerm()">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Category Filter -->
+        <mat-form-field class="w-full sm:w-64">
+          <mat-label>Category</mat-label>
+          <mat-select 
+            [value]="selectedCategory()"
+            (selectionChange)="onCategoryChange($event.value)">
+            <mat-option value="all">All Categories</mat-option>
+            @for (category of categories; track category) {
+              <mat-option [value]="category">{{category}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="flex justify-center items-center py-12">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+  <!-- Products Table -->
+  @if (!isLoading()) {
+    <mat-card>
+      <mat-card-content class="p-0">
+        <div class="overflow-x-auto">
+          <table mat-table [dataSource]="filteredProducts()" class="w-full">
+            
+            <!-- Token Column -->
+            <ng-container matColumnDef="token">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Token ID</th>
+              <td mat-cell *matCellDef="let product" class="font-medium">
+                <div>
+                  <div class="text-sm font-medium text-gray-900">{{product.token}}</div>
+                </div>
+              </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Product Name</th>
+              <td mat-cell *matCellDef="let product" class="font-medium">
+                <div>
+                  <div class="text-sm font-medium text-gray-900">{{product.name}}</div>
+                  @if (product.description) {
+                    <div class="text-xs text-gray-500 mt-1">{{product.description}}</div>
+                  }
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Variation Column -->
+            <ng-container matColumnDef="variation">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Variation</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.variation) {
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {{product.variation}}
+                  </span>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Size Column -->
+            <ng-container matColumnDef="size">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Size</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.size) {
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {{product.size}}
+                  </span>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Temp Column -->
+            <ng-container matColumnDef="temperature">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Size</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.temperature){
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {{product.temperature}}
+                  </span>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Drink Attributes Column -->
+            <ng-container matColumnDef="toGoStatus">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Status</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.toGoStatus) {
+                  <div class="flex flex-wrap gap-1">
+                    @if (product.toGoStatus) {
+                      <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs bg-purple-100 text-purple-800">
+                        {{product.toGoStatus}}
+                      </span>
+                    }
+                  </div>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Category Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Category</th>
+              <td mat-cell *matCellDef="let product">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  {{product.category}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Price</th>
+              <td mat-cell *matCellDef="let product" class="font-medium text-green-600">
+                {{formatPrice(product.price)}}
+              </td>
+            </ng-container>
+
+            <!-- Ingredients Column -->
+            <ng-container matColumnDef="ingredients">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Ingredients</th>
+              <td mat-cell *matCellDef="let product">
+                <div class="text-sm">
+                  <span [class]="product.ingredients && product.ingredients.length > 0 ? 'text-gray-900' : 'text-gray-400'">
+                    {{getIngredientsSummary(product.ingredients)}}
+                  </span>
+                  @if (product.ingredients && product.ingredients.length > 0) {
+                    <div class="flex flex-wrap gap-1 mt-1">
+                      @for (ingredient of product.ingredients; track ingredient.inventoryItemId) {
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs bg-gray-100 text-gray-700">
+                          {{ingredient.quantity}}{{ingredient.unit}} {{ingredient.inventoryItemName}}
+                        </span>
+                      }
+                    </div>
+                  }
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Actions</th>
+              <td mat-cell *matCellDef="let product">
+                <div class="flex gap-2">
+                  <button 
+                    mat-icon-button 
+                    color="primary"
+                    (click)="editProduct(product)"
+                    matTooltip="Edit product">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  
+                  <button 
+                    mat-icon-button 
+                    color="warn"
+                    (click)="deleteProduct(product)"
+                    matTooltip="Delete product">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50"></tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        @if (filteredProducts().length === 0 && !isLoading()) {
+          <div class="text-center py-12">
+            <mat-icon class="text-gray-400 text-6xl mb-4">inventory_2</mat-icon>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+            <p class="text-gray-500 mb-4">
+              @if (searchTerm() || selectedCategory() !== 'all') {
+                Try adjusting your search criteria or filters.
+              } @else {
+                Get started by creating your first product or importing from CSV.
+              }
+            </p>
+            
+            @if (searchTerm() === '' && selectedCategory() === 'all') {
+              <div class="flex justify-center gap-3">
+                <button mat-button color="accent" (click)="importFromCsv()">
+                  Import from CSV
+                </button>
+                <button mat-raised-button color="primary" (click)="createProduct()">
+                  Add Product
+                </button>
+              </div>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Products Summary -->
+  @if (!isLoading() && products().length > 0) {
+    <div class="mt-6 text-sm text-gray-600 text-center">
+      Showing {{filteredProducts().length}} of {{products().length}} products
+    </div>
+  }
+</div>

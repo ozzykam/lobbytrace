@@ -38,6 +38,11 @@ export interface Product {
   isActive: boolean;
   isArchived: boolean;
   
+  // Drink-specific attributes (extracted from variation for Drinks category)
+  size?: DrinkSize; // '10oz', '16oz', etc.
+  temperature?: DrinkTemperature; // 'Hot', 'Iced'
+  toGoStatus?: ToGoStatus; // 'Here', 'To-Go'
+  
   // Ingredient specifications - this is what you want to customize
   ingredients: ProductIngredient[];
   
@@ -71,28 +76,30 @@ export interface CreateProductRequest {
   description?: string;
   category: string;
   price: number;
+  size?: DrinkSize;
+  temperature?: DrinkTemperature;
+  toGoStatus?: ToGoStatus;
   ingredients: ProductIngredient[];
   preparationTime?: number;
   preparationInstructions?: string;
   allergens?: string[];
+  token?: string; // From CSV
 }
 
 export interface UpdateProductRequest extends Partial<CreateProductRequest> {
   id: string;
 }
 
-// For CSV import
+// For CSV import - Updated to match CSV format
 export interface CsvProductRow {
   Token: string;
-  'Item Name': string;
-  'Variation Name': string;
-  SKU: string;
-  Description: string;
+  ItemName: string;
+  Variation: string; // Contains size, temp, and to-go info
+  Size?: string; // Optional empty columns in CSV
+  Temp?: string; // Optional empty columns in CSV
+  ToGo?: string; // Optional empty columns in CSV
   Categories: string;
-  'Reporting Category': string;
   Price: string;
-  Archived: string;
-  // ... other CSV fields as needed
 }
 
 // Product category definitions
@@ -146,3 +153,27 @@ export const MEASUREMENT_UNITS = [
 ] as const;
 
 export type MeasurementUnit = typeof MEASUREMENT_UNITS[number];
+
+// Drink-specific attribute types
+export const DRINK_SIZES = [
+  '10oz',
+  '16oz',
+  '8oz',
+  '12oz',
+  '20oz',
+  '2oz'  // for shots like macchiato
+] as const;
+
+export const DRINK_TEMPERATURES = [
+  'Hot',
+  'Iced'
+] as const;
+
+export const TO_GO_STATUSES = [
+  'Here',
+  'To-Go'
+] as const;
+
+export type DrinkSize = typeof DRINK_SIZES[number];
+export type DrinkTemperature = typeof DRINK_TEMPERATURES[number];
+export type ToGoStatus = typeof TO_GO_STATUSES[number];

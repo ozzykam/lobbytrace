@@ -1,260 +1,260 @@
-Token,Item Name,Variation Name,SKU,Description,Categories,Reporting Category,SEO Title,SEO Description,Permalink,GTIN,Square Online Item Visibility,Item Type,Weight (lb),Social Media Link Title,Social Media Link Description,Shipping Enabled,Self-serve Ordering Enabled,Delivery Enabled,Pickup Enabled,Price,Online Sale Price,Archived,Sellable,Contains Alcohol,Stockable,Skip Detail Screen in POS,Option Name 1,Option Value 1,Enabled Edina,Current Quantity Edina,New Quantity Edina,Stock Alert Enabled Edina,Stock Alert Count Edina,Price Edina,Enabled Excelsior,Current Quantity Excelsior,New Quantity Excelsior,Stock Alert Enabled Excelsior,Stock Alert Count Excelsior,Price Excelsior,Modifier Set - Avocado Toast,Modifier Set - Bagel,Modifier Set - Breakfast Sandwich,Modifier Set - Breakfast Sandwich (Everything Bagel),Modifier Set - Cold Foam,Modifier Set - Cortado,Modifier Set - Cortado Milk,Modifier Set - Drip coffee Milk,Modifier Set - Espresso shot,Modifier Set - Flavors,Modifier Set - Hot Or Iced,Modifier Set - Italian Soda,Modifier Set - Latte Milk,Modifier Set - Matcha,Modifier Set - Panini Side,Modifier Set - Sandwich,Modifier Set - Smoothie,Modifier Set - Smoothie Milk,Modifier Set - Smoothies add ons,Modifier Set - To-go or Here,Modifier Set - Warm,Tax - Liquor Tax (2.5%)
-LHBA4EDN2FCIZ5ELDJH3COZ3,Almond Croissant,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,Y,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-4ASY2J5Z3GFOJCTGAORULAGG,Americano,10oz (Here),,Espresso shot over water.,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,Y,N,Y,4,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N
-KUJOGXQQ6ZYFRVSLD3SLU5RO,Americano,10oz (To Go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N
-AZ5RHXPXYAPSIVG6Y5KXZURA,Americano,16oz (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N
-TTIF6A2F6TGVMOUTXS6NA4Z3,Americano,16oz (To Go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N
-BKKSFOFGTWAPQYUEEEWXIIMF,Americano,16oz Iced (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N
-NSTIXVN4GQ7BBQJVDKN3RSNG,Americano,16oz Iced (To Go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N
-U6QHVDAH24TE7JTKQGDEANPL,Apple Cider,10oz,,,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,5.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,Y,N,N
-PQY4VXSIMCCEMM62DOHGAEUY,Apple Cider,16oz,,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,Y,N,N
-W2I6E22D4UP7GEOLU4SNPSJH,Apple Fitter,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.75,,N,,N,,N,,,N,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-3J5TZSWIMQSVADSKJP4RBKRV,Arnold Palmer (Half Lemonade & Half Black Iced Tea),Here,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-BFFXJF3ET6REDZKD7T5YAQY5,Arnold Palmer (Half Lemonade & Half Black Iced Tea),To Go,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-LU7IEQLST3QM7PTGLGO2SV3I,Asiago Bagel,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-NECKE3OVOJ2KGEF32SO4LB2S,Avocado Whip Feta on Toast,Regular,,,Breakfast,Breakfast,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,12,,N,,N,,N,,,Y,,,,,,Y,,,,,,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-VCHULMNGYKYJ7Y3CPN6KVJGK,Barrel-aged Beer,Regular,,,Beer,Beer,,,,,unavailable,Physical good,,,,,,,Y,9,,Y,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-EU33LOTMZAK6VPTKPMG6W2YM,Beach Season Smoothie,Regular,,"(Banana, Coconibs, Almond Butter, Honey, Oat Milk",Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8.95,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,Y,Y,N,N
-RAT2GBEAE3GLGJ6HMZES3WE6,Blackberry Lemonade,Here,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-YZTQ77YBJHW6CRG6OMZRJWEN,Blackberry Lemonade,To Go,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-CCMXHKXXELSGL76SJ6SNZWHB,Blackstack Local 755,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,10,,N,,N,,N,,,Y,,,,,,N,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-ZI6PB4TAHET54NIO4EWXP6ZA,Bliss Latte,10oz (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-PP4GLSKXB4HESAPHBPROACUB,Bliss Latte,10oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-QJBTX46SWJ5CA6P7Y3PV4QYU,Bliss Latte,16oz Hot (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-3SRYXT26OUBS3ZL76K6XHTRK,Bliss Latte,16oz Iced (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-WGBHBLGV42VAVRW6OTCILAP7,Bliss Latte,16oz Iced (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-7AHVVUMMTDM4KXLVTIFPSOJY,Blossom Latte (Rose & Lavender),10oz (Here),,Lavender and Rose,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-MMNTRXPUHMAMKNDORIGRRNE3,Blossom Latte (Rose & Lavender),10oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-WJCCCUS4772MPBDZD47VR7AY,Blossom Latte (Rose & Lavender),16oz Hot (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-JVPSY75VXIFYJ4AZTBGLCYXO,Blossom Latte (Rose & Lavender),16oz Iced (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-24VZWE4YOW4RGIIKYDEQMDOG,Blossom Latte (Rose & Lavender),16oz Iced (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-W7OH33UAT7XSWQJLLUTIHFUI,Breakfast Sandwich (Bacon),Regular,,,Breakfast,Breakfast,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-DTKTFL4QKS2J4AM3GLCDC5L2,Breakfast Sandwich (Everything Bagel),Regular,,"Gouda Cheese, egg, tomato, sliced avocado micro greens on an everyday bagel.",Breakfast,Breakfast,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-P5K4GAQPLTU5S7ZIREDZG3VV,Breakfast Sandwich (Sausage),Regular,,,Breakfast,Breakfast,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-5MFH5CI2C6NY7TVCDKD4QETT,Breakfast Sandwich (Turkey Sausage),Regular,,,Breakfast,Breakfast,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,Y
-ZPCD6MYKOB4HUCDNX6RY4YUK,Brown Sugar Latte (Brown Sugar in the portafilter),10oz (Here),,Double shot of espresso infused with brown sugar,Signature Drinks,Signature Drinks,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-JMCJZUIYP2MOEL22GLAOITK3,Brown Sugar Latte (Brown Sugar in the portafilter),10oz (To go),,,Signature Drinks,Signature Drinks,,,,,unavailable,Prepared food and beverage,,,,,,,,6.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-PEYLNVMY3XVAE52WHIOD4JQ6,Brown Sugar Latte (Brown Sugar in the portafilter),16oz (To go),,,Signature Drinks,Signature Drinks,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-HQNPGUBO6NHNBFH67OWSXQIW,Brown Sugar Latte (Brown Sugar in the portafilter),16oz Iced (Here),,,Signature Drinks,Signature Drinks,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-ISJAWZFVEMBXBICKGBBHEBIV,Brown Sugar Latte (Brown Sugar in the portafilter),16oz Iced (To go),,,Signature Drinks,Signature Drinks,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-CPCSEUTE2JEZ5D7MI5V2WE6K,Brownie,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-6Y3I4USF33UO3RC3H5DTR32X,"Cabernet Sauvignon, Bleasdale",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,N,N,12,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-I7D6VBHV4GMULQ4BMXEGLXRU,"Cabernet Sauvignon, Bleasdale",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,44,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-KVLHSKDGUN3GT2MC3PG7GS2Y,Candle,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,20,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-2MKHG7LSD75X65C53LOIBFG3,Cappuccino,Regular,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,Y,N,N
-ADUGUCKRV6DH526CYRDBQGBZ,Cappuccino,Iced cappuccino,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,Y,N,N
-ZUGOWD54M7BYZSH6QINL6VRD,Cappuccino,Brown Sugar Cappuccino,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.35,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,Y,N,N
-TXNGRQANMFZ7ADBXSS32WKEZ,Cappuccino,PS Iced Cappuccino,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,Y,N,N
-4J6GJMHIKA5P3GLRRXRVBCJT,Cereal Milk Latte,10oz (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,N,N,N,Y,8.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-5Z2ADSELW33TJ7VJAKEO45QW,Cereal Milk Latte,10oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,8.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-4EXWQTWSETO6OHP3LBPUBU5Z,Cereal Milk Latte,16oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,8.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-LJRP4O5JAPNVDMJLNZWJU4DG,Cereal Milk Latte,16oz Iced (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,8.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-BDGCJSU7JFOFDY6VMKWMVUFF,Cereal Milk Latte,16oz Iced (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,8.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-VWFFHSMM7T7OI4XX2HTCXS2N,Chai,10oz (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-AJU7S5WIV57EVUCA2U2GJDRG,Chai,10oz (To Go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-7A2YDOOUK3TN7QKF2X5NAIZG,Chai,16oz (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-U2YEIEGWKOAE7DUIIY7LZUD6,Chai,16oz (To Go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-34XLTURGE3KHCEGCZCOEKVKU,Chai,16oz Iced (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-BVA7WRTG7BMNBOGPLFSV3LTK,Chai,16oz Iced (To Go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-AGSDCMR4NGU3VHA5QVBBUXCV,"Chardonnay, Oberon",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,N,N,12,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-JTZ6ABX7GZ24UI2ZNIG5NDA4,"Chardonnay, Oberon",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,44,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-UJX6S25ZPASFC7IEA5QKKZYW,Charles Roux Blanc De Blanc,Regular,,,Wine,Wine,,,,,,Prepared food and beverage,,,,,,,Y,12,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-MXU6ADWWM3PK65I5SKYR4Y26,Chider,10oz (Here),,1/3 Chi 1/3 Cider 1/3 Oat milk,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-Z7SVWDWZNZDEGNAZNTCA7ENE,Chider,10oz (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-JADJBSOBFLRGIO4G342RBWXA,Chider,16oz (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-7M7K3AZHBTLTIO4MQ57U7CFL,Chider,16oz (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-BRU5RSXRMIP24UMSW2D4DV2O,Chocolate Chip Cookie,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-YBX2QUCH5Z2NV5M7PWDDAT7U,Chocolate Croissant,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-JPXORT2GQJOJEAJIKZSTRKDT,Chocolate chip banana bread,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-Z5DB6R3VWLNH5ZJPKOXT3XQJ,Chrurros Latte (Brown Sugar in the portafilter & Cinnamon powder in cup),10oz,,,Signature Drinks,Signature Drinks,,,,,,Physical good,,,,,,,Y,6.75,,N,,N,,N,,,Y,,,,,,N,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,Y,N,N
-JXQNNRZ7ZLBCZOHJLAZTQZRD,Chrurros Latte (Brown Sugar in the portafilter & Cinnamon powder in cup),16oz,,,Signature Drinks,Signature Drinks,,,,,,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,N,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,Y,N,N
-GVD26MBCIVI3LMRE2F3TTNXW,Chrurros Latte (Brown Sugar in the portafilter & Cinnamon powder in cup),16oz Iced,,,Signature Drinks,Signature Drinks,,,,,,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,N,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,Y,N,N
-SKS3XJAP5GM27MOVWUCETNKQ,Cider,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,,,,Y,7,,N,,N,,N,,,N,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-NZIOUIBUTZLF4MUSBBTM7VA4,Cinnamon Toast Latte,10oz (Here),,"Honey, Vanilla, Caramel and dash of Cinnamon",Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-56SNWWMQNVHUHP5ZULGLKT7Q,Cinnamon Toast Latte,10oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-53YTNTT5HD3GRHXTKYH64X4X,Cinnamon Toast Latte,16oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-V5ELM27RZEP6EPYFGMOISSEB,Cinnamon Toast Latte,16oz Iced (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-7L465BAQYTBH5V6FNBVQQWPD,Cinnamon Toast Latte,16oz Iced (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-HQ33GIPTIDHCHONI7GZEGEDB,Classic Butter Croissant,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-TOVYFKDS3E3XEI5YYKAKJXNR,Coconut Rocher *(gf),Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-ZZEZVXVG3KH5LQXUZTIO77KG,Coffee togo box,Regular,,,Catering And Event Space,Catering And Event Space,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,38,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-F6UZ3OF5XVMH7EE42FUQIRLE,Cold Brew,Regular,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-4IUMO4AEWYX2O5IEOXQH3FZJ,Cortado,Regular,,"With a 1 to 1 ratio this drink not only gives you the right amount of coffee, but with the right amount of creaminess.",Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3.95,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,Y,Y,N,Y,N,N,N,N,N,N,N,N,N,N,Y,N,N
-NEG646GHHTTP4HMHBBOQL753,Crème Brûlée,10oz (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.5,,Y,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N
-IAJO224SV3JFAU4XWIPO76VT,Crème Brûlée,10oz (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.5,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N
-KH4DHOSV4CQWC4WDWKFSA3RQ,Crème Brûlée,16oz (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.45,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N
-4BDQOPSJNILQNIWQKOTAIHOY,Crème Brûlée,16oz (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.45,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N
-AZR55YMNGVSF5IQM5YWL5AKH,Cup,Latte,,,Retail,Retail,,,,,,Prepared food and beverage,,,,,,,Y,22,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-USKUENPGTQNK3U4RDL5FHCTE,Cup,Cappuccino,,,Retail,Retail,,,,,,Prepared food and beverage,,,,,,,,20,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-5XRTDKZC6DABF3SIBNW4V3T5,Cup,Coffee Mug,,,Retail,Retail,,,,,,Prepared food and beverage,,,,,,,,18,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-AWQYBFMRRABPASSBFXZ45XNB,Drip coffee,“Dark” -10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-AUQE24NZ3O667Y4UFSLDSWYG,Drip coffee,“Dark” - 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-35XVBUNM6MKED4KEAEN4NUWR,Drip coffee,“Medium” - 10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-TRM4W55ZADCAYHREH24DQ3T4,Drip coffee,“Medium”- 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-H6MFHQQLCBVKCMH7N55WMLY7,Drip coffee,“Light” - 10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-LF3AR46W5YGMEJDACTTWG7TT,Drip coffee,“Light” - 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-UFAIK7NHZRGU6DPXTLDXOA3Q,Drip coffee,Decaf - 10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-MZ444TMKICNO76MYD6KO5O24,Drip coffee,Decaf - 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-D6QWMB4CN27WRVARCNETL7TC,Drip coffee,Refill 10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,1.5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-V2ADFG3J6BKAV7MTAQVN7HBE,Drip coffee,Refill 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,2.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-F2RBQ7KHB42B6FTPSI4AMXVB,Eggnog,10oz (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.5,,Y,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-VVAHSMYZAOBBQ5VMGA2ESK4D,Eggnog,10oz (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.5,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-BWCMFXIPKKC6AZ2O7CRO72PH,Eggnog,16oz (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.45,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-XT4NYOUPSDIP5H6C4N3BAOHS,Eggnog,16oz (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.45,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-6YEWCES3KOHZ5I7E7TODFUOX,Elderberry & Passionfruit Black Iced Tea (Elderberry & Passionfruit Black Tea),Regular,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Physical good,,,,N,N,N,Y,5.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-OGBXWB4SNCQOHSCZPLB2FH3R,Elderberry Lemonade,Here,,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-AOJN2T2MD32RTPUXWZGMHOCR,Elderberry Lemonade,To Go,,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,6,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-UTO6RYYEKZLEDV7ZNKV2FPA4,Espresso,Regular,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-PUHBLP2GUPFDQXOGOIHQJ624,Espresso,Extra Shot,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,1.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-FEPI7BGGWWXDXCC2DOZ7V7ZN,Espresso,Brown Sugar Infused Espresso,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
-WZFDU65QMM7OY2DFQKKIXLYD,Espresso & Tonic (Orange),16oz,,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,Y,N,N
-3ABOLY2HMUHGFRQXBUNH54PD,Espresso & Tonic (Orange),The Carámbula (Aaron & Kelly),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,Y,N,N
-YIX62KAFI5WQ5JHIGUXGUGSJ,Everything Bagel,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-66RQ7HY4HXA5D26KSXQCFZF6,Flat White,Regular,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,Y,N,N
-5XWJZ6SFFTBKTJNIUYPFJCHK,"Fontanabianca, Nebbiolo",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,Y,16,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-ARMMAQZDKSG63G6P3AET4XSJ,"Fontanabianca, Nebbiolo",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,50,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-DAY7PFFUCG7WRTVZXHVRLPE2,Fuzz Face - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,20,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-FMOT3YSISQD5QTQV4BHTSL57,Gingerbread Latte,10oz Hot (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-EMF4KKMYGE2O4QX4MTGXLSRQ,Gingerbread Latte,10oz Hot (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-IMECY3NKRI72TOI6DBD3HTXO,Gingerbread Latte,16oz Hot (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-HZI7UA5A4VSEYUPZ3MESSDCU,Gingerbread Latte,16oz Iced (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-D5YXRKAICKAPI2PGMIHL77WW,Gingerbread Latte,16oz Iced (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-FSVAXSXN4LYKHC5GHCPDKXUQ,Golden Honey,10oz (Here),,"(Vanilla, Honey & Turmeric)",Signature Drinks,Signature Drinks,,,,,visible,Physical good,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-N6MXEHKHZDGXA3OFS2BFC22E,Golden Honey,10oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Physical good,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-SD72ALVQFL4EOBGXTMC6EQQD,Golden Honey,16oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-Y2W23GEDOX3TWWMWHBGCEG7F,Golden Honey,16oz Iced (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-HIPS6GUWSRCMOYB5BAV3FV6N,Golden Honey,16oz Iced (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-WMLS5XEZWVVWCXIU4U36OTDA,Grain Belt Premium Lager,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-NIKLAKC3Y2PF4X5HOCPH2NFA,Gray Duck “Bomba Juice” Seltzer,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,,,N,N,6,,Y,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-ZLPY4G434EZESZASWWC3S4NP,Honey & Lavender,10oz (Here),,(Honey and Lavender),Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-ZHYOWGKDIOTKOXGEPBBBCL4M,Honey & Lavender,10oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-KDIYZBDDQDSF65JWMAZLOGPU,Honey & Lavender,16oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-HMVOBQ7LEGEWG5MDDEOMV7W3,Honey & Lavender,16oz Iced (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-Y6EW74KZZJQ627ASY34EMWEW,Honey & Lavender,16oz Iced (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-Z73WCM4XKVDYEV47YQ4YL4UP,Honey Sticks,Regular,,,Retail,Retail,,,,,visible,Physical good,,,,N,N,N,Y,5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-NTD4IYFXPMY3J6WIIMXJYJ2Z,Hot chocolate catering,Regular,,,,,,,,,,Physical good,,,,,,,Y,32,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-2L3AZO4SKTSVVGKWNAP5M6N4,Iced Cappuccino,Regular,,One of most popular signature drinks.  Quad shot of espresso poured over ice milk and topped with vanilla cold cream.,Signature Drinks,Signature Drinks,,,,,,Prepared food and beverage,,,,N,N,N,Y,7.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,Y,N,N
-N2OVPDSAZYYBWQQ7PV7SGK4S,Iced Tea,Black Iced Tea,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-QDJX4NZ7IEL4OURLXDRCJZDL,Iced Tea,Iced Mallorca Melon,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-7CDROLNFCIIZBGOOCX26EQ6E,Italian Soda,Regular,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,Y,N,N
-U5EYTMLTL2G72RIKILONSY6K,Itumpi - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-J5KNFWRBWJWJZFFOAF2SXATU,Kunjin - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-LADA5XFRFP2TF2N2GUA6OOMJ,Las Flores - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,26,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-FHOXWW5KA2T4NR4LHSUFQFPL,Latte,10oz (To go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-KFULSOPNRUTYZZTWOXH3WNJD,Latte,10oz (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,6.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-KTEKRCVDX7C42FHOOEGM7XDJ,Latte,16oz Hot (To go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-HNLW33TSDISR5IKAI3LJ2K4B,Latte,16oz Iced (Here),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-MY4V5YJGGDR3K5KL5M5HAZ6N,Latte,16oz Iced (To go),,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,Y,N,N,Y,N,N,N,N,N,N,N,N,N
-POXPMQYKT3MLQ37DRAHDUCYO,Lavender Haze,Regular,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Physical good,,,,N,N,N,Y,5.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-4Q6K7SWG7TGCHCMN2OAOY5QE,"Lavender, Ice Tea & Tonic",Regular,,"(Lavender, Ice, Tonic Water topped w/Melon Tea)",Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-CWZ5FCTFMXVMGIFMS27RCIZF,Lemonade,Here,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-YGN4WJ5WZEJXRBCN5GNUWJSY,Lemonade,To Go,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-Z5L6PQ5ZPJNXU4LJ3QQ67R2U,Lemonade Matcha,Here,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Physical good,,,,N,N,N,Y,7.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,Y
-OMDEO4YDV7IP7HBA64CJ5AIF,Lemonade Matcha,To Go,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,Y
-XCLRYMNIFSEQ3LWXPQC2ODNA,Macchiato,2oz traditional,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-R3J3B6SYQKKF55BZIM76M4JN,Maple Cardamom Latte,10oz (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-QHUCZS6XAEUWWKXAMPGUNMLN,Maple Cardamom Latte,10oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-YFH4QPOUSULA5XK2TEOIMVJY,Maple Cardamom Latte,16oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-G4KEH6IUOTT2YWWUNLUEHCGD,Maple Cardamom Latte,16oz Iced (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-2CAOORKESGQRE7TLHWAZYWYO,Maple Cardamom Latte,16oz Iced (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-C7ZQRWUGUIHMOU6IJGZCV5CB,Matcha,10oz,,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,N,Y,N,Y,Y,Y,N,N,N,N,N,Y,N,N
-N75PH3WSVQVJEUVTWXAQGI33,Matcha,16oz,,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,N,Y,N,Y,Y,Y,N,N,N,N,N,Y,N,N
-HDGWCMYJOOBFY6YMPHLVDVDY,Matcha,16oz Iced,,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,N,Y,N,Y,Y,Y,N,N,N,N,N,Y,N,N
-VGDRF436KQLHOZCG46ASTKXR,Mixed nuts,Regular,,,Paninis,Paninis,,,,,,Physical good,,,,,,,Y,5.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-66IEFSJUSWBR5BC6CC7ZOFPP,Noble Vines Pinot Grigio,Glass,,,Wine,Wine,,,,,,Prepared food and beverage,,,,,,,Y,10,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-2I5XWBQ3VDRNPINVD244G4LW,Noble Vines Pinot Grigio,Bottle,,,Wine,Wine,,,,,,Prepared food and beverage,,,,,,,,36,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-2MXM7LIY6EBBTR2KDBSO36TX,Old Fashioned Donut,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3,,N,,N,,N,,,N,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-33AP6G6OQRPAQHLWITLPZHEM,Passion Fruit Black Iced Tea,Regular,,,"Signature Drinks, Non Coffee Drinks",Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,5.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-ICDAPBHMETRC5TGSC42P26YM,Passion Pop,Regular,,Lemonade and passion fruit syrup,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Physical good,,,,N,N,N,Y,5.25,,N,,N,,N,,,Y,,,,,,N,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-FIHWHIYCL3TGSD64IRAFGH4Z,Peppermint Mocha,10oz Hot (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-MM2FMLUPI3U5FRZPOCXLAJ25,Peppermint Mocha,10oz Hot (To go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-CF26C4XY5I5FGSCYO5RX6AMX,Peppermint Mocha,16oz Iced (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-44BLCRGA46PCBQ3TOMR6JNH3,Peppermint Mocha,16oz Iced (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-2REIOBCPG5RPGFQXQVJFCJVE,Peppermint Mocha,16oz Hot (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-KRKD4LB55PVNY3VC534RWCQ4,"Pinot Grigio, Noble Vines",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,N,N,10,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-5ZXE2EYAM2SXGXPEFKDEBVXR,"Pinot Grigio, Noble Vines",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,36,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-QXEBCU76P4D2SMUYXT3QGXBU,"Pinot Noir, Duck Pond",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,16,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-KLZDPVSIFDOLWFMNVU776O2E,"Pinot Noir, Duck Pond",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,48,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-Y2FHZ6IW5F6VXHR6P4BXK724,Pistachio Latte,10oz (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-V735TJXE7CJRR5UNPUTP77XA,Pistachio Latte,10oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-MPUX3Q3MXOFAEAXYDIZ35TXF,Pistachio Latte,16oz (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-HTGOOIXGR3I4XAEW745TUPAD,Pistachio Latte,16oz Iced (Here),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-3FRGIE67ERIS65UG5XVGXL5K,Pistachio Latte,16oz Iced (To go),,,Signature Drinks,Signature Drinks,,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-E5RGAOHSONJEMEQAS2BMSZ3W,Pop Cake,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3.25,,N,,N,,N,,,N,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-7O26YZNKARSIRN57VHNXZK5W,Prosecco,Prosecco Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,Y,12,,Y,,N,,N,,,N,,,,,,N,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-KHG7AWDKLES26UDGVBBFIIMX,Prosecco,Prosecco Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,44,,Y,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-6WCLSKVUJEEWJDVGZMNIGJEV,Prosecco (375ml),Regular,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,30,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-UFYF2SULV2S7DHD6FDOULIXH,Raspberry Rush,Regular,,Lemonade and Raspberries Syrup,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Physical good,,,,N,N,N,Y,5.25,,N,,N,,N,,,Y,,,,,,N,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N
-YUVZBRK3AYJUOX45HD6VPO3J,"Rosé, Gayda ""La Minuette""",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,N,N,11,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-6LQ65RJEK3DZT2PZ2SZ2KAL7,"Rosé, Gayda ""La Minuette""",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,40,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-X3PX2Q5JJAZVIYLYX732VPKW,S'mores,10oz Hot (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,Y
-HZHZ5YJBLR4CNLOZHYMFNTNK,S'mores,10oz Hot (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,Y
-J34MZ3AHN5MO74J4PRKEFNE4,S'mores,16oz Iced (Here),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,Y
-NH2IXIUG4PZEBGKGVEBWPD3C,S'mores,16oz Iced (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,Y
-JPFIRVCZ5HGGIXDWF47ERHRT,S'mores,16oz Hot (To Go),,,,,,,,,unavailable,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,Y
-TRSUB2HUY7WSYXONYOE7AR5S,Salted Caramel Latte,10oz (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-LYBEIMU3OHRU6AC2PQQ3YDLG,Salted Caramel Latte,10oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-3XMSZPT3G2YP736E7SO5EZNZ,Salted Caramel Latte,16oz Hot (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-BW7GV4QGHODRS4QPN473WXOT,Salted Caramel Latte,16oz Iced (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-6F2WGPGJLHPSS7M2Y7O2UAFW,Salted Caramel Latte,16oz Iced (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-3G7VSYGU5Y5VUQFCQ2N32B5J,San Lorenzo - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-P2OWXNE4LBO77RWQHJZUEQ6J,"Sauvignon Blanc, Mussel Bay - New Zealand",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,N,N,10,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-Q2T7VC26LVCYGH2ELEXHFKYW,"Sauvignon Blanc, Mussel Bay - New Zealand",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,36,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-EC7UHZFIIC2MCESLWJQJNK5T,Schell's Barrel Aged Cave Aged Lager,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,9,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-DVIN235YI24XKEJ3F7KECCUE,Scone w. Earl Grey Currants,Regular,,,Bakery,Bakery,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N
-CJ2AUZSKWZ4E2HS4XGWEPKJF,Small Honey Bears,Regular,,,Retail,Retail,,,,,visible,Physical good,,,,N,N,N,Y,3.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-MMDMNRNXV5VNC2COTLVUWKYV,Soda water,Regular,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,2.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,Y
-ZXOW5J75DOBGWQN5MN7LZZXA,Steamer (Milk & Syrup),8oz Steamer,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-3E5UEY5VSNBSUNL2MSMCIJWY,Steamer (Milk & Syrup),10oz Steamer,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-LYXPTJFMJTAHCCHXAJZHC7DO,Steamer (Milk & Syrup),16oz Steamer,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-EJPVOJDW3CO76YDT7QJF5G67,Steamer (Milk & Syrup),16oz Cold Milk,,,Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-OJ5KF4IWCPVP4NNFOAL5FTJU,Storm Chaser,10oz,,Drip coffee with a shot of espresso,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,4.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-3AN5KXXRCSBF3A6BULU2ALLW,Storm Chaser,16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,Y,Y,N,N,N,N,N,N,N,N,N,Y,N,N
-TF5EHMTCBDLFCEIF7SPPJS7R,Strawberry Cheesecake Latte (Strawberry & Vanilla),10oz (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-YCC2OY7TPPMK24ORGESHD45J,Strawberry Cheesecake Latte (Strawberry & Vanilla),10oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-GLFA7M4JTOL3QGHGC3M4DETZ,Strawberry Cheesecake Latte (Strawberry & Vanilla),16oz Hot (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-ILFNRTHITUUU6FVDYYYVGFDB,Strawberry Cheesecake Latte (Strawberry & Vanilla),16oz Iced (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-ZY4RUNB33YHSXL67FMBAZAJ7,Strawberry Cheesecake Latte (Strawberry & Vanilla),16oz Iced (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-QY25HWAJZ4JALL7VK7YIMCHD,Strawberry Lemonade,Here,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-D2DX4RI5LSDSEUJ4ZSIMP5BL,Strawberry Lemonade,To Go,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-LVW2O32NFMM7OWYVIWG6VYII,Strawberry Rose Lemonade,Here,,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,N,N,N,Y,6,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-3KJYKDB3GIVXLYO4WZ7QTWTS,Strawberry Rose Lemonade,To Go,,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Prepared food and beverage,,,,,,,,6,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-OJCTVK3AFGFHIBUWZML2UYF7,Strawberry Rose Matcha,10oz (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,N,N,N,Y,6.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-ODVTH3XZQSQ3Z7OE36CHFHGN,Strawberry Rose Matcha,10oz (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,6.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-D5GH6ZHP3UANMY73ICTTQCSV,Strawberry Rose Matcha,16oz Hot (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-43SCREVVEANAKRQQL3ZDQJMC,Strawberry Rose Matcha,16oz Iced (Here),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-PZZBUTWKTCQOTOIQ2TGIYQ7Q,Strawberry Rose Matcha,16oz Iced (To Go),,,Seasonal (Spring/Summer),Seasonal (Spring/Summer),,,,,visible,Physical good,,,,,,,,7.25,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,Y,N,N,N,Y,N,N,N,Y,N,N,N,N,N,N,N,N,N
-JHNKK42BWQCQP7KDCC2CEV6Z,SuperNova - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,22.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-DD7EBGJNIX5MEB275UDE5QTL,Surly “One Man Mosh Pit” Hazy IPA,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,7,,N,,N,,N,,,Y,,,,,,N,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-IIZB5BDELRINOZBERHAED72A,Tea,10oz Jasmine Pearls,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,3.75,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-RHMMK5MN5WYHRJGS7J62N5WG,Tea,10oz Passion Fruit Dream,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-DJGGSQLV55HUFAD6YEBCQJUK,Tea,10oz Moroccan Mint Meritage,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-XM3YSVVATSXBA5QEZSWE4MWF,Tea,10oz Wild Rose Honeybush Chamomile,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-2PIROCKNIN4NQIDHZ3DN2PNN,Tea,10oz Mallorca Melón,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-O6J24PDHACYGEYGYBKV4QDTZ,Tea,10oz Earl Grey,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-QTMKYKJZLQW33JRQF5NI2EQT,Tea,10oz Emperor's Aged Keemun,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-G6HHNBENHULJKPPQMANWMKTR,Tea,10oz English breakfast,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-HYOX2DCVHLBWQBQI65IYQS4Z,Tea,Vanilla London Fog 10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-LFJ3HRN6DCZXIEJRZTUIFA7E,Tea,Lavender London Fog 10oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,3.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-UV6DZBAZZBDT26DYGR42C7BJ,Tea,16oz Jasmine Pearls,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-7B4L5VW3PSN24JYLGSDG25TT,Tea,16oz (GREEN TEA!!!!!) Passion Fruit Dream,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-WGNKHXGAUVWYKM46WUL7AS5A,Tea,16oz Moroccan Mint Meritage,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-24QF7KK3F3SLMQGBQ4R2JWCU,Tea,16oz Wild Rose Honeybush Chamomile,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-CASF26FORJARPJ4VL54Q5XNB,Tea,16oz Mallorca Melon,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-F2SW3DTUF33OYHFAPICZONVF,Tea,16oz Earl Grey,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-2REDGH4SIH5FDQNSKKY2JKH5,Tea,16oz English Breakfast,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-OC52WAQCPSEC6PTVTOXNDEIT,Tea,16oz Emperor's Aged Keemun,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,4.75,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-XLFOL6ASWKSOYYSOMZFBHAMR,Tea,Vanilla London Fog 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-FYHU2LJU7GNH34MVOJCUSF6T,Tea,Lavender London Fog 16oz,,,Drinks,Drinks,,,,,visible,Prepared food and beverage,,,,,,,,5.5,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,Y,N,N,Y,N,N,N,N,N,N,N,N,Y,N,N
-FV6DBM6BRFVGTYZOOC4NE5RO,The Blue Gill Smoothie,Regular,,"(Blueberry, Banana, Coconut Flakes, Oat Milk)",Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8.95,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,Y,Y,N,N
-DKFFMZVMGOI5X6XTBMELQR6J,The Caprese,Regular,,"Delight in a classic Caprese with ripe tomato slices, fresh mozzarella, and basil leaves on schiaccita, drizzled with olive oil balsamic glaze.and red sauce. Seasoned with salt and pepper to taste.",Paninis,Paninis,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,13.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N
-IMQ7IRYRWLQCVD4MZ6FKR4XJ,The Chicken Pesto,Regular,,"Grilled whole chicken breasts, thinly sliced tomatoes, avocado, fresh mozzarella, salt, pepper, sautéed bell peppers and onions on toasted schiaccita. All slathered with an flavor-packed pesto sauce for a deliciously satisfying bite.",Paninis,Paninis,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,13.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N
-BHZAQTQKZFVMGENU5CSOQ6BA,The Classic,Regular,,"Savor the timeless flavors of thinly sliced prosciutto, fresh mozzarella, roasted red pepper, and fresh basil on schiaccita bread, drizzled with olive oil, balsamic vinegar and red sauce. A simple yet elegant sandwich.",Paninis,Paninis,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,13.25,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N
-GPYN2ICVSCTQOKFBJ5OI5BRB,The Skipper Smoothie,,,"(Strawberry, Banana, Honey, Oat Milk)",Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8.95,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,Y,Y,N,N
-H7FX5ZHKGX6C354IMWESB4MN,The Sun Deck Smoothie,Regular,,"(Pineapple, Mango, Honey, Oat Milk)",Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8.95,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,Y,Y,N,N
-5XD7DGTDISO2IJIGTD5LL2CI,The Ultimate,Regular,,"Experience the ultimate flavor with thinly sliced ham, turkey breast and pepperoni layered with havarti, fresh tomato, sautéed bell peppers and onion, mustard, mayo, salt and pepper on toasted schiaccita, topped with zesty Italian dressing.",Paninis,Paninis,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,14.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N
-QFG44LPJBSHNKC5WEJJI2FDR,The Wake Skate Smoothie,Regular,,"(Banana, Coconibs, Almond Butter, Honey, Cold Brew, Oat Milk)",Non Coffee Drinks,Non Coffee Drinks,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,8.95,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,Y,Y,Y,N,N
-WVOR3DWJ2YRKMYXDFWOZU42A,Tone Bender - Beans,Regular,,,Retail,Retail,,,,,visible,Prepared food and beverage,,,,N,N,N,Y,22.5,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
-DLLDRYEY4ZPQ6Y65EM7XPWIN,Toppling Goliath “Pseudo Sue” Pale Ale,Regular,,,Beer,Beer,,,,,unavailable,Prepared food and beverage,,,,N,N,N,N,7,,N,,N,,N,,,Y,,,,,,N,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-QHGCDNTBMPLOKLNQRYJY2ECQ,"Vinho Verde, Aveleda ""Fonte""",Glass,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,N,N,10,,N,,N,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
-TYUGUK4KBCDITFYX3BG7AALP,"Vinho Verde, Aveleda ""Fonte""",Bottle,,,Wine,Wine,,,,,unavailable,Prepared food and beverage,,,,,,,,36,,N,,,,N,,,Y,,,,,,Y,,,,,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
+Token,ItemName,Variation,Size,Temp,ToGo,Categories,Price
+LHBA4EDN2FCIZ5ELDJH3COZ3,Almond Croissant,Regular,,,,Bakery,6
+4ASY2J5Z3GFOJCTGAORULAGG,Americano,10oz (Here),,,,Drinks,4
+KUJOGXQQ6ZYFRVSLD3SLU5RO,Americano,10oz (To Go),,,,Drinks,4
+AZ5RHXPXYAPSIVG6Y5KXZURA,Americano,16oz (Here),,,,Drinks,4.75
+TTIF6A2F6TGVMOUTXS6NA4Z3,Americano,16oz (To Go),,,,Drinks,4.75
+BKKSFOFGTWAPQYUEEEWXIIMF,Americano,16oz Iced (Here),,,,Drinks,4.75
+NSTIXVN4GQ7BBQJVDKN3RSNG,Americano,16oz Iced (To Go),,,,Drinks,4.75
+U6QHVDAH24TE7JTKQGDEANPL,Apple Cider,10oz,,,,,5.25
+PQY4VXSIMCCEMM62DOHGAEUY,Apple Cider,16oz,,,,,6.25
+W2I6E22D4UP7GEOLU4SNPSJH,Apple Fitter,Regular,,,,Bakery,4.75
+3J5TZSWIMQSVADSKJP4RBKRV,Arnold Palmer (Half Lemonade & Half Black Iced Tea),Here,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+BFFXJF3ET6REDZKD7T5YAQY5,Arnold Palmer (Half Lemonade & Half Black Iced Tea),To Go,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+LU7IEQLST3QM7PTGLGO2SV3I,Asiago Bagel,Regular,,,,Bakery,6
+NECKE3OVOJ2KGEF32SO4LB2S,Avocado Whip Feta on Toast,Regular,,,,Breakfast,12
+VCHULMNGYKYJ7Y3CPN6KVJGK,Barrel-aged Beer,Regular,,,,Beer,9
+EU33LOTMZAK6VPTKPMG6W2YM,Beach Season Smoothie,Regular,,,,Non Coffee Drinks,8.95
+RAT2GBEAE3GLGJ6HMZES3WE6,Blackberry Lemonade,Here,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+YZTQ77YBJHW6CRG6OMZRJWEN,Blackberry Lemonade,To Go,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+CCMXHKXXELSGL76SJ6SNZWHB,Blackstack Local 755,Regular,,,,Beer,10
+ZI6PB4TAHET54NIO4EWXP6ZA,Bliss Latte,10oz (Here),,,,Seasonal (Spring/Summer),6.75
+PP4GLSKXB4HESAPHBPROACUB,Bliss Latte,10oz (To Go),,,,Seasonal (Spring/Summer),6.75
+QJBTX46SWJ5CA6P7Y3PV4QYU,Bliss Latte,16oz Hot (To Go),,,,Seasonal (Spring/Summer),7.25
+3SRYXT26OUBS3ZL76K6XHTRK,Bliss Latte,16oz Iced (Here),,,,Seasonal (Spring/Summer),7.25
+WGBHBLGV42VAVRW6OTCILAP7,Bliss Latte,16oz Iced (To Go),,,,Seasonal (Spring/Summer),7.25
+7AHVVUMMTDM4KXLVTIFPSOJY,Blossom Latte (Rose & Lavender),10oz (Here),,,,Seasonal (Spring/Summer),6.75
+MMNTRXPUHMAMKNDORIGRRNE3,Blossom Latte (Rose & Lavender),10oz (To Go),,,,Seasonal (Spring/Summer),6.75
+WJCCCUS4772MPBDZD47VR7AY,Blossom Latte (Rose & Lavender),16oz Hot (To Go),,,,Seasonal (Spring/Summer),7.25
+JVPSY75VXIFYJ4AZTBGLCYXO,Blossom Latte (Rose & Lavender),16oz Iced (Here),,,,Seasonal (Spring/Summer),7.25
+24VZWE4YOW4RGIIKYDEQMDOG,Blossom Latte (Rose & Lavender),16oz Iced (To Go),,,,Seasonal (Spring/Summer),7.25
+W7OH33UAT7XSWQJLLUTIHFUI,Breakfast Sandwich (Bacon),Regular,,,,Breakfast,8
+DTKTFL4QKS2J4AM3GLCDC5L2,Breakfast Sandwich (Everything Bagel),Regular,,,,Breakfast,8.75
+P5K4GAQPLTU5S7ZIREDZG3VV,Breakfast Sandwich (Sausage),Regular,,,,Breakfast,8
+5MFH5CI2C6NY7TVCDKD4QETT,Breakfast Sandwich (Turkey Sausage),Regular,,,,Breakfast,8
+ZPCD6MYKOB4HUCDNX6RY4YUK,Brown Sugar Latte (Brown Sugar in the portafilter),10oz (Here),,,,Signature Drinks,6.25
+JMCJZUIYP2MOEL22GLAOITK3,Brown Sugar Latte (Brown Sugar in the portafilter),10oz (To go),,,,Signature Drinks,6.25
+PEYLNVMY3XVAE52WHIOD4JQ6,Brown Sugar Latte (Brown Sugar in the portafilter),16oz (To go),,,,Signature Drinks,7.25
+HQNPGUBO6NHNBFH67OWSXQIW,Brown Sugar Latte (Brown Sugar in the portafilter),16oz Iced (Here),,,,Signature Drinks,7.25
+ISJAWZFVEMBXBICKGBBHEBIV,Brown Sugar Latte (Brown Sugar in the portafilter),16oz Iced (To go),,,,Signature Drinks,7.25
+CPCSEUTE2JEZ5D7MI5V2WE6K,Brownie,Regular,,,,Bakery,5
+6Y3I4USF33UO3RC3H5DTR32X,"Cabernet Sauvignon, Bleasdale",Glass,,,,Wine,12
+I7D6VBHV4GMULQ4BMXEGLXRU,"Cabernet Sauvignon, Bleasdale",Bottle,,,,Wine,44
+KVLHSKDGUN3GT2MC3PG7GS2Y,Candle,Regular,,,,Retail,20
+2MKHG7LSD75X65C53LOIBFG3,Cappuccino,Regular,,,,Drinks,4.5
+ADUGUCKRV6DH526CYRDBQGBZ,Cappuccino,Iced cappuccino,,,,Drinks,7.25
+ZUGOWD54M7BYZSH6QINL6VRD,Cappuccino,Brown Sugar Cappuccino,,,,Drinks,5.35
+TXNGRQANMFZ7ADBXSS32WKEZ,Cappuccino,PS Iced Cappuccino,,,,Drinks,7.25
+4J6GJMHIKA5P3GLRRXRVBCJT,Cereal Milk Latte,10oz (Here),,,,Seasonal (Spring/Summer),8.25
+5Z2ADSELW33TJ7VJAKEO45QW,Cereal Milk Latte,10oz (To Go),,,,Seasonal (Spring/Summer),8.25
+4EXWQTWSETO6OHP3LBPUBU5Z,Cereal Milk Latte,16oz (To Go),,,,Seasonal (Spring/Summer),8.75
+LJRP4O5JAPNVDMJLNZWJU4DG,Cereal Milk Latte,16oz Iced (Here),,,,Seasonal (Spring/Summer),8.75
+BDGCJSU7JFOFDY6VMKWMVUFF,Cereal Milk Latte,16oz Iced (To Go),,,,Seasonal (Spring/Summer),8.75
+VWFFHSMM7T7OI4XX2HTCXS2N,Chai,10oz (Here),,,,Drinks,5.25
+AJU7S5WIV57EVUCA2U2GJDRG,Chai,10oz (To Go),,,,Drinks,5.25
+7A2YDOOUK3TN7QKF2X5NAIZG,Chai,16oz (Here),,,,Drinks,5.75
+U2YEIEGWKOAE7DUIIY7LZUD6,Chai,16oz (To Go),,,,Drinks,5.75
+34XLTURGE3KHCEGCZCOEKVKU,Chai,16oz Iced (Here),,,,Drinks,5.75
+BVA7WRTG7BMNBOGPLFSV3LTK,Chai,16oz Iced (To Go),,,,Drinks,5.75
+AGSDCMR4NGU3VHA5QVBBUXCV,"Chardonnay, Oberon",Glass,,,,Wine,12
+JTZ6ABX7GZ24UI2ZNIG5NDA4,"Chardonnay, Oberon",Bottle,,,,Wine,44
+UJX6S25ZPASFC7IEA5QKKZYW,Charles Roux Blanc De Blanc,Regular,,,,Wine,12
+MXU6ADWWM3PK65I5SKYR4Y26,Chider,10oz (Here),,,,,6.75
+Z7SVWDWZNZDEGNAZNTCA7ENE,Chider,10oz (To Go),,,,,6.75
+JADJBSOBFLRGIO4G342RBWXA,Chider,16oz (To Go),,,,,7.25
+7M7K3AZHBTLTIO4MQ57U7CFL,Chider,16oz (Here),,,,,7.25
+BRU5RSXRMIP24UMSW2D4DV2O,Chocolate Chip Cookie,Regular,,,,Bakery,4
+YBX2QUCH5Z2NV5M7PWDDAT7U,Chocolate Croissant,Regular,,,,Bakery,5.5
+JPXORT2GQJOJEAJIKZSTRKDT,Chocolate chip banana bread,Regular,,,,Bakery,5
+Z5DB6R3VWLNH5ZJPKOXT3XQJ,Chrurros Latte (Brown Sugar in the portafilter & Cinnamon powder in cup),10oz,,,,Signature Drinks,6.75
+JXQNNRZ7ZLBCZOHJLAZTQZRD,Chrurros Latte (Brown Sugar in the portafilter & Cinnamon powder in cup),16oz,,,,Signature Drinks,7.25
+GVD26MBCIVI3LMRE2F3TTNXW,Chrurros Latte (Brown Sugar in the portafilter & Cinnamon powder in cup),16oz Iced,,,,Signature Drinks,7.25
+SKS3XJAP5GM27MOVWUCETNKQ,Cider,Regular,,,,Beer,7
+NZIOUIBUTZLF4MUSBBTM7VA4,Cinnamon Toast Latte,10oz (Here),,,,Signature Drinks,6.75
+56SNWWMQNVHUHP5ZULGLKT7Q,Cinnamon Toast Latte,10oz (To go),,,,Signature Drinks,6.75
+53YTNTT5HD3GRHXTKYH64X4X,Cinnamon Toast Latte,16oz (To go),,,,Signature Drinks,7.25
+V5ELM27RZEP6EPYFGMOISSEB,Cinnamon Toast Latte,16oz Iced (Here),,,,Signature Drinks,7.25
+7L465BAQYTBH5V6FNBVQQWPD,Cinnamon Toast Latte,16oz Iced (To go),,,,Signature Drinks,7.25
+HQ33GIPTIDHCHONI7GZEGEDB,Classic Butter Croissant,Regular,,,,Bakery,5.5
+TOVYFKDS3E3XEI5YYKAKJXNR,Coconut Rocher *(gf),Regular,,,,Bakery,3.5
+ZZEZVXVG3KH5LQXUZTIO77KG,Coffee togo box,Regular,,,,Catering And Event Space,38
+F6UZ3OF5XVMH7EE42FUQIRLE,Cold Brew,Regular,,,,Drinks,5.75
+4IUMO4AEWYX2O5IEOXQH3FZJ,Cortado,Regular,,,,Drinks,3.95
+NEG646GHHTTP4HMHBBOQL753,Crème Brûlée,10oz (Here),,,,,6.5
+IAJO224SV3JFAU4XWIPO76VT,Crème Brûlée,10oz (To Go),,,,,6.5
+KH4DHOSV4CQWC4WDWKFSA3RQ,Crème Brûlée,16oz (Here),,,,,7.45
+4BDQOPSJNILQNIWQKOTAIHOY,Crème Brûlée,16oz (To Go),,,,,7.45
+AZR55YMNGVSF5IQM5YWL5AKH,Cup,Latte,,,,Retail,22
+USKUENPGTQNK3U4RDL5FHCTE,Cup,Cappuccino,,,,Retail,20
+5XRTDKZC6DABF3SIBNW4V3T5,Cup,Coffee Mug,,,,Retail,18
+AWQYBFMRRABPASSBFXZ45XNB,Drip coffee,“Dark” -10oz,,,,Drinks,4.5
+AUQE24NZ3O667Y4UFSLDSWYG,Drip coffee,“Dark” - 16oz,,,,Drinks,5.25
+35XVBUNM6MKED4KEAEN4NUWR,Drip coffee,“Medium” - 10oz,,,,Drinks,4.5
+TRM4W55ZADCAYHREH24DQ3T4,Drip coffee,“Medium”- 16oz,,,,Drinks,5.25
+H6MFHQQLCBVKCMH7N55WMLY7,Drip coffee,“Light” - 10oz,,,,Drinks,4.5
+LF3AR46W5YGMEJDACTTWG7TT,Drip coffee,“Light” - 16oz,,,,Drinks,5.25
+UFAIK7NHZRGU6DPXTLDXOA3Q,Drip coffee,Decaf - 10oz,,,,Drinks,4.5
+MZ444TMKICNO76MYD6KO5O24,Drip coffee,Decaf - 16oz,,,,Drinks,5.25
+D6QWMB4CN27WRVARCNETL7TC,Drip coffee,Refill 10oz,,,,Drinks,1.5
+V2ADFG3J6BKAV7MTAQVN7HBE,Drip coffee,Refill 16oz,,,,Drinks,2.25
+F2RBQ7KHB42B6FTPSI4AMXVB,Eggnog,10oz (Here),,,,,6.5
+VVAHSMYZAOBBQ5VMGA2ESK4D,Eggnog,10oz (To Go),,,,,6.5
+BWCMFXIPKKC6AZ2O7CRO72PH,Eggnog,16oz (To Go),,,,,7.45
+XT4NYOUPSDIP5H6C4N3BAOHS,Eggnog,16oz (Here),,,,,7.45
+6YEWCES3KOHZ5I7E7TODFUOX,Elderberry & Passionfruit Black Iced Tea (Elderberry & Passionfruit Black Tea),Regular,,,,Non Coffee Drinks,5.5
+OGBXWB4SNCQOHSCZPLB2FH3R,Elderberry Lemonade,Here,,,,Seasonal (Spring/Summer),6
+AOJN2T2MD32RTPUXWZGMHOCR,Elderberry Lemonade,To Go,,,,Seasonal (Spring/Summer),6
+UTO6RYYEKZLEDV7ZNKV2FPA4,Espresso,Regular,,,,Drinks,3
+PUHBLP2GUPFDQXOGOIHQJ624,Espresso,Extra Shot,,,,Drinks,1.75
+FEPI7BGGWWXDXCC2DOZ7V7ZN,Espresso,Brown Sugar Infused Espresso,,,,Drinks,4
+WZFDU65QMM7OY2DFQKKIXLYD,Espresso & Tonic (Orange),16oz,,,,Signature Drinks,6.5
+3ABOLY2HMUHGFRQXBUNH54PD,Espresso & Tonic (Orange),The Carámbula (Aaron & Kelly),,,,Signature Drinks,4
+YIX62KAFI5WQ5JHIGUXGUGSJ,Everything Bagel,Regular,,,,Bakery,6
+66RQ7HY4HXA5D26KSXQCFZF6,Flat White,Regular,,,,Drinks,4.5
+5XWJZ6SFFTBKTJNIUYPFJCHK,"Fontanabianca, Nebbiolo",Glass,,,,Wine,16
+ARMMAQZDKSG63G6P3AET4XSJ,"Fontanabianca, Nebbiolo",Bottle,,,,Wine,50
+DAY7PFFUCG7WRTVZXHVRLPE2,Fuzz Face - Beans,Regular,,,,Retail,20
+FMOT3YSISQD5QTQV4BHTSL57,Gingerbread Latte,10oz Hot (Here),,,,,6.75
+EMF4KKMYGE2O4QX4MTGXLSRQ,Gingerbread Latte,10oz Hot (To Go),,,,,6.75
+IMECY3NKRI72TOI6DBD3HTXO,Gingerbread Latte,16oz Hot (To Go),,,,,7.25
+HZI7UA5A4VSEYUPZ3MESSDCU,Gingerbread Latte,16oz Iced (Here),,,,,7.25
+D5YXRKAICKAPI2PGMIHL77WW,Gingerbread Latte,16oz Iced (To Go),,,,,7.25
+FSVAXSXN4LYKHC5GHCPDKXUQ,Golden Honey,10oz (Here),,,,Signature Drinks,6.75
+N6MXEHKHZDGXA3OFS2BFC22E,Golden Honey,10oz (To go),,,,Signature Drinks,6.75
+SD72ALVQFL4EOBGXTMC6EQQD,Golden Honey,16oz (To go),,,,Signature Drinks,7.25
+Y2W23GEDOX3TWWMWHBGCEG7F,Golden Honey,16oz Iced (Here),,,,Signature Drinks,7.25
+HIPS6GUWSRCMOYB5BAV3FV6N,Golden Honey,16oz Iced (To go),,,,Signature Drinks,7.25
+WMLS5XEZWVVWCXIU4U36OTDA,Grain Belt Premium Lager,Regular,,,,Beer,6
+NIKLAKC3Y2PF4X5HOCPH2NFA,Gray Duck “Bomba Juice” Seltzer,Regular,,,,Beer,6
+ZLPY4G434EZESZASWWC3S4NP,Honey & Lavender,10oz (Here),,,,Signature Drinks,6.75
+ZHYOWGKDIOTKOXGEPBBBCL4M,Honey & Lavender,10oz (To go),,,,Signature Drinks,6.75
+KDIYZBDDQDSF65JWMAZLOGPU,Honey & Lavender,16oz (To go),,,,Signature Drinks,7.25
+HMVOBQ7LEGEWG5MDDEOMV7W3,Honey & Lavender,16oz Iced (Here),,,,Signature Drinks,7.25
+Y6EW74KZZJQ627ASY34EMWEW,Honey & Lavender,16oz Iced (To go),,,,Signature Drinks,7.25
+Z73WCM4XKVDYEV47YQ4YL4UP,Honey Sticks,Regular,,,,Retail,5
+NTD4IYFXPMY3J6WIIMXJYJ2Z,Hot chocolate catering,Regular,,,,,32
+2L3AZO4SKTSVVGKWNAP5M6N4,Iced Cappuccino,Regular,,,,Signature Drinks,7.75
+N2OVPDSAZYYBWQQ7PV7SGK4S,Iced Tea,Black Iced Tea,,,,Non Coffee Drinks,4.75
+QDJX4NZ7IEL4OURLXDRCJZDL,Iced Tea,Iced Mallorca Melon,,,,Non Coffee Drinks,4.75
+7CDROLNFCIIZBGOOCX26EQ6E,Italian Soda,Regular,,,,Non Coffee Drinks,4.75
+U5EYTMLTL2G72RIKILONSY6K,Itumpi - Beans,Regular,,,,Retail,25
+J5KNFWRBWJWJZFFOAF2SXATU,Kunjin - Beans,Regular,,,,Retail,25
+LADA5XFRFP2TF2N2GUA6OOMJ,Las Flores - Beans,Regular,,,,Retail,26
+FHOXWW5KA2T4NR4LHSUFQFPL,Latte,10oz (To go),,,,Drinks,6.25
+KFULSOPNRUTYZZTWOXH3WNJD,Latte,10oz (Here),,,,Drinks,6.25
+KTEKRCVDX7C42FHOOEGM7XDJ,Latte,16oz Hot (To go),,,,Drinks,7.25
+HNLW33TSDISR5IKAI3LJ2K4B,Latte,16oz Iced (Here),,,,Drinks,7.25
+MY4V5YJGGDR3K5KL5M5HAZ6N,Latte,16oz Iced (To go),,,,Drinks,7.25
+POXPMQYKT3MLQ37DRAHDUCYO,Lavender Haze,Regular,,,,Non Coffee Drinks,5.25
+4Q6K7SWG7TGCHCMN2OAOY5QE,"Lavender, Ice Tea & Tonic",Regular,,,,Signature Drinks,5.75
+CWZ5FCTFMXVMGIFMS27RCIZF,Lemonade,Here,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+YGN4WJ5WZEJXRBCN5GNUWJSY,Lemonade,To Go,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+Z5L6PQ5ZPJNXU4LJ3QQ67R2U,Lemonade Matcha,Here,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",7.25
+OMDEO4YDV7IP7HBA64CJ5AIF,Lemonade Matcha,To Go,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",7.25
+XCLRYMNIFSEQ3LWXPQC2ODNA,Macchiato,2oz traditional,,,,Drinks,3.75
+R3J3B6SYQKKF55BZIM76M4JN,Maple Cardamom Latte,10oz (Here),,,,Signature Drinks,6.75
+QHUCZS6XAEUWWKXAMPGUNMLN,Maple Cardamom Latte,10oz (To go),,,,Signature Drinks,6.75
+YFH4QPOUSULA5XK2TEOIMVJY,Maple Cardamom Latte,16oz (To go),,,,Signature Drinks,7.25
+G4KEH6IUOTT2YWWUNLUEHCGD,Maple Cardamom Latte,16oz Iced (Here),,,,Signature Drinks,7.25
+2CAOORKESGQRE7TLHWAZYWYO,Maple Cardamom Latte,16oz Iced (To go),,,,Signature Drinks,7.25
+C7ZQRWUGUIHMOU6IJGZCV5CB,Matcha,10oz,,,,Signature Drinks,6.25
+N75PH3WSVQVJEUVTWXAQGI33,Matcha,16oz,,,,Signature Drinks,7.25
+HDGWCMYJOOBFY6YMPHLVDVDY,Matcha,16oz Iced,,,,Signature Drinks,7.25
+VGDRF436KQLHOZCG46ASTKXR,Mixed nuts,Regular,,,,Paninis,5.5
+66IEFSJUSWBR5BC6CC7ZOFPP,Noble Vines Pinot Grigio,Glass,,,,Wine,10
+2I5XWBQ3VDRNPINVD244G4LW,Noble Vines Pinot Grigio,Bottle,,,,Wine,36
+2MXM7LIY6EBBTR2KDBSO36TX,Old Fashioned Donut,Regular,,,,Bakery,3
+33AP6G6OQRPAQHLWITLPZHEM,Passion Fruit Black Iced Tea,Regular,,,,"Signature Drinks, Non Coffee Drinks",5.5
+ICDAPBHMETRC5TGSC42P26YM,Passion Pop,Regular,,,,Non Coffee Drinks,5.25
+FIHWHIYCL3TGSD64IRAFGH4Z,Peppermint Mocha,10oz Hot (Here),,,,,6.75
+MM2FMLUPI3U5FRZPOCXLAJ25,Peppermint Mocha,10oz Hot (To go),,,,,6.75
+CF26C4XY5I5FGSCYO5RX6AMX,Peppermint Mocha,16oz Iced (Here),,,,,7.25
+44BLCRGA46PCBQ3TOMR6JNH3,Peppermint Mocha,16oz Iced (To Go),,,,,7.25
+2REIOBCPG5RPGFQXQVJFCJVE,Peppermint Mocha,16oz Hot (To Go),,,,,7.25
+KRKD4LB55PVNY3VC534RWCQ4,"Pinot Grigio, Noble Vines",Glass,,,,Wine,10
+5ZXE2EYAM2SXGXPEFKDEBVXR,"Pinot Grigio, Noble Vines",Bottle,,,,Wine,36
+QXEBCU76P4D2SMUYXT3QGXBU,"Pinot Noir, Duck Pond",Glass,,,,Wine,16
+KLZDPVSIFDOLWFMNVU776O2E,"Pinot Noir, Duck Pond",Bottle,,,,Wine,48
+Y2FHZ6IW5F6VXHR6P4BXK724,Pistachio Latte,10oz (Here),,,,Signature Drinks,6.75
+V735TJXE7CJRR5UNPUTP77XA,Pistachio Latte,10oz (To go),,,,Signature Drinks,6.75
+MPUX3Q3MXOFAEAXYDIZ35TXF,Pistachio Latte,16oz (To go),,,,Signature Drinks,7.25
+HTGOOIXGR3I4XAEW745TUPAD,Pistachio Latte,16oz Iced (Here),,,,Signature Drinks,7.25
+3FRGIE67ERIS65UG5XVGXL5K,Pistachio Latte,16oz Iced (To go),,,,Signature Drinks,7.25
+E5RGAOHSONJEMEQAS2BMSZ3W,Pop Cake,Regular,,,,Bakery,3.25
+7O26YZNKARSIRN57VHNXZK5W,Prosecco,Prosecco Glass,,,,Wine,12
+KHG7AWDKLES26UDGVBBFIIMX,Prosecco,Prosecco Bottle,,,,Wine,44
+6WCLSKVUJEEWJDVGZMNIGJEV,Prosecco (375ml),Regular,,,,Wine,30
+UFYF2SULV2S7DHD6FDOULIXH,Raspberry Rush,Regular,,,,Non Coffee Drinks,5.25
+YUVZBRK3AYJUOX45HD6VPO3J,"Rosé, Gayda ""La Minuette""",Glass,,,,Wine,11
+6LQ65RJEK3DZT2PZ2SZ2KAL7,"Rosé, Gayda ""La Minuette""",Bottle,,,,Wine,40
+X3PX2Q5JJAZVIYLYX732VPKW,S'mores,10oz Hot (Here),,,,,6.75
+HZHZ5YJBLR4CNLOZHYMFNTNK,S'mores,10oz Hot (To Go),,,,,6.75
+J34MZ3AHN5MO74J4PRKEFNE4,S'mores,16oz Iced (Here),,,,,7.25
+NH2IXIUG4PZEBGKGVEBWPD3C,S'mores,16oz Iced (To Go),,,,,7.25
+JPFIRVCZ5HGGIXDWF47ERHRT,S'mores,16oz Hot (To Go),,,,,7.25
+TRSUB2HUY7WSYXONYOE7AR5S,Salted Caramel Latte,10oz (Here),,,,Seasonal (Spring/Summer),6.75
+LYBEIMU3OHRU6AC2PQQ3YDLG,Salted Caramel Latte,10oz (To Go),,,,Seasonal (Spring/Summer),6.75
+3XMSZPT3G2YP736E7SO5EZNZ,Salted Caramel Latte,16oz Hot (To Go),,,,Seasonal (Spring/Summer),7.25
+BW7GV4QGHODRS4QPN473WXOT,Salted Caramel Latte,16oz Iced (Here),,,,Seasonal (Spring/Summer),7.25
+6F2WGPGJLHPSS7M2Y7O2UAFW,Salted Caramel Latte,16oz Iced (To Go),,,,Seasonal (Spring/Summer),7.25
+3G7VSYGU5Y5VUQFCQ2N32B5J,San Lorenzo - Beans,Regular,,,,Retail,25
+P2OWXNE4LBO77RWQHJZUEQ6J,"Sauvignon Blanc, Mussel Bay - New Zealand",Glass,,,,Wine,10
+Q2T7VC26LVCYGH2ELEXHFKYW,"Sauvignon Blanc, Mussel Bay - New Zealand",Bottle,,,,Wine,36
+EC7UHZFIIC2MCESLWJQJNK5T,Schell's Barrel Aged Cave Aged Lager,Regular,,,,Beer,9
+DVIN235YI24XKEJ3F7KECCUE,Scone w. Earl Grey Currants,Regular,,,,Bakery,4.5
+CJ2AUZSKWZ4E2HS4XGWEPKJF,Small Honey Bears,Regular,,,,Retail,3.5
+MMDMNRNXV5VNC2COTLVUWKYV,Soda water,Regular,,,,Non Coffee Drinks,2.5
+ZXOW5J75DOBGWQN5MN7LZZXA,Steamer (Milk & Syrup),8oz Steamer,,,,Non Coffee Drinks,4
+3E5UEY5VSNBSUNL2MSMCIJWY,Steamer (Milk & Syrup),10oz Steamer,,,,Non Coffee Drinks,4.25
+LYXPTJFMJTAHCCHXAJZHC7DO,Steamer (Milk & Syrup),16oz Steamer,,,,Non Coffee Drinks,5
+EJPVOJDW3CO76YDT7QJF5G67,Steamer (Milk & Syrup),16oz Cold Milk,,,,Non Coffee Drinks,5
+OJ5KF4IWCPVP4NNFOAL5FTJU,Storm Chaser,10oz,,,,Drinks,4.75
+3AN5KXXRCSBF3A6BULU2ALLW,Storm Chaser,16oz,,,,Drinks,5.75
+TF5EHMTCBDLFCEIF7SPPJS7R,Strawberry Cheesecake Latte (Strawberry & Vanilla),10oz (Here),,,,Seasonal (Spring/Summer),6.75
+YCC2OY7TPPMK24ORGESHD45J,Strawberry Cheesecake Latte (Strawberry & Vanilla),10oz (To Go),,,,Seasonal (Spring/Summer),6.75
+GLFA7M4JTOL3QGHGC3M4DETZ,Strawberry Cheesecake Latte (Strawberry & Vanilla),16oz Hot (To Go),,,,Seasonal (Spring/Summer),7.25
+ILFNRTHITUUU6FVDYYYVGFDB,Strawberry Cheesecake Latte (Strawberry & Vanilla),16oz Iced (Here),,,,Seasonal (Spring/Summer),7.25
+ZY4RUNB33YHSXL67FMBAZAJ7,Strawberry Cheesecake Latte (Strawberry & Vanilla),16oz Iced (To Go),,,,Seasonal (Spring/Summer),7.25
+QY25HWAJZ4JALL7VK7YIMCHD,Strawberry Lemonade,Here,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+D2DX4RI5LSDSEUJ4ZSIMP5BL,Strawberry Lemonade,To Go,,,,"Non Coffee Drinks, Seasonal (Spring/Summer)",6
+LVW2O32NFMM7OWYVIWG6VYII,Strawberry Rose Lemonade,Here,,,,Seasonal (Spring/Summer),6
+3KJYKDB3GIVXLYO4WZ7QTWTS,Strawberry Rose Lemonade,To Go,,,,Seasonal (Spring/Summer),6
+OJCTVK3AFGFHIBUWZML2UYF7,Strawberry Rose Matcha,10oz (Here),,,,Seasonal (Spring/Summer),6.75
+ODVTH3XZQSQ3Z7OE36CHFHGN,Strawberry Rose Matcha,10oz (To Go),,,,Seasonal (Spring/Summer),6.75
+D5GH6ZHP3UANMY73ICTTQCSV,Strawberry Rose Matcha,16oz Hot (To Go),,,,Seasonal (Spring/Summer),7.25
+43SCREVVEANAKRQQL3ZDQJMC,Strawberry Rose Matcha,16oz Iced (Here),,,,Seasonal (Spring/Summer),7.25
+PZZBUTWKTCQOTOIQ2TGIYQ7Q,Strawberry Rose Matcha,16oz Iced (To Go),,,,Seasonal (Spring/Summer),7.25
+JHNKK42BWQCQP7KDCC2CEV6Z,SuperNova - Beans,Regular,,,,Retail,22.5
+DD7EBGJNIX5MEB275UDE5QTL,Surly “One Man Mosh Pit” Hazy IPA,Regular,,,,Beer,7
+IIZB5BDELRINOZBERHAED72A,Tea,10oz Jasmine Pearls,,,,Drinks,3.75
+RHMMK5MN5WYHRJGS7J62N5WG,Tea,10oz Passion Fruit Dream,,,,Drinks,3.75
+DJGGSQLV55HUFAD6YEBCQJUK,Tea,10oz Moroccan Mint Meritage,,,,Drinks,3.75
+XM3YSVVATSXBA5QEZSWE4MWF,Tea,10oz Wild Rose Honeybush Chamomile,,,,Drinks,3.75
+2PIROCKNIN4NQIDHZ3DN2PNN,Tea,10oz Mallorca Melón,,,,Drinks,3.75
+O6J24PDHACYGEYGYBKV4QDTZ,Tea,10oz Earl Grey,,,,Drinks,3.75
+QTMKYKJZLQW33JRQF5NI2EQT,Tea,10oz Emperor's Aged Keemun,,,,Drinks,3.75
+G6HHNBENHULJKPPQMANWMKTR,Tea,10oz English breakfast,,,,Drinks,3.75
+HYOX2DCVHLBWQBQI65IYQS4Z,Tea,Vanilla London Fog 10oz,,,,Drinks,4.75
+LFJ3HRN6DCZXIEJRZTUIFA7E,Tea,Lavender London Fog 10oz,,,,Drinks,3.75
+UV6DZBAZZBDT26DYGR42C7BJ,Tea,16oz Jasmine Pearls,,,,Drinks,5
+7B4L5VW3PSN24JYLGSDG25TT,Tea,16oz (GREEN TEA!!!!!) Passion Fruit Dream,,,,Drinks,4.75
+WGNKHXGAUVWYKM46WUL7AS5A,Tea,16oz Moroccan Mint Meritage,,,,Drinks,4.75
+24QF7KK3F3SLMQGBQ4R2JWCU,Tea,16oz Wild Rose Honeybush Chamomile,,,,Drinks,4.75
+CASF26FORJARPJ4VL54Q5XNB,Tea,16oz Mallorca Melon,,,,Drinks,4.75
+F2SW3DTUF33OYHFAPICZONVF,Tea,16oz Earl Grey,,,,Drinks,4.75
+2REDGH4SIH5FDQNSKKY2JKH5,Tea,16oz English Breakfast,,,,Drinks,4.75
+OC52WAQCPSEC6PTVTOXNDEIT,Tea,16oz Emperor's Aged Keemun,,,,Drinks,4.75
+XLFOL6ASWKSOYYSOMZFBHAMR,Tea,Vanilla London Fog 16oz,,,,Drinks,5.5
+FYHU2LJU7GNH34MVOJCUSF6T,Tea,Lavender London Fog 16oz,,,,Drinks,5.5
+FV6DBM6BRFVGTYZOOC4NE5RO,The Blue Gill Smoothie,Regular,,,,Non Coffee Drinks,8.95
+DKFFMZVMGOI5X6XTBMELQR6J,The Caprese,Regular,,,,Paninis,13.25
+IMQ7IRYRWLQCVD4MZ6FKR4XJ,The Chicken Pesto,Regular,,,,Paninis,13.25
+BHZAQTQKZFVMGENU5CSOQ6BA,The Classic,Regular,,,,Paninis,13.25
+GPYN2ICVSCTQOKFBJ5OI5BRB,The Skipper Smoothie,,,,,Non Coffee Drinks,8.95
+H7FX5ZHKGX6C354IMWESB4MN,The Sun Deck Smoothie,Regular,,,,Non Coffee Drinks,8.95
+5XD7DGTDISO2IJIGTD5LL2CI,The Ultimate,Regular,,,,Paninis,14.5
+QFG44LPJBSHNKC5WEJJI2FDR,The Wake Skate Smoothie,Regular,,,,Non Coffee Drinks,8.95
+WVOR3DWJ2YRKMYXDFWOZU42A,Tone Bender - Beans,Regular,,,,Retail,22.5
+DLLDRYEY4ZPQ6Y65EM7XPWIN,Toppling Goliath “Pseudo Sue” Pale Ale,Regular,,,,Beer,7
+QHGCDNTBMPLOKLNQRYJY2ECQ,"Vinho Verde, Aveleda ""Fonte""",Glass,,,,Wine,10
+TYUGUK4KBCDITFYX3BG7AALP,"Vinho Verde, Aveleda ""Fonte""",Bottle,,,,Wine,36
