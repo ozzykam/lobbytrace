@@ -6,7 +6,11 @@
 
 /* Page Header */
 .page-header {
-  @apply text-center mb-8;
+  @apply mb-8;
+
+  .header-content {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4;
+  }
 
   .page-title {
     @apply text-3xl font-bold text-gray-500 mb-2;
@@ -150,6 +154,11 @@
 
   &.btn-secondary {
     @apply bg-gray-600 text-white hover:bg-gray-700;
+    @apply focus:ring-gray-500;
+  }
+
+  &.btn-outline {
+    @apply bg-white text-gray-700 border-gray-300 hover:bg-gray-50;
     @apply focus:ring-gray-500;
   }
 

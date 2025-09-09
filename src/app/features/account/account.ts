@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,8 +6,10 @@ import { AuthService } from '../../core/services/auth.service';
 import { ImageUploadComponent, ImageUploadEvent } from '../../shared/components/image-upload/image-upload.component';
 import { ImageUploadConfig } from '../../shared/services/image-upload.service';
 import { Firestore, doc, updateDoc, Timestamp } from '@angular/fire/firestore';
-import { Auth, updateEmail, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
-import { first, Observable } from 'rxjs';
+import { Auth, reauthenticateWithCredential, EmailAuthProvider, verifyBeforeUpdateEmail } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material/dialog';
+import { PasswordDialogComponent } from '../../shared/components/password-dialog/password-dialog.component';
+import { first, Observable, Subscription } from 'rxjs';
 
 interface UserProfile {
   uid: string;
@@ -29,10 +31,12 @@ interface UserProfile {
   templateUrl: './account.html',
   styleUrl: './account.scss'
 })
-export class Account implements OnInit {
+export class Account implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private firestore = inject(Firestore);
+  private auth = inject(Auth);
+  private dialog = inject(MatDialog);
   private router = inject(Router);
 
   // Component state
@@ -43,6 +47,11 @@ export class Account implements OnInit {
   isChangingPassword = signal(false);
   successMessage = signal<string | null>(null);
   errorMessage = signal<string | null>(null);
+  
+  // Subscription management
+  private authSubscription?: Subscription;
+  private visibilitySubscription?: Subscription;
+  private periodicCheckInterval?: ReturnType<typeof setInterval>;
 
   // Forms
   profileForm: FormGroup;
@@ -75,35 +84,104 @@ export class Account implements OnInit {
 
   // Load current user profile
   async ngOnInit() {
-  this.isLoading.set(true);
-  this.currentUserProfile$.pipe(first()).subscribe({
-    next: (profile) => {
-      if (!profile) {
-        this.errorMessage.set('No profile found.');
-        return;
-      }
-      // profile here is your Firestore doc with firstName/lastName
-      this.userProfile.set({
-        uid: profile.uid,
-        email: profile.email,
-        displayName: profile.displayName,
-        firstName: profile.firstName ?? '',
-        lastName: profile.lastName ?? '',
-        phoneNumber: profile.phoneNumber,
-        photoURL: profile.photoURL,
-        role: profile.role,
-        createdAt: this.convertTimestampToDate(profile.createdAt),
-        updatedAt: this.convertTimestampToDate(profile.updatedAt),
+    this.setupVisibilityListener();
+    this.setupPeriodicCheck();
+    
+    await this.loadUserProfile();
+  }
+
+  ngOnDestroy() {
+    // Clean up subscriptions and intervals
+    this.authSubscription?.unsubscribe();
+    this.visibilitySubscription?.unsubscribe();
+    if (this.periodicCheckInterval) {
+      clearInterval(this.periodicCheckInterval);
+    }
+  }
+
+  // Set up automatic sync when user returns to the page
+  private setupVisibilityListener() {
+    // Listen for page visibility changes
+    if (typeof document !== 'undefined') {
+      this.visibilitySubscription = new Observable<boolean>(subscriber => {
+        const handleVisibilityChange = () => {
+          subscriber.next(!document.hidden);
+        };
+        
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        
+        return () => {
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+      }).subscribe(async (isVisible) => {
+        if (isVisible && !this.isLoading()) {
+          // Auto-sync when page becomes visible (user returns from email)
+          await this.autoSyncProfile();
+        }
       });
-      this.populateProfileForm(this.userProfile()!);
-    },
-    error: (err) => {
-      console.error(err);
-      this.errorMessage.set('Failed to load profile data');
-    },
-    complete: () => this.isLoading.set(false),
-  });
-}
+    }
+  }
+
+  // Set up periodic check for email changes (backup method)
+  private setupPeriodicCheck() {
+    // Check every 5 seconds when on the account page
+    this.periodicCheckInterval = setInterval(async () => {
+      if (!document.hidden && !this.isLoading()) {
+        await this.autoSyncProfile();
+      }
+    }, 5000);
+  }
+
+  // Automatic profile sync (silent, no success message)
+  private async autoSyncProfile() {
+    try {
+      const currentUser = this.auth.currentUser;
+      if (!currentUser) return;
+      
+      // Check if email was verified by comparing Auth vs Firestore
+      const currentProfile = this.userProfile();
+      if (currentProfile && currentUser.email !== currentProfile.email) {
+        console.log('Email change detected, syncing profile...');
+        await this.authService.syncUserProfile();
+        await this.loadUserProfile();
+      }
+    } catch (error) {
+      console.error('Auto-sync error:', error);
+      // Silent fail - don't show error to user for auto-sync
+    }
+  }
+
+  // Method to load/reload user profile data
+  private async loadUserProfile() {
+    this.isLoading.set(true);
+    this.currentUserProfile$.pipe(first()).subscribe({
+      next: (profile) => {
+        if (!profile) {
+          this.errorMessage.set('No profile found.');
+          return;
+        }
+        // profile here is your Firestore doc with firstName/lastName
+        this.userProfile.set({
+          uid: profile.uid,
+          email: profile.email,
+          displayName: profile.displayName,
+          firstName: profile.firstName ?? '',
+          lastName: profile.lastName ?? '',
+          phoneNumber: profile.phoneNumber,
+          photoURL: profile.photoURL,
+          role: profile.role,
+          createdAt: this.convertTimestampToDate(profile.createdAt),
+          updatedAt: this.convertTimestampToDate(profile.updatedAt),
+        });
+        this.populateProfileForm(this.userProfile()!);
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage.set('Failed to load profile data');
+      },
+      complete: () => this.isLoading.set(false),
+    });
+  }
 
   // Populate form with user data
   private populateProfileForm(profile: UserProfile) {
@@ -133,19 +211,48 @@ export class Account implements OnInit {
         throw new Error('No current profile found');
       }
 
-      // Check if email has changed and update Firebase Auth if needed
-      if (formValue.email !== currentProfile.email) {
-        await this.updateUserEmail(formValue.email);
+      // Always update phone number first (since it doesn't require verification)
+      const phoneChanged = formValue.phoneNumber !== currentProfile.phoneNumber;
+      if (phoneChanged) {
+        await this.updateFirestoreProfile({
+          phoneNumber: formValue.phoneNumber || '',
+          updatedAt: new Date()
+        });
       }
 
-      // Update Firestore user document with editable fields
-      await this.updateFirestoreProfile({
-        email: formValue.email,
-        phoneNumber: formValue.phoneNumber || '',
-        updatedAt: new Date()
-      });
+      // Then check if email has changed and handle separately
+      const emailChanged = formValue.email !== currentProfile.email;
+      if (emailChanged) {
+        try {
+          await this.updateUserEmail(formValue.email);
+          // If we reach here, email was updated without verification
+          await this.updateFirestoreProfile({
+            email: formValue.email,
+            updatedAt: new Date()
+          });
+        } catch (error: any) {
+          if (error.message === 'VERIFICATION_EMAIL_SENT') {
+            // Show the verification dialog instead of success message
+            if (phoneChanged) {
+              this.successMessage.set('Phone number updated! Verification email sent for email change - please check your inbox.');
+            } else {
+              this.showVerificationSentDialog();
+            }
+            return; // Don't show general success message
+          } else {
+            throw error; // Re-throw other errors
+          }
+        }
+      }
 
-      this.successMessage.set('Profile updated successfully!');
+      // Show success message for completed updates
+      if (phoneChanged && !emailChanged) {
+        this.successMessage.set('Phone number updated successfully!');
+      } else if (!phoneChanged && !emailChanged) {
+        this.successMessage.set('No changes to save.');
+      } else {
+        this.successMessage.set('Profile updated successfully!');
+      }
       
       // Update local state with the changes
       this.userProfile.set({
@@ -176,10 +283,79 @@ export class Account implements OnInit {
 
   // Helper method to update email in Firebase Auth
   private async updateUserEmail(newEmail: string): Promise<void> {
-    // Note: Email updates require recent authentication in Firebase Auth
-    // For now, we'll update it in Firestore only
-    // In a production app, you might want to require re-authentication
-    console.log('Email change requested, updating Firestore only');
+    const currentUser = this.auth.currentUser;
+    if (!currentUser || !currentUser.email) {
+      throw new Error('No authenticated user found');
+    }
+
+    // Open password dialog to get user's current password
+    const password = await this.promptForPassword();
+    if (!password) {
+      throw new Error('Password verification cancelled');
+    }
+
+    try {
+      // Re-authenticate the user
+      const credential = EmailAuthProvider.credential(currentUser.email, password);
+      await reauthenticateWithCredential(currentUser, credential);
+
+      // Send verification email to the new email address
+      await verifyBeforeUpdateEmail(currentUser, newEmail);
+      
+      console.log('Verification email sent to new address');
+      
+      // Throw a special error to indicate verification email was sent
+      throw new Error('VERIFICATION_EMAIL_SENT');
+    } catch (error: any) {
+      console.error('Error updating email in Firebase Auth:', error);
+      
+      // Handle the verification email sent case
+      if (error.message === 'VERIFICATION_EMAIL_SENT') {
+        throw error;
+      }
+      
+      // Re-throw with user-friendly message
+      if (error.code === 'auth/wrong-password') {
+        throw new Error('Incorrect password. Please try again.');
+      } else if (error.code === 'auth/email-already-in-use') {
+        throw new Error('This email address is already in use by another account.');
+      } else if (error.code === 'auth/invalid-email') {
+        throw new Error('Please enter a valid email address.');
+      } else if (error.code === 'auth/requires-recent-login') {
+        throw new Error('Session expired. Please sign out and sign in again.');
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  // Helper method to prompt user for their current password using Material Dialog
+  private async promptForPassword(): Promise<string | null> {
+    return new Promise((resolve) => {
+      const dialogRef = this.dialog.open(PasswordDialogComponent, {
+        width: '450px',
+        disableClose: true,
+        autoFocus: true,
+        restoreFocus: true
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        resolve(result || null);
+      });
+    });
+  }
+
+  // Helper method to show verification email sent dialog
+  private showVerificationSentDialog(): void {
+    const dialogRef = this.dialog.open(PasswordDialogComponent, {
+      width: '450px',
+      disableClose: true,
+      autoFocus: true,
+      restoreFocus: true
+    });
+
+    // Switch to success state immediately
+    dialogRef.componentInstance.showVerificationSent();
   }
 
   // Helper method to update Firestore user document
@@ -356,6 +532,22 @@ export class Account implements OnInit {
   private clearMessages() {
     this.successMessage.set(null);
     this.errorMessage.set(null);
+  }
+
+  // Public method to refresh profile data
+  async refreshProfile() {
+    this.clearMessages();
+    
+    try {
+      // First sync Firestore with Firebase Auth data
+      await this.authService.syncUserProfile();
+      // Then reload the profile data
+      await this.loadUserProfile();
+      this.successMessage.set('Profile data refreshed successfully!');
+    } catch (error) {
+      console.error('Error refreshing profile:', error);
+      this.errorMessage.set('Failed to refresh profile data. Please try again.');
+    }
   }
 
   // Password form validation helpers

@@ -12,7 +12,7 @@ import {
   EmailAuthProvider 
 } from '@angular/fire/auth';
 
-import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable, from, of, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -213,6 +213,34 @@ export class AuthService {
       }, { merge: true });
     } catch (error) {
       console.error('Error changing password:', error);
+      throw error;
+    }
+  }
+
+  // Sync Firestore user data with current Firebase Auth user data
+  async syncUserProfile(): Promise<void> {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      throw new Error('No authenticated user found');
+    }
+
+    try {
+      // Force reload the Firebase Auth user to get latest data
+      await currentUser.reload();
+      
+      const userRef = doc(this.firestore, `users/${currentUser.uid}`);
+      
+      // Update Firestore with current Firebase Auth data
+      await updateDoc(userRef, {
+        email: currentUser.email || '',
+        displayName: currentUser.displayName || '',
+        photoURL: currentUser.photoURL || '',
+        updatedAt: new Date()
+      });
+
+      console.log('User profile synced successfully');
+    } catch (error) {
+      console.error('Error syncing user profile:', error);
       throw error;
     }
   }
