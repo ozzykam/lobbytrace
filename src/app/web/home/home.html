@@ -1,0 +1,289 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        The Complete Management Solution for 
+        <span class="highlight">Coffee Shops</span>
+      </h1>
+      <p class="hero-subtitle">
+        Streamline inventory, track expenses, and boost profitability with our AI-powered platform 
+        designed specifically for coffee shop owners.
+      </p>
+      
+      <div class="hero-cta">
+        @if (!(isAuthenticated$ | async)) {
+          <a routerLink="/signup" class="btn btn-primary cta-primary">
+            <span class="material-icons btn-icon">rocket_launch</span>
+            Start Free Trial
+          </a>
+          <a routerLink="/features" class="btn btn-outline cta-secondary">
+            <span class="material-icons btn-icon">play_arrow</span>
+            Watch Demo
+          </a>
+        } @else {
+          <a routerLink="/dashboard" class="btn btn-primary cta-primary">
+            <span class="material-icons btn-icon">dashboard</span>
+            Go to Dashboard
+          </a>
+        }
+      </div>
+      
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Coffee Shops</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">30%</div>
+          <div class="stat-label">Waste Reduction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2.5x</div>
+          <div class="stat-label">ROI Improvement</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero-visual">
+      <div class="hero-image">
+        <!-- Dashboard Preview -->
+        <div class="dashboard-preview">
+          <div class="preview-header">
+            <div class="preview-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="preview-title">LobbyTrace Dashboard</div>
+          </div>
+          <div class="preview-content">
+            <div class="preview-cards">
+              <div class="preview-card">
+                <span class="material-icons">inventory_2</span>
+                <div class="card-info">
+                  <div class="card-title">Inventory</div>
+                  <div class="card-value">234 items</div>
+                </div>
+              </div>
+              <div class="preview-card">
+                <span class="material-icons">trending_up</span>
+                <div class="card-info">
+                  <div class="card-title">Revenue</div>
+                  <div class="card-value">+15.2%</div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-chart">
+              <div class="chart-bars">
+                <div class="bar" style="height: 60%"></div>
+                <div class="bar" style="height: 80%"></div>
+                <div class="bar" style="height: 45%"></div>
+                <div class="bar" style="height: 70%"></div>
+                <div class="bar" style="height: 90%"></div>
+                <div class="bar" style="height: 65%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>Everything You Need to Succeed</h2>
+      <p>Powerful tools designed specifically for coffee shop operations</p>
+    </div>
+    
+    <div class="features-grid">
+      @for (feature of features; track feature.title) {
+        <div class="feature-card">
+          <div class="feature-icon">
+            <span class="material-icons">{{ feature.icon }}</span>
+          </div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Problem/Solution Section -->
+<section class="problem-solution">
+  <div class="container">
+    <div class="problem-solution-grid">
+      <div class="problem-side">
+        <h2>Running a Coffee Shop Shouldn't Be This Hard</h2>
+        <div class="problems">
+          <div class="problem-item">
+            <span class="material-icons problem-icon">error</span>
+            <div class="problem-text">
+              <h4>Inventory Chaos</h4>
+              <p>Running out of popular items or overstocking ingredients that expire</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <span class="material-icons problem-icon">receipt_long</span>
+            <div class="problem-text">
+              <h4>Manual Expense Tracking</h4>
+              <p>Hours spent entering receipts and calculating costs by hand</p>
+            </div>
+          </div>
+          <div class="problem-item">
+            <span class="material-icons problem-icon">trending_down</span>
+            <div class="problem-text">
+              <h4>Poor Visibility</h4>
+              <p>No clear picture of what's profitable and what's draining resources</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="solution-side">
+        <h2>LobbyTrace Makes It Simple</h2>
+        <div class="solutions">
+          <div class="solution-item">
+            <span class="material-icons solution-icon">check_circle</span>
+            <div class="solution-text">
+              <h4>Smart Inventory Alerts</h4>
+              <p>Automatic reorder notifications and demand forecasting prevent stockouts</p>
+            </div>
+          </div>
+          <div class="solution-item">
+            <span class="material-icons solution-icon">camera_alt</span>
+            <div class="solution-text">
+              <h4>AI Receipt Scanning</h4>
+              <p>Just snap a photo - our OCR technology handles the rest automatically</p>
+            </div>
+          </div>
+          <div class="solution-item">
+            <span class="material-icons solution-icon">insights</span>
+            <div class="solution-text">
+              <h4>Real-time Analytics</h4>
+              <p>Live dashboards show exactly what's working and what needs attention</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>Trusted by Coffee Shop Owners</h2>
+      <p>See how LobbyTrace is transforming businesses like yours</p>
+    </div>
+    
+    <div class="testimonials-grid">
+      @for (testimonial of testimonials; track testimonial.name) {
+        <div class="testimonial-card">
+          <div class="testimonial-content">
+            <div class="testimonial-stars">
+              @for (star of [1,2,3,4,5]; track star) {
+                <span class="material-icons star">star</span>
+              }
+            </div>
+            <blockquote>"{{ testimonial.quote }}"</blockquote>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">
+              <span class="material-icons">person</span>
+            </div>
+            <div class="author-info">
+              <div class="author-name">{{ testimonial.name }}</div>
+              <div class="author-business">{{ testimonial.business }}</div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="pricing">
+  <div class="container">
+    <div class="section-header">
+      <h2>Simple, Transparent Pricing</h2>
+      <p>Choose the plan that fits your business size</p>
+    </div>
+    
+    <div class="pricing-grid">
+      @for (plan of pricingPlans; track plan.name) {
+        <div class="pricing-card" 
+             [class.popular]="plan.popular">
+          <div class="plan-header">
+            <div class="plan-name">{{ plan.name }}</div>
+            <div class="plan-price">
+              <span class="currency">$</span>
+              <span class="amount">{{ plan.price }}</span>
+              <span class="period">/{{ plan.period }}</span>
+            </div>
+            <div class="plan-description">{{ plan.description }}</div>
+          </div>
+          
+          <div class="plan-features">
+            @for (feature of plan.features; track feature) {
+              <div class="feature">
+                <span class="material-icons feature-check">check</span>
+                <span>{{ feature }}</span>
+              </div>
+            }
+          </div>
+          
+          <div class="plan-cta">
+            @if (!(isAuthenticated$ | async)) {
+              <a routerLink="/signup" class="btn" 
+                 [class]="plan.popular ? 'btn-primary' : 'btn-outline'">
+                Start Free Trial
+              </a>
+            } @else {
+              <a routerLink="/account" class="btn btn-outline">
+                Upgrade Plan
+              </a>
+            }
+          </div>
+          
+          @if (plan.popular) {
+            <div class="popular-badge">Most Popular</div>
+          }
+        </div>
+      }
+    </div>
+    
+    <div class="pricing-footer">
+      <p>All plans include a 14-day free trial. No credit card required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="final-cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to Transform Your Coffee Shop?</h2>
+      <p>Join hundreds of successful coffee shop owners who trust LobbyTrace</p>
+      
+      <div class="cta-buttons">
+        @if (!(isAuthenticated$ | async)) {
+          <a routerLink="/signup" class="btn btn-primary cta-large">
+            <span class="material-icons btn-icon">rocket_launch</span>
+            Start Your Free Trial
+          </a>
+          <p class="cta-subtext">14-day free trial • No credit card required</p>
+        } @else {
+          <a routerLink="/dashboard" class="btn btn-primary cta-large">
+            <span class="material-icons btn-icon">dashboard</span>
+            Access Your Dashboard
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</section>

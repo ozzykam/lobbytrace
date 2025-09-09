@@ -9,6 +9,7 @@
     {
       "source": "functions",
       "codebase": "default",
+      "runtime": "nodejs22",
       "ignore": [
         "node_modules",
         ".git",
@@ -23,7 +24,7 @@
     }
   ],
   "hosting": {
-    "public": "public",
+    "public": "dist/lobbytrace/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

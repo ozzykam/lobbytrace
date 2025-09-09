@@ -157,7 +157,7 @@ lobbytrace/
 ## ☕ Features
 
 - **Inventory Management**: Track coffee shop inventory items
-- **Recipe Management**: Manage recipes and ingredient requirements
+- **Product Management**: Manage products and their ingredient requirements
 - **Order Processing**: Handle customer orders with automatic inventory deduction
 - **Receipt Scanner**: OCR-powered receipt scanning and expense tracking
 - **Task Management**: Staff task assignment and tracking

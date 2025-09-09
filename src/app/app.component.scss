@@ -1,0 +1,35 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.main-content {
+  flex: 1;
+  min-height: 0; // Allows content to shrink if needed
+}
+
+// Ensure smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Prevent horizontal overflow
+.app-layout {
+  overflow-x: hidden;
+}
+
+// Mobile-specific optimizations for sticky navbar
+@media (max-width: 768px) {
+  // Ensure the main content accounts for the sticky navbar on mobile
+  .main-content {
+    // Add scroll padding to account for sticky navbar when scrolling to anchors
+    scroll-padding-top: 60px;
+  }
+  
+  // Optimize rendering performance for sticky elements on mobile
+  .app-layout {
+    -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+  }
+}
