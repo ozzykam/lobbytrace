@@ -56,7 +56,7 @@ export class Products implements OnInit {
   isLoading = signal(false);
 
   // Table columns
-  displayedColumns = ['token', 'name', 'variation', 'category', 'price', 'ingredients', 'actions'];
+  displayedColumns = ['token', 'name', 'variation', 'size', 'temperature', 'toGoStatus', 'category', 'price', 'ingredients', 'actions'];
   
   // Categories
   categories = this.productService.getProductCategories();

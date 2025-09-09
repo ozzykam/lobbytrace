@@ -78,9 +78,6 @@
               <td mat-cell *matCellDef="let product" class="font-medium">
                 <div>
                   <div class="text-sm font-medium text-gray-900">{{product.token}}</div>
-                  @if (product.token) {
-                    <div class="text-xs text-gray-500 mt-1">{{product.token}}</div>
-                  }
                 </div>
               </td>
             </ng-container>
@@ -105,6 +102,52 @@
                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                     {{product.variation}}
                   </span>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Size Column -->
+            <ng-container matColumnDef="size">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Size</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.size) {
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {{product.size}}
+                  </span>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Temp Column -->
+            <ng-container matColumnDef="temperature">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Size</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.temperature){
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    {{product.temperature}}
+                  </span>
+                } @else {
+                  <span class="text-gray-400 text-sm">—</span>
+                }
+              </td>
+            </ng-container>
+
+            <!-- Drink Attributes Column -->
+            <ng-container matColumnDef="toGoStatus">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Status</th>
+              <td mat-cell *matCellDef="let product">
+                @if (product.toGoStatus) {
+                  <div class="flex flex-wrap gap-1">
+                    @if (product.toGoStatus) {
+                      <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs bg-purple-100 text-purple-800">
+                        {{product.toGoStatus}}
+                      </span>
+                    }
+                  </div>
                 } @else {
                   <span class="text-gray-400 text-sm">—</span>
                 }

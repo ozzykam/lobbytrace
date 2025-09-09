@@ -30,6 +30,19 @@
             }
           </mat-form-field>
 
+          <!-- Token ID -->
+          <mat-form-field class="w-full">
+            <mat-label>Token ID</mat-label>
+            <input 
+              matInput 
+              formControlName="token"
+              placeholder="unique token id"
+              [class.mat-form-field-invalid]="isFieldInvalid('token')">
+            @if (isFieldInvalid('token')) {
+              <mat-error>{{getFieldError('token')}}</mat-error>
+            }
+          </mat-form-field>
+
           <!-- Variation -->
           <mat-form-field class="w-full">
             <mat-label>Variation</mat-label>
@@ -72,6 +85,54 @@
               <mat-error>{{getFieldError('price')}}</mat-error>
             }
           </mat-form-field>
+        </div>
+
+        <!-- Drink Attributes Section (only show if category is drink-related) -->
+        @if (productForm.get('category')?.value && ['Drinks', 'Non Coffee Drinks', 'Signature Drinks'].includes(productForm.get('category')?.value)) {
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 p-4 bg-blue-50 rounded-lg">
+            <div class="md:col-span-3 mb-2">
+              <h4 class="text-sm font-medium text-blue-900 flex items-center gap-2">
+                <mat-icon class="text-blue-600">local_cafe</mat-icon>
+                Drink Attributes (Auto-extracted from variation)
+              </h4>
+            </div>
+
+            <!-- Size -->
+            <mat-form-field class="w-full">
+              <mat-label>Size</mat-label>
+              <mat-select formControlName="size">
+                <mat-option value="">None</mat-option>
+                @for (size of drinkSizes; track size) {
+                  <mat-option [value]="size">{{size}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Temperature -->
+            <mat-form-field class="w-full">
+              <mat-label>Temperature</mat-label>
+              <mat-select formControlName="temperature">
+                <mat-option value="">None</mat-option>
+                @for (temp of drinkTemperatures; track temp) {
+                  <mat-option [value]="temp">{{temp}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <!-- To-Go Status -->
+            <mat-form-field class="w-full">
+              <mat-label>To-Go Status</mat-label>
+              <mat-select formControlName="toGoStatus">
+                <mat-option value="">None</mat-option>
+                @for (status of toGoStatuses; track status) {
+                  <mat-option [value]="status">{{status}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 
           <!-- Preparation Time -->
           <mat-form-field class="w-full">
@@ -141,17 +202,15 @@
             <div [formGroupName]="i" class="ingredient-row border border-gray-200 rounded-lg p-4 mb-4 relative">
               
               <!-- Remove button -->
-              @if (ingredientsArray.length > 1) {
-                <button 
-                  type="button"
-                  mat-icon-button 
-                  color="warn"
-                  class="absolute top-2 right-2"
-                  (click)="removeIngredient(i)"
-                  matTooltip="Remove ingredient">
-                  <mat-icon>close</mat-icon>
-                </button>
-              }
+              <button 
+                type="button"
+                mat-icon-button 
+                color="warn"
+                class="absolute top-2 right-2"
+                (click)="removeIngredient(i)"
+                matTooltip="Remove ingredient">
+                <mat-icon>close</mat-icon>
+              </button>
 
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 
@@ -219,6 +278,15 @@
           }
         </div>
 
+        <!-- No Ingredients Message -->
+        @if (ingredientsArray.length === 0) {
+          <div class="text-center py-8 text-gray-500">
+            <mat-icon class="text-4xl mb-2">restaurant</mat-icon>
+            <p class="mb-4">No ingredients specified yet</p>
+            <p class="text-sm">Add ingredients to define what inventory items are needed to make this product</p>
+          </div>
+        }
+
         <!-- Add Ingredient Button -->
         <div class="flex justify-center">
           <button 
@@ -228,7 +296,7 @@
             (click)="addIngredient()"
             class="flex items-center gap-2">
             <mat-icon>add</mat-icon>
-            Add Another Ingredient
+            {{ ingredientsArray.length === 0 ? 'Add Ingredient' : 'Add Another Ingredient' }}
           </button>
         </div>
 

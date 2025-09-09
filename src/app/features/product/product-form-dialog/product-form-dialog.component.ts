@@ -21,7 +21,13 @@ import {
   UpdateProductRequest,
   ProductCategory,
   MeasurementUnit,
-  MEASUREMENT_UNITS
+  MEASUREMENT_UNITS,
+  DrinkSize,
+  DrinkTemperature,
+  ToGoStatus,
+  DRINK_SIZES,
+  DRINK_TEMPERATURES,
+  TO_GO_STATUSES
 } from '../../../shared/models/product.models';
 
 export interface ProductFormDialogData {
@@ -61,6 +67,9 @@ export class ProductFormDialogComponent implements OnInit {
   isLoading = signal(false);
   measurementUnits = MEASUREMENT_UNITS;
   categories = this.productService.getProductCategories();
+  drinkSizes = DRINK_SIZES;
+  drinkTemperatures = DRINK_TEMPERATURES;
+  toGoStatuses = TO_GO_STATUSES;
 
   // Data from dialog injection
   inventoryItems: InventoryItem[];
@@ -82,6 +91,9 @@ export class ProductFormDialogComponent implements OnInit {
       description: [''],
       category: ['', [Validators.required]],
       price: [0, [Validators.required, Validators.min(0)]],
+      size: [''],
+      temperature: [''],
+      toGoStatus: [''],
       preparationTime: [0, [Validators.min(0)]],
       preparationInstructions: [''],
       allergens: [[]],
@@ -92,10 +104,8 @@ export class ProductFormDialogComponent implements OnInit {
   ngOnInit() {
     if (this.mode === 'edit' && this.product) {
       this.populateForm(this.product);
-    } else {
-      // Add one empty ingredient row for new products
-      this.addIngredient();
     }
+    // Note: Don't add empty ingredient automatically - let user add them manually
   }
 
   // Form array getter for ingredients
@@ -112,6 +122,9 @@ export class ProductFormDialogComponent implements OnInit {
       description: product.description || '',
       category: product.category,
       price: product.price,
+      size: product.size || '',
+      temperature: product.temperature || '',
+      toGoStatus: product.toGoStatus || '',
       preparationTime: product.preparationTime || 0,
       preparationInstructions: product.preparationInstructions || '',
       allergens: product.allergens || []
@@ -123,10 +136,8 @@ export class ProductFormDialogComponent implements OnInit {
       product.ingredients.forEach(ingredient => {
         this.addIngredient(ingredient);
       });
-    } else {
-      // Add empty ingredient if none exist
-      this.addIngredient();
     }
+    // Note: Don't add empty ingredient automatically - let user add them manually
   }
 
   // Add ingredient to form array
@@ -145,11 +156,7 @@ export class ProductFormDialogComponent implements OnInit {
   // Remove ingredient from form array
   removeIngredient(index: number) {
     this.ingredientsArray.removeAt(index);
-    
-    // Ensure at least one ingredient exists
-    if (this.ingredientsArray.length === 0) {
-      this.addIngredient();
-    }
+    // Note: Allow empty ingredients array - ingredients are optional
   }
 
   // Handle inventory item selection
@@ -201,6 +208,9 @@ export class ProductFormDialogComponent implements OnInit {
       description: 'Description',
       category: 'Category',
       price: 'Price',
+      size: 'Size',
+      temperature: 'Temperature',
+      toGoStatus: 'To-Go Status',
       preparationTime: 'Preparation Time',
       preparationInstructions: 'Preparation Instructions'
     };
@@ -260,10 +270,14 @@ export class ProductFormDialogComponent implements OnInit {
           description: formValue.description || undefined,
           category: formValue.category,
           price: formValue.price,
+          size: formValue.size || undefined,
+          temperature: formValue.temperature || undefined,
+          toGoStatus: formValue.toGoStatus || undefined,
           ingredients,
           preparationTime: formValue.preparationTime || undefined,
           preparationInstructions: formValue.preparationInstructions || undefined,
-          allergens: formValue.allergens || []
+          allergens: formValue.allergens || [],
+          token: formValue.token || undefined
         };
 
         await this.productService.createProduct(createRequest).toPromise();
@@ -275,10 +289,14 @@ export class ProductFormDialogComponent implements OnInit {
           description: formValue.description || undefined,
           category: formValue.category,
           price: formValue.price,
+          size: formValue.size || undefined,
+          temperature: formValue.temperature || undefined,
+          toGoStatus: formValue.toGoStatus || undefined,
           ingredients,
           preparationTime: formValue.preparationTime || undefined,
           preparationInstructions: formValue.preparationInstructions || undefined,
-          allergens: formValue.allergens || []
+          allergens: formValue.allergens || [],
+          token: formValue.token || undefined
         };
 
         await this.productService.updateProduct(updateRequest).toPromise();

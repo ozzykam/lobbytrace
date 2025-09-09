@@ -22,7 +22,13 @@ import {
   UpdateProductRequest,
   CsvProductRow,
   ProductCategory,
-  PRODUCT_CATEGORIES
+  PRODUCT_CATEGORIES,
+  DrinkSize,
+  DrinkTemperature,
+  ToGoStatus,
+  DRINK_SIZES,
+  DRINK_TEMPERATURES,
+  TO_GO_STATUSES
 } from '../../shared/models/product.models';
 import { AuthService } from './auth.service';
 
@@ -314,7 +320,7 @@ export class ProductService {
 
   private async createProductFromCsvRow(row: CsvProductRow, userId: string): Promise<void> {
     // Skip invalid products (no name or price)
-    if (!row['Item Name'] || !row.Price) {
+    if (!row.ItemName || !row.Price) {
       return;
     }
 
@@ -323,16 +329,25 @@ export class ProductService {
       throw new Error(`Invalid price: ${row.Price}`);
     }
 
-    // Clean up variation field (CSV has extra space in header)
-    const variation = row['Variation '] || row['Variation '] || '';
+    // Clean up variation field
+    const csvToken = row.Token ? row.Token.trim() : undefined;
+    const variation = row.Variation || '';
+    const category = this.mapCsvCategoryToProductCategory(row.Categories);
+
+    // Parse drink attributes from variation column
+    const drinkAttributes = this.parseDrinkAttributes(variation.trim(), category);
 
     const productData: CreateProductRequest = {
-      name: row['Item Name'].trim(),
+      name: row.ItemName.trim(),
       variation: variation.trim() || undefined,
-      description: undefined, // No description in simplified CSV
-      category: this.mapCsvCategoryToProductCategory(row.Categories),
+      description: undefined, // No description in CSV
+      category: category,
       price: price,
-      ingredients: [] // Will be added manually later
+      size: drinkAttributes.size,
+      temperature: drinkAttributes.temperature,
+      toGoStatus: drinkAttributes.toGoStatus,
+      ingredients: [], // Will be added manually later
+      token: csvToken,
     };
 
     await this.createProductAsync(productData, userId);
@@ -379,6 +394,52 @@ export class ProductService {
     return 'Drinks'; // Default fallback
   }
 
+  // Parse drink attributes from variation string
+  private parseDrinkAttributes(variation: string, category: string): {
+    size?: DrinkSize;
+    temperature?: DrinkTemperature;
+    toGoStatus?: ToGoStatus;
+  } {
+    // Only parse drink attributes for Drinks-related categories
+    const drinkCategories = ['Drinks', 'Non Coffee Drinks', 'Signature Drinks'];
+    if (!drinkCategories.includes(category) || !variation) {
+      return {};
+    }
+
+    const variationLower = variation.toLowerCase();
+    const result: {
+      size?: DrinkSize;
+      temperature?: DrinkTemperature;
+      toGoStatus?: ToGoStatus;
+    } = {};
+
+    // Extract size (10oz, 16oz, etc.)
+    for (const size of DRINK_SIZES) {
+      if (variationLower.includes(size.toLowerCase())) {
+        result.size = size;
+        break;
+      }
+    }
+
+    // Extract temperature (Hot, Iced)
+    if (variationLower.includes('iced')) {
+      result.temperature = 'Iced';
+    } else if (variationLower.includes('hot') || variationLower.includes('10oz')) {
+      result.temperature = 'Hot';
+    } 
+
+    // Extract to-go status
+    if (variationLower.includes('here')) {
+      result.toGoStatus = 'Here';
+    } else if (variationLower.includes('to go') || variationLower.includes('to-go')) {
+      result.toGoStatus = 'To-Go';
+    } else if (variationLower.includes('16oz') && !variationLower.includes('Iced')) {
+      result.toGoStatus = "To-Go"; // Assume 16oz is to-go unless specified as iced
+    }
+
+    return result;
+  }
+
   // UTILITY METHODS
 
   // Get product categories
@@ -414,6 +475,9 @@ export class ProductService {
       price: data.price,
       isActive: data.isActive ?? true,
       isArchived: data.isArchived ?? false,
+      size: data.size,
+      temperature: data.temperature,
+      toGoStatus: data.toGoStatus,
       ingredients: data.ingredients || [],
       preparationTime: data.preparationTime,
       preparationInstructions: data.preparationInstructions,
