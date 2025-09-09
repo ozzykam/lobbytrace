@@ -301,20 +301,20 @@ export class ProductService {
       if (char === '"') {
         inQuotes = !inQuotes;
       } else if (char === ',' && !inQuotes) {
-        result.push(current.trim());
+        result.push(current.trim().replace(/^"(.*)"$/, '$1')); // Remove surrounding quotes
         current = '';
       } else {
         current += char;
       }
     }
     
-    result.push(current.trim());
+    result.push(current.trim().replace(/^"(.*)"$/, '$1')); // Remove surrounding quotes
     return result;
   }
 
   private async createProductFromCsvRow(row: CsvProductRow, userId: string): Promise<void> {
-    // Skip archived or invalid products
-    if (row.Archived === 'Y' || !row['Item Name'] || !row.Price) {
+    // Skip invalid products (no name or price)
+    if (!row['Item Name'] || !row.Price) {
       return;
     }
 
@@ -323,10 +323,13 @@ export class ProductService {
       throw new Error(`Invalid price: ${row.Price}`);
     }
 
+    // Clean up variation field (CSV has extra space in header)
+    const variation = row['Variation '] || row['Variation '] || '';
+
     const productData: CreateProductRequest = {
-      name: row['Item Name'],
-      variation: row['Variation Name'] || undefined,
-      description: row.Description || undefined,
+      name: row['Item Name'].trim(),
+      variation: variation.trim() || undefined,
+      description: undefined, // No description in simplified CSV
       category: this.mapCsvCategoryToProductCategory(row.Categories),
       price: price,
       ingredients: [] // Will be added manually later
@@ -336,6 +339,13 @@ export class ProductService {
   }
 
   private mapCsvCategoryToProductCategory(csvCategory: string): ProductCategory {
+    // Handle empty or undefined categories
+    if (!csvCategory || csvCategory.trim() === '') {
+      return 'Drinks'; // Default category
+    }
+
+    const category = csvCategory.trim();
+    
     // Map CSV categories to our defined categories
     const mapping: { [key: string]: ProductCategory } = {
       'Drinks': 'Drinks',
@@ -346,10 +356,27 @@ export class ProductService {
       'Retail': 'Retail',
       'Seasonal (Spring/Summer)': 'Seasonal (Spring/Summer)',
       'Non Coffee Drinks': 'Non Coffee Drinks',
-      'Signature Drinks': 'Signature Drinks'
+      'Signature Drinks': 'Signature Drinks',
+      'Catering And Event Space': 'Retail', // Map to existing category
+      'Paninis': 'Breakfast' // Map to existing category
     };
 
-    return mapping[csvCategory] || 'Drinks';
+    // Handle comma-separated categories (take the first one)
+    const firstCategory = category.split(',')[0].trim();
+    
+    // Try to find exact match first
+    if (mapping[firstCategory]) {
+      return mapping[firstCategory];
+    }
+    
+    // Try to find partial match for categories with quotes
+    for (const key in mapping) {
+      if (firstCategory.includes(key) || key.includes(firstCategory)) {
+        return mapping[key];
+      }
+    }
+
+    return 'Drinks'; // Default fallback
   }
 
   // UTILITY METHODS
@@ -419,7 +446,15 @@ export class ProductService {
   }
 
   private convertToFirestore(data: any): any {
-    const result = { ...data };
+    const result: any = {};
+    
+    // Only add defined values to avoid Firestore errors
+    Object.keys(data).forEach(key => {
+      const value = data[key];
+      if (value !== undefined) {
+        result[key] = value;
+      }
+    });
     
     // Convert Date objects to Firestore Timestamps
     if (result.createdAt instanceof Date) {

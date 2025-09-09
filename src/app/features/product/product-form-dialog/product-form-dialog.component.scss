@@ -1,0 +1,57 @@
+.ingredient-row {
+  position: relative;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.mat-mdc-dialog-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.cost-estimation {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-left: 4px solid #1976d2;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+// Responsive grid adjustments
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .md\\:col-span-2 {
+    grid-column: span 1;
+  }
+  
+  .md\\:grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .md\\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Animation for adding/removing ingredients
+.ingredient-row {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

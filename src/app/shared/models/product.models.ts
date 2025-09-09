@@ -81,18 +81,13 @@ export interface UpdateProductRequest extends Partial<CreateProductRequest> {
   id: string;
 }
 
-// For CSV import
+// For CSV import - Updated to match simplified CSV format
 export interface CsvProductRow {
   Token: string;
   'Item Name': string;
-  'Variation Name': string;
-  SKU: string;
-  Description: string;
+  'Variation ': string; // Note: extra space in CSV header
   Categories: string;
-  'Reporting Category': string;
   Price: string;
-  Archived: string;
-  // ... other CSV fields as needed
 }
 
 // Product category definitions

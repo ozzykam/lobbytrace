@@ -1,0 +1,216 @@
+<!-- Dialog Header -->
+<div mat-dialog-title class="flex items-center gap-3">
+  <mat-icon class="text-primary">upload</mat-icon>
+  <span>Import Products from CSV</span>
+</div>
+
+<!-- Dialog Content -->
+<div mat-dialog-content class="dialog-content">
+  
+  <!-- Instructions -->
+  @if (!selectedFile() && !importResults()) {
+    <mat-card class="mb-4 bg-blue-50 border-blue-200">
+      <mat-card-content class="pt-4">
+        <div class="flex items-start gap-3">
+          <mat-icon class="text-blue-600 mt-1">info</mat-icon>
+          <div>
+            <h4 class="font-medium text-blue-900 mb-2">CSV Import Instructions</h4>
+            <ul class="text-sm text-blue-800 space-y-1">
+              <li>• Use the provided CSV template with columns: Token, Item Name, Variation Name, etc.</li>
+              <li>• Products marked as "Archived: Y" will be skipped</li>
+              <li>• Products will be imported without ingredient specifications (add those manually)</li>
+              <li>• Maximum file size: 10MB</li>
+            </ul>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- File Upload Area -->
+  @if (!importResults()) {
+    <div class="mb-6">
+      @if (!selectedFile()) {
+        <!-- Drop Zone -->
+        <div 
+          class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer transition-colors"
+          [class.border-blue-400]="dragOver()"
+          [class.bg-blue-50]="dragOver()"
+          (click)="triggerFileInput()"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)">
+          
+          <mat-icon class="text-6xl text-gray-400 mb-4">cloud_upload</mat-icon>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">
+            @if (dragOver()) {
+              Drop your CSV file here
+            } @else {
+              Choose a CSV file or drag it here
+            }
+          </h3>
+          <p class="text-sm text-gray-500 mb-4">
+            Select your product catalog CSV file to import
+          </p>
+          <button 
+            type="button"
+            mat-raised-button 
+            color="primary"
+            class="flex items-center gap-2 mx-auto">
+            <mat-icon>folder_open</mat-icon>
+            Browse Files
+          </button>
+        </div>
+      } @else {
+        <!-- Selected File Display -->
+        <mat-card>
+          <mat-card-content class="pt-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <mat-icon class="text-green-600">description</mat-icon>
+                <div>
+                  <div class="font-medium text-gray-900">{{selectedFile()!.name}}</div>
+                  <div class="text-sm text-gray-500">
+                    {{formatFileSize(selectedFile()!.size)}} • CSV File
+                  </div>
+                </div>
+              </div>
+              
+              <button 
+                type="button"
+                mat-icon-button 
+                color="warn"
+                (click)="removeFile()"
+                matTooltip="Remove file">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+  <!-- Import Progress -->
+  @if (isImporting()) {
+    <mat-card class="mb-4">
+      <mat-card-content class="pt-4">
+        <div class="flex items-center gap-3 mb-3">
+          <mat-icon class="text-blue-600">sync</mat-icon>
+          <span class="font-medium">Importing products...</span>
+        </div>
+        <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+        <p class="text-sm text-gray-600 mt-2">
+          Please wait while we process your CSV file and create products.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Import Results -->
+  @if (importResults()) {
+    <mat-card class="mb-4">
+      <mat-card-content class="pt-4">
+        <div class="flex items-center gap-3 mb-4">
+          <mat-icon [class]="importResults()!.success > 0 ? 'text-green-600' : 'text-red-600'">
+            {{ importResults()!.success > 0 ? 'check_circle' : 'error' }}
+          </mat-icon>
+          <span class="font-medium text-lg">Import Complete</span>
+        </div>
+
+        <!-- Success Summary -->
+        @if (importResults()!.success > 0) {
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+            <div class="flex items-center gap-2 mb-2">
+              <mat-icon class="text-green-600">check_circle_outline</mat-icon>
+              <span class="font-medium text-green-900">
+                Successfully imported {{importResults()!.success}} products
+              </span>
+            </div>
+            <p class="text-sm text-green-800">
+              Products have been created and are now available in your catalog. 
+              You can now add ingredient specifications to each product.
+            </p>
+          </div>
+        }
+
+        <!-- Errors Summary -->
+        @if (importResults()!.errors.length > 0) {
+          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-3">
+              <mat-icon class="text-red-600">warning</mat-icon>
+              <span class="font-medium text-red-900">
+                {{importResults()!.errors.length}} errors occurred
+              </span>
+            </div>
+            
+            <div class="max-h-40 overflow-y-auto">
+              @for (error of importResults()!.errors; track $index) {
+                <div class="text-sm text-red-800 mb-1 font-mono bg-red-100 p-2 rounded">
+                  {{error}}
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Next Steps -->
+        @if (importResults()!.success > 0) {
+          <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <mat-icon class="text-blue-600">lightbulb</mat-icon>
+              <span class="font-medium text-blue-900">Next Steps</span>
+            </div>
+            <ul class="text-sm text-blue-800 space-y-1">
+              <li>• Review the imported products in the product catalog</li>
+              <li>• Add ingredient specifications to each product</li>
+              <li>• Set up inventory items if not already created</li>
+              <li>• Test product creation and ordering workflows</li>
+            </ul>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+
+</div>
+
+<!-- Dialog Actions -->
+<div mat-dialog-actions class="flex justify-end gap-3 pt-4 border-t">
+  @if (!importResults()) {
+    <!-- Pre-import actions -->
+    <button 
+      type="button"
+      mat-button 
+      (click)="onCancel()"
+      [disabled]="isImporting()">
+      Cancel
+    </button>
+    
+    <button 
+      type="button"
+      mat-raised-button 
+      color="primary"
+      [disabled]="!selectedFile() || isImporting()"
+      (click)="importCsv()"
+      class="flex items-center gap-2">
+      @if (isImporting()) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        <mat-icon>upload</mat-icon>
+      }
+      Import Products
+    </button>
+  } @else {
+    <!-- Post-import actions -->
+    <button 
+      type="button"
+      mat-raised-button 
+      color="primary"
+      (click)="onClose()"
+      class="flex items-center gap-2">
+      <mat-icon>check</mat-icon>
+      Close
+    </button>
+  }
+</div>

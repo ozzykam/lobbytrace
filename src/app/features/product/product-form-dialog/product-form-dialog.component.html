@@ -1,0 +1,287 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  
+  <!-- Dialog Header -->
+  <div mat-dialog-title class="flex items-center gap-3">
+    <mat-icon class="text-primary">{{ mode === 'create' ? 'add_circle' : 'edit' }}</mat-icon>
+    <span>{{ mode === 'create' ? 'Create New Product' : 'Edit Product' }}</span>
+  </div>
+
+  <!-- Dialog Content -->
+  <div mat-dialog-content class="max-h-[80vh] overflow-y-auto">
+    
+    <!-- Basic Product Information -->
+    <mat-card class="mb-4">
+      <mat-card-header>
+        <mat-card-title class="text-lg">Basic Information - {{data.product?.token}} </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="pt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Product Name -->
+          <mat-form-field class="w-full">
+            <mat-label>Product Name *</mat-label>
+            <input 
+              matInput 
+              formControlName="name"
+              placeholder="e.g., Americano, Croissant"
+              [class.mat-form-field-invalid]="isFieldInvalid('name')">
+            @if (isFieldInvalid('name')) {
+              <mat-error>{{getFieldError('name')}}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Variation -->
+          <mat-form-field class="w-full">
+            <mat-label>Variation</mat-label>
+            <input 
+              matInput 
+              formControlName="variation"
+              placeholder="e.g., 10oz (To Go), 16oz (Here)"
+              [class.mat-form-field-invalid]="isFieldInvalid('variation')">
+            @if (isFieldInvalid('variation')) {
+              <mat-error>{{getFieldError('variation')}}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Category -->
+          <mat-form-field class="w-full">
+            <mat-label>Category *</mat-label>
+            <mat-select formControlName="category">
+              @for (category of categories; track category) {
+                <mat-option [value]="category">{{category}}</mat-option>
+              }
+            </mat-select>
+            @if (isFieldInvalid('category')) {
+              <mat-error>{{getFieldError('category')}}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Price -->
+          <mat-form-field class="w-full">
+            <mat-label>Price *</mat-label>
+            <input 
+              matInput 
+              type="number"
+              step="0.01"
+              min="0"
+              formControlName="price"
+              placeholder="0.00"
+              [class.mat-form-field-invalid]="isFieldInvalid('price')">
+            <span matTextPrefix>$</span>
+            @if (isFieldInvalid('price')) {
+              <mat-error>{{getFieldError('price')}}</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Preparation Time -->
+          <mat-form-field class="w-full">
+            <mat-label>Preparation Time</mat-label>
+            <input 
+              matInput 
+              type="number"
+              min="0"
+              formControlName="preparationTime"
+              placeholder="0"
+              [class.mat-form-field-invalid]="isFieldInvalid('preparationTime')">
+            <span matTextSuffix>minutes</span>
+            @if (isFieldInvalid('preparationTime')) {
+              <mat-error>{{getFieldError('preparationTime')}}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <mat-form-field class="w-full mt-4">
+          <mat-label>Description</mat-label>
+          <textarea 
+            matInput 
+            formControlName="description"
+            placeholder="Optional description of the product"
+            rows="3"
+            [class.mat-form-field-invalid]="isFieldInvalid('description')">
+          </textarea>
+          @if (isFieldInvalid('description')) {
+            <mat-error>{{getFieldError('description')}}</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Preparation Instructions -->
+        <mat-form-field class="w-full">
+          <mat-label>Preparation Instructions</mat-label>
+          <textarea 
+            matInput 
+            formControlName="preparationInstructions"
+            placeholder="Optional instructions for staff on how to prepare this product"
+            rows="3"
+            [class.mat-form-field-invalid]="isFieldInvalid('preparationInstructions')">
+          </textarea>
+          @if (isFieldInvalid('preparationInstructions')) {
+            <mat-error>{{getFieldError('preparationInstructions')}}</mat-error>
+          }
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Ingredient Specifications -->
+    <mat-card class="mb-4">
+      <mat-card-header>
+        <mat-card-title class="text-lg flex items-center gap-2">
+          <mat-icon>restaurant</mat-icon>
+          Ingredient Specifications
+        </mat-card-title>
+        <mat-card-subtitle>
+          Define what inventory items are needed to make this product
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="pt-4">
+        
+        <!-- Ingredients Form Array -->
+        <div formArrayName="ingredients">
+          @for (ingredientControl of ingredientsArray.controls; track $index; let i = $index) {
+            <div [formGroupName]="i" class="ingredient-row border border-gray-200 rounded-lg p-4 mb-4 relative">
+              
+              <!-- Remove button -->
+              @if (ingredientsArray.length > 1) {
+                <button 
+                  type="button"
+                  mat-icon-button 
+                  color="warn"
+                  class="absolute top-2 right-2"
+                  (click)="removeIngredient(i)"
+                  matTooltip="Remove ingredient">
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                
+                <!-- Inventory Item Selection -->
+                <mat-form-field class="md:col-span-2">
+                  <mat-label>Inventory Item *</mat-label>
+                  <mat-select 
+                    formControlName="inventoryItemId"
+                    (selectionChange)="onInventoryItemSelected(i, $event.value)"
+                    [class.mat-form-field-invalid]="isIngredientFieldInvalid(i, 'inventoryItemId')">
+                    
+                    @for (item of inventoryItems; track item.id) {
+                      <mat-option [value]="item.id">
+                        {{getInventoryItemDisplayName(item)}}
+                      </mat-option>
+                    }
+                  </mat-select>
+                  @if (isIngredientFieldInvalid(i, 'inventoryItemId')) {
+                    <mat-error>Please select an inventory item</mat-error>
+                  }
+                </mat-form-field>
+
+                <!-- Quantity -->
+                <mat-form-field>
+                  <mat-label>Quantity *</mat-label>
+                  <input 
+                    matInput 
+                    type="number"
+                    step="0.1"
+                    min="0.1"
+                    formControlName="quantity"
+                    placeholder="0"
+                    [class.mat-form-field-invalid]="isIngredientFieldInvalid(i, 'quantity')">
+                  @if (isIngredientFieldInvalid(i, 'quantity')) {
+                    <mat-error>Quantity must be greater than 0</mat-error>
+                  }
+                </mat-form-field>
+
+                <!-- Unit -->
+                <mat-form-field>
+                  <mat-label>Unit *</mat-label>
+                  <mat-select 
+                    formControlName="unit"
+                    [class.mat-form-field-invalid]="isIngredientFieldInvalid(i, 'unit')">
+                    @for (unit of measurementUnits; track unit) {
+                      <mat-option [value]="unit">{{unit}}</mat-option>
+                    }
+                  </mat-select>
+                  @if (isIngredientFieldInvalid(i, 'unit')) {
+                    <mat-error>Please select a unit</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <!-- Notes -->
+              <mat-form-field class="w-full mt-3">
+                <mat-label>Notes (Optional)</mat-label>
+                <input 
+                  matInput 
+                  formControlName="notes"
+                  placeholder="e.g., 'extra hot', 'grind fresh', 'use organic'"
+                  [class.mat-form-field-invalid]="isIngredientFieldInvalid(i, 'notes')">
+              </mat-form-field>
+            </div>
+          }
+        </div>
+
+        <!-- Add Ingredient Button -->
+        <div class="flex justify-center">
+          <button 
+            type="button"
+            mat-raised-button 
+            color="accent"
+            (click)="addIngredient()"
+            class="flex items-center gap-2">
+            <mat-icon>add</mat-icon>
+            Add Another Ingredient
+          </button>
+        </div>
+
+        <!-- Cost Estimation -->
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+          <div class="flex items-center gap-2 mb-2">
+            <mat-icon class="text-blue-600">calculate</mat-icon>
+            <span class="font-medium text-blue-900">Cost Estimation</span>
+          </div>
+          <div class="text-sm text-blue-800">
+            Estimated ingredient cost: 
+            <span class="font-medium">
+              {{calculateEstimatedCost() | currency:'USD':'symbol':'1.2-2'}}
+            </span>
+          </div>
+          <div class="text-xs text-blue-600 mt-1">
+            Selling price: {{productForm.get('price')?.value | currency:'USD':'symbol':'1.2-2'}}
+            @if (productForm.get('price')?.value && calculateEstimatedCost() > 0) {
+              | Margin: {{((productForm.get('price')?.value - calculateEstimatedCost()) / productForm.get('price')?.value * 100) | number:'1.0-0'}}%
+            }
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Allergens (Optional Enhancement for Future) -->
+    <!-- This section can be expanded later with allergen management -->
+    
+  </div>
+
+  <!-- Dialog Actions -->
+  <div mat-dialog-actions class="flex justify-end gap-3 pt-4 border-t">
+    <button 
+      type="button"
+      mat-button 
+      (click)="onCancel()"
+      [disabled]="isLoading()">
+      Cancel
+    </button>
+    
+    <button 
+      type="submit"
+      mat-raised-button 
+      color="primary"
+      [disabled]="productForm.invalid || isLoading()"
+      class="flex items-center gap-2">
+      @if (isLoading()) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        <mat-icon>{{ mode === 'create' ? 'add' : 'save' }}</mat-icon>
+      }
+      {{ mode === 'create' ? 'Create Product' : 'Save Changes' }}
+    </button>
+  </div>
+
+</form>
