@@ -421,7 +421,7 @@ export class ProductService {
       }
     }
 
-    // Extract temperature (Hot, Iced)
+    // Extract temperature (Hot or Iced)
     if (variationLower.includes('iced')) {
       result.temperature = 'Iced';
     } else if (variationLower.includes('hot') || variationLower.includes('10oz')) {
