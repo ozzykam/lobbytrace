@@ -118,3 +118,6 @@ src/environments/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Databae Population Files
+data/

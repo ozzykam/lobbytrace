@@ -495,17 +495,21 @@ export class ProductService {
       id,
       name: data.name,
       description: data.description,
-      unit: data.unit,
+      physicalUnit: data.unit,
       category: data.category,
-      currentStock: data.currentStock,
-      minStockLevel: data.minStockLevel,
-      maxStockLevel: data.maxStockLevel,
-      costPerUnit: data.costPerUnit,
+      currentPhysicalStock: data.currentStock,
+      minPhysicalStockLevel: data.minStockLevel,
+      maxPhysicalStockLevel: data.maxStockLevel,
+      costPerPhysicalUnit: data.costPerUnit,
       supplier: data.supplier,
       lastRestocked: this.convertTimestampToDate(data.lastRestocked),
       createdAt: this.convertTimestampToDate(data.createdAt),
       updatedAt: this.convertTimestampToDate(data.updatedAt),
-      createdBy: data.createdBy
+      createdBy: data.createdBy,
+      recipeUnit: data.recipeUnit,
+      unitsPerPhysicalItem: data.unitsPerPhysicalItem,
+      costPerRecipeUnit: data.costPerRecipeUnit,
+      useCustomStockLevel: data.useCustomStockLevel || false
     };
   }
 

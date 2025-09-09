@@ -167,7 +167,7 @@ export class ProductFormDialogComponent implements OnInit {
       ingredientGroup.patchValue({
         inventoryItemId: inventoryItem.id,
         inventoryItemName: inventoryItem.name,
-        unit: inventoryItem.unit // Set default unit from inventory item
+        unit: inventoryItem.physicalUnit // Set default unit from inventory item
       });
     }
   }
@@ -229,7 +229,7 @@ export class ProductFormDialogComponent implements OnInit {
         const inventoryItem = this.inventoryItems.find(item => item.id === inventoryItemId);
         if (inventoryItem) {
           // Convert units if needed (simplified - assumes same units for now)
-          totalCost += quantity * inventoryItem.costPerUnit;
+          totalCost += quantity * inventoryItem.costPerPhysicalUnit;
         }
       }
     });

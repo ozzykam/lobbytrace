@@ -1,7 +1,264 @@
-<app-coming-soon 
-  featureName="Inventory"
-  description="Manage and track your inventory with ease. This feature will help you keep everything organized and up-to-date."
-  [showBackButton]="true"
-  backButtonText="Back to Home"
-  backButtonLink="/">
-</app-coming-soon>
+<div class="inventory-container p-6 max-w-7xl mx-auto">
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Inventory Management</h1>
+      <p class="text-gray-600 mt-1">Track and manage your coffee shop inventory items</p>
+    </div>
+    
+    <div class="flex gap-3">
+      <!-- Low Stock Alert Badge -->
+      @if (lowStockItems().length > 0) {
+        <div class="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-700 rounded-lg border border-red-200">
+          <mat-icon class="text-red-600">warning</mat-icon>
+          <span class="text-sm font-medium">{{lowStockItems().length}} Low Stock</span>
+        </div>
+      }
+      
+      <button 
+        mat-stroked-button 
+        color="primary"
+        (click)="importFromCsv()"
+        class="flex items-center gap-2">
+        <mat-icon>cloud_upload</mat-icon>
+        Import CSV
+      </button>
+      
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="createItem()"
+        class="flex items-center gap-2">
+        <mat-icon>add</mat-icon>
+        Add Item
+      </button>
+    </div>
+  </div>
+
+  <!-- Search and Filters -->
+  <mat-card class="mb-6">
+    <mat-card-content class="pt-4">
+      <div class="flex flex-col sm:flex-row gap-4">
+        <!-- Search Input -->
+        <mat-form-field class="flex-1">
+          <mat-label>Search inventory...</mat-label>
+          <input 
+            matInput 
+            placeholder="Search by name, category, or supplier"
+            (input)="onSearch($event)"
+            [value]="searchTerm()">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Category Filter -->
+        <mat-form-field class="w-full sm:w-64">
+          <mat-label>Category</mat-label>
+          <mat-select 
+            [value]="selectedCategory()"
+            (selectionChange)="onCategoryChange($event.value)">
+            <mat-option value="all">All Categories</mat-option>
+            @for (category of categories; track category) {
+              <mat-option [value]="category">{{category}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="flex justify-center items-center py-12">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+  <!-- Inventory Table -->
+  @if (!isLoading()) {
+    <mat-card>
+      <mat-card-content class="p-0">
+        <div class="overflow-x-auto">
+          <table mat-table [dataSource]="filteredItems()" class="w-full">
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Item Name</th>
+              <td mat-cell *matCellDef="let item" class="font-medium">
+                <div>
+                  <div class="text-sm font-medium text-gray-900">{{item.name}}</div>
+                  @if (item.description) {
+                    <div class="text-xs text-gray-500 mt-1">{{item.description}}</div>
+                  }
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Category Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Category</th>
+              <td mat-cell *matCellDef="let item">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  {{item.category}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Current Stock Column -->
+            <ng-container matColumnDef="currentStock">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Physical Stock</th>
+              <td mat-cell *matCellDef="let item">
+                <div class="flex items-center gap-2">
+                  <div>
+                    <div class="font-medium">{{item.currentPhysicalStock}} {{item.physicalUnit}}</div>
+                    <div class="text-xs text-gray-500">{{item.currentPhysicalStock * item.unitsPerPhysicalItem}} {{item.recipeUnit}}</div>
+                  </div>
+                  @if (getStockStatus(item) === 'low') {
+                    <mat-icon class="text-red-500 text-sm" matTooltip="Low stock warning">warning</mat-icon>
+                  }
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Min Stock Level Column -->
+            <ng-container matColumnDef="minStockLevel">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Min Level</th>
+              <td mat-cell *matCellDef="let item" class="text-gray-600">
+                {{item.minPhysicalStockLevel}} {{item.physicalUnit}}
+              </td>
+            </ng-container>
+
+            <!-- Unit Column -->
+            <ng-container matColumnDef="unit">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Units</th>
+              <td mat-cell *matCellDef="let item">
+                <div class="flex flex-col gap-1">
+                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-blue-100 text-blue-700">
+                    Physical: {{item.physicalUnit}}
+                  </span>
+                  <span class="inline-flex items-center px-2 py-1 rounded text-xs bg-green-100 text-green-700">
+                    Recipe: {{item.recipeUnit}}
+                  </span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Cost Per Unit Column -->
+            <ng-container matColumnDef="costPerUnit">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Cost/Unit</th>
+              <td mat-cell *matCellDef="let item" class="font-medium text-green-600">
+                <div class="flex flex-col">
+                  <div>{{formatCurrency(item.costPerPhysicalUnit)}}/{{item.physicalUnit}}</div>
+                  <div class="text-xs">{{formatCurrency(item.costPerRecipeUnit)}}/{{item.recipeUnit}}</div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Supplier Column -->
+            <ng-container matColumnDef="supplier">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Supplier</th>
+              <td mat-cell *matCellDef="let item" class="text-gray-600">
+                {{item.supplier || '—'}}
+              </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Status</th>
+              <td mat-cell *matCellDef="let item">
+                <span 
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                  [class]="getStockStatus(item) === 'low' ? 'bg-red-100 text-red-800' : 
+                           getStockStatus(item) === 'high' ? 'bg-yellow-100 text-yellow-800' : 
+                           'bg-green-100 text-green-800'">
+                  {{getStockStatusText(getStockStatus(item))}}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="font-medium text-gray-900">Actions</th>
+              <td mat-cell *matCellDef="let item">
+                <div class="flex gap-2">
+                  <button 
+                    mat-icon-button 
+                    color="accent"
+                    (click)="adjustStock(item)"
+                    matTooltip="Adjust stock">
+                    <mat-icon>tune</mat-icon>
+                  </button>
+                  
+                  <button 
+                    mat-icon-button 
+                    color="primary"
+                    (click)="editItem(item)"
+                    matTooltip="Edit item">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  
+                  <button 
+                    mat-icon-button 
+                    color="warn"
+                    (click)="deleteItem(item)"
+                    matTooltip="Delete item">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50"></tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        @if (filteredItems().length === 0 && !isLoading()) {
+          <div class="text-center py-12">
+            <mat-icon class="text-gray-400 text-6xl mb-4">inventory_2</mat-icon>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No inventory items found</h3>
+            <p class="text-gray-500 mb-4">
+              @if (searchTerm() || selectedCategory() !== 'all') {
+                Try adjusting your search criteria or filters.
+              } @else {
+                Get started by adding your first inventory item.
+              }
+            </p>
+            
+            @if (searchTerm() === '' && selectedCategory() === 'all') {
+              <button mat-raised-button color="primary" (click)="createItem()">
+                Add Inventory Item
+              </button>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Inventory Summary -->
+  @if (!isLoading() && inventoryItems().length > 0) {
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="text-2xl font-bold text-blue-600">{{inventoryItems().length}}</div>
+          <div class="text-sm text-gray-600">Total Items</div>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="text-2xl font-bold text-red-600">{{lowStockItems().length}}</div>
+          <div class="text-sm text-gray-600">Low Stock Alerts</div>
+        </mat-card-content>
+      </mat-card>
+      
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="text-2xl font-bold text-green-600">{{categories.length}}</div>
+          <div class="text-sm text-gray-600">Categories</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+</div>

@@ -1,0 +1,88 @@
+/* Fix Material Select dropdown styling */
+::ng-deep .mat-mdc-select-panel {
+  background: white !important;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  max-height: 256px;
+}
+
+::ng-deep .mat-mdc-option {
+  background: white !important;
+  color: #374151 !important;
+  padding: 12px 16px;
+  min-height: 48px;
+  line-height: 24px;
+}
+
+::ng-deep .mat-mdc-option:hover {
+  background: #f3f4f6 !important;
+}
+
+::ng-deep .mat-mdc-option.mdc-list-item--selected {
+  background: #e5e7eb !important;
+  color: #1f2937 !important;
+}
+
+::ng-deep .mat-mdc-option.mat-mdc-option-active {
+  background: #f3f4f6 !important;
+}
+
+/* Fix select arrow and field styling */
+::ng-deep .mat-mdc-select-arrow {
+  color: #6b7280;
+}
+
+::ng-deep .mat-mdc-select-value {
+  color: #374151;
+}
+
+::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-select-arrow {
+  color: #3b82f6;
+}
+
+/* Ensure proper overlay positioning */
+::ng-deep .cdk-overlay-container {
+  z-index: 1000;
+}
+
+::ng-deep .cdk-overlay-backdrop {
+  background: rgba(0, 0, 0, 0.32);
+}
+
+/* Fix input field styling */
+::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background: white;
+}
+
+::ng-deep .mat-mdc-form-field-input-control {
+  color: #374151;
+}
+
+::ng-deep .mat-mdc-form-field-input-control::placeholder {
+  color: #9ca3af;
+}
+
+/* Inventory specific styles */
+.inventory-container {
+  max-width: 100%;
+}
+
+/* Table styling */
+::ng-deep .mat-mdc-table {
+  background: white;
+}
+
+::ng-deep .mat-mdc-header-row {
+  background: #f9fafb;
+}
+
+::ng-deep .mat-mdc-row:hover {
+  background: #f9fafb;
+}
+
+/* Card styling */
+::ng-deep .mat-mdc-card {
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
