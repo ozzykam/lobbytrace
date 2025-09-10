@@ -1,0 +1,436 @@
+/* Fix Material Tooltip Styling */
+::ng-deep .mat-mdc-tooltip {
+  background: #374151 !important;
+  color: white !important;
+  font-size: 12px !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+::ng-deep .mat-mdc-tooltip .mdc-tooltip__surface {
+  background: #374151 !important;
+  color: white !important;
+}
+
+.inventory-settings {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+
+  .page-header {
+    margin-bottom: 32px;
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .header-icon {
+        font-size: 36px;
+        width: 36px;
+        height: 36px;
+        color: #1976d2;
+      }
+
+      .header-text {
+        h1 {
+          margin: 0;
+          font-size: 28px;
+          font-weight: 500;
+        }
+
+        p {
+          margin: 4px 0 0 0;
+          color: #666;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    // Overview Card
+    .overview-card {
+      .overview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+
+        .overview-item {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          .label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+          }
+
+          .value {
+            font-size: 18px;
+            font-weight: 600;
+
+            &.primary {
+              color: #1976d2;
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
+
+    // Statistics Card
+    .stats-card {
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+
+        .stat-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px;
+          border-radius: 8px;
+          background-color: #f8f9fa;
+
+          mat-icon {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+          }
+
+          .stat-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            .stat-value {
+              font-size: 20px;
+              font-weight: 600;
+              color: #333;
+            }
+
+            .stat-label {
+              font-size: 12px;
+              color: #666;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+
+    // Settings Form Card
+    .settings-form-card {
+      .current-selection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+
+        .selection-label {
+          font-weight: 500;
+          color: #333;
+        }
+      }
+
+      .presets-section {
+        margin: 24px 0;
+
+        h3 {
+          margin: 0 0 16px 0;
+          font-size: 16px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        .presets-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 12px;
+
+          .preset-button {
+            height: auto;
+            padding: 16px;
+            text-align: left;
+
+            .preset-content {
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              width: 100%;
+
+              .preset-label {
+                font-weight: 600;
+                font-size: 16px;
+              }
+
+              .preset-description {
+                font-size: 12px;
+                color: #666;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+
+      .slider-section {
+        margin: 24px 0;
+
+        h3 {
+          margin: 0 0 16px 0;
+          font-size: 16px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        .slider-container {
+          .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+          }
+        }
+      }
+
+      .percentage-input {
+        width: 100%;
+        margin: 24px 0;
+      }
+
+      .impact-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px;
+        background-color: #e3f2fd;
+        border-radius: 8px;
+        margin: 24px 0;
+
+        mat-icon {
+          margin-top: 2px;
+        }
+
+        .impact-content {
+          h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1976d2;
+          }
+
+          p {
+            margin: 0 0 8px 0;
+            line-height: 1.4;
+            color: #333;
+
+            &.impact-note {
+              font-size: 12px;
+              color: #666;
+            }
+          }
+        }
+      }
+    }
+
+    // Help Card
+    .help-card {
+      .guidelines {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .guideline-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+
+          mat-icon {
+            margin-top: 2px;
+            flex-shrink: 0;
+          }
+
+          h4 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+          }
+
+          p {
+            margin: 0;
+            line-height: 1.5;
+            color: #666;
+          }
+
+          ul {
+            margin: 4px 0 0 0;
+            padding-left: 16px;
+            
+            li {
+              margin-bottom: 4px;
+              line-height: 1.4;
+              color: #666;
+
+              strong {
+                color: #333;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    
+    mat-spinner {
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+    }
+  }
+}
+
+// Card headers customization
+:host ::ng-deep {
+  .mat-card-header {
+    .mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 500;
+
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .mat-card-actions {
+    display: flex;
+    gap: 12px;
+    padding: 16px 24px;
+
+    button {
+      mat-icon {
+        margin-right: 8px;
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  // Make slider full width
+  .mat-mdc-slider {
+    width: 97%;
+    margin: 0 5px 0px 20px;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .inventory-settings {
+    padding: 16px;
+
+    .page-header {
+      margin-bottom: 24px;
+
+      .header-content {
+        .header-icon {
+          font-size: 32px;
+          width: 32px;
+          height: 32px;
+        }
+
+        .header-text h1 {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .settings-container {
+      gap: 16px;
+
+      .overview-card .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-card .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .settings-form-card {
+        .presets-section .presets-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .current-selection {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .inventory-settings {
+    .settings-container {
+      .overview-card .overview-grid,
+      .stats-card .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .help-card .guidelines .guideline-item {
+        flex-direction: column;
+        gap: 8px;
+
+        mat-icon {
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+
+  :host ::ng-deep {
+    .mat-card-actions {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+  background: white;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #7f8184;
+}

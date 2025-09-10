@@ -2,12 +2,19 @@
  * Firebase Cloud Functions for LeeBoy's Wildlife Removal
  */
 
-import {onCall, CallableRequest, HttpsError} from "firebase-functions/v2/https";
+import {
+  onCall,
+  onRequest,
+  CallableRequest,
+  HttpsError,
+} from "firebase-functions/v2/https";
 import {onDocumentCreated} from "firebase-functions/v2/firestore";
 import {getAuth} from "firebase-admin/auth";
 import {getFirestore} from "firebase-admin/firestore";
 import {initializeApp} from "firebase-admin/app";
 import * as logger from "firebase-functions/logger";
+import {createHmac} from "crypto";
+import cors from "cors";
 
 // Initialize Firebase Admin
 initializeApp();
@@ -300,3 +307,371 @@ export const createUserProfile = onDocumentCreated(
     // - Send welcome email
   }
 );
+
+// SQUARE WEBHOOK HANDLING
+
+/**
+ * Interface for Square webhook events
+ */
+interface SquareWebhookEvent {
+  merchant_id: string;
+  type: string;
+  event_id: string;
+  created_at: string;
+  data: {
+    type: string;
+    id: string;
+    object: {
+      order: {
+        id: string;
+        location_id: string;
+        state: string;
+        line_items: Array<{
+          uid: string;
+          catalog_object_id: string;
+          quantity: string;
+          name: string;
+          variation_name?: string;
+          base_price_money: {
+            amount: number;
+            currency: string;
+          };
+        }>;
+        created_at: string;
+        updated_at: string;
+      };
+    };
+  };
+}
+
+/**
+ * Verify Square webhook signature.
+ * @param {string} body - The raw request body as a string.
+ * @param {string} signature - The signature from the Square webhook header.
+ * @param {string} signatureKey - The secret key used to verify the signature.
+ * @return {boolean} Returns true if the signature is valid, false otherwise.
+ */
+function verifySquareSignature(
+  body: string,
+  signature: string,
+  signatureKey: string
+): boolean {
+  try {
+    // Create HMAC SHA-256 hash
+    const hmac = createHmac("sha256", signatureKey);
+    hmac.update(body);
+    const expectedSignature = hmac.digest("base64");
+
+    // Compare signatures
+    return signature === expectedSignature;
+  } catch (error) {
+    logger.error("Error verifying signature:", error);
+    return false;
+  }
+}
+
+/**
+ * Process Square webhook events for inventory updates
+ */
+export const squareWebhook = onRequest({
+  cors: true,
+  timeoutSeconds: 60,
+}, async (req, res) => {
+  const corsHandler = cors({origin: true});
+
+  corsHandler(req, res, async () => {
+    // Only accept POST requests
+    if (req.method !== "POST") {
+      res.status(405).send("Method Not Allowed");
+      return;
+    }
+
+    try {
+      const body = JSON.stringify(req.body);
+      const signature = req.headers["x-square-signature"] as string;
+
+      logger.info("Received Square webhook", {
+        signature: signature ? "present" : "missing",
+        bodyLength: body.length,
+        eventType: req.body.type,
+        eventId: req.body.event_id,
+      });
+
+      // Get webhook signature key from Firestore
+      let signatureKey: string | null = null;
+      try {
+        const configSnapshot = await db.collection("square_config")
+          .limit(1).get();
+        if (!configSnapshot.empty) {
+          const configData = configSnapshot.docs[0].data();
+          signatureKey = configData.webhookSignatureKey;
+        }
+      } catch (error) {
+        logger.warn("Could not retrieve signature key:", error);
+      }
+
+      // Verify signature if we have a key
+      if (signatureKey && signature) {
+        const isValidSignature = verifySquareSignature(
+          body,
+          signature,
+          signatureKey
+        );
+        if (!isValidSignature) {
+          logger.error("Invalid webhook signature");
+          await logWebhookEvent(req.body, false, "Invalid signature");
+          res.status(401).send("Unauthorized - Invalid signature");
+          return;
+        }
+        logger.info("Webhook signature verified successfully");
+      } else if (signature) {
+        logger.warn("Signature provided but no signature key configured");
+      }
+
+      const webhookEvent = req.body as SquareWebhookEvent;
+
+      // Check for duplicate events
+      const existingLogQuery = await db
+        .collection("square_webhook_logs")
+        .where("eventId", "==", webhookEvent.event_id)
+        .limit(1)
+        .get();
+
+      if (!existingLogQuery.empty) {
+        logger.info("Webhook event already processed:", webhookEvent.event_id);
+        res.status(200).send("OK - Already processed");
+        return;
+      }
+
+      // Process the webhook based on event type
+      const success = await processWebhookEvent(webhookEvent);
+
+      if (success) {
+        await logWebhookEvent(webhookEvent, true);
+        res.status(200).send("OK");
+      } else {
+        await logWebhookEvent(webhookEvent, false, "Processing failed");
+        res.status(500).send("Processing failed");
+      }
+    } catch (error) {
+      logger.error("Error processing Square webhook:", error);
+      if (req.body) {
+        await logWebhookEvent(req.body, false, `Error: ${error}`);
+      }
+      res.status(500).send("Internal Server Error");
+    }
+  });
+});
+
+/**
+ * Process Square webhook events
+ * @param {SquareWebhookEvent} event - The Square webhook event to process.
+ */
+async function processWebhookEvent(
+  event: SquareWebhookEvent): Promise<boolean> {
+  try {
+    logger.info("Processing webhook event", {
+      type: event.type,
+      eventId: event.event_id,
+      merchantId: event.merchant_id,
+    });
+
+    // Only process completed orders to avoid double-counting
+    if (!["order.created", "order.updated", "order.fulfillment.updated"]
+      .includes(event.type)) {
+      logger.info("Ignoring event type:", event.type);
+      return true; // Not an error, just not something we process
+    }
+
+    const order = event.data.object.order;
+
+    // Only process completed orders
+    if (order.state !== "COMPLETED") {
+      logger.info("Ignoring non-completed order:", order.state);
+      return true;
+    }
+
+    // Get product mappings
+    const mappingsSnapshot = await db.collection("product_square_mappings")
+      .get();
+    interface ProductSquareMapping {
+      id: string;
+      squareItemVariationId: string;
+      syncEnabled: boolean;
+      productName?: string;
+      productId?: string;
+      [key: string]: any;
+    }
+
+    const mappings: ProductSquareMapping[] = mappingsSnapshot.docs.map((doc) =>{
+      const data = doc.data();
+      return {
+        id: doc.id,
+        squareItemVariationId: data.squareItemVariationId,
+        syncEnabled: data.syncEnabled,
+        productName: data.productName,
+        productId: data.productId,
+        ...data,
+      };
+    });
+
+    if (mappings.length === 0) {
+      logger.warn("No product mappings found");
+      return false;
+    }
+    // Find the product mapping for this Square item
+    const mapping = mappings.find((m) =>
+      m.squareItemVariationId === lineItem.catalog_object_id &&
+      m.syncEnabled
+    );
+    const errors: string[] = [];
+
+    // Process each line item in the order
+    for (const lineItem of order.line_items) {
+      try {
+        // Find the product mapping for this Square item
+        const mapping = mappings.find((m) =>
+          m.squareItemVariationId === lineItem.catalog_object_id &&
+          m.syncEnabled
+        );
+
+        if (!mapping) {
+          logger.info(`
+            No mapping found for Square item: ${lineItem.catalog_object_id}
+            `);
+          continue; // Skip unmapped items
+        }
+
+        logger.info(`Processing mapped item: ${mapping.productName}`);
+
+        // Get the product to access its recipe
+        const productDoc = await db.collection("products")
+          .doc(mapping.productId)
+          .get();
+        if (!productDoc.exists) {
+          errors.push(`Product not found: ${mapping.productName}`);
+          continue;
+        }
+
+        const product = productDoc.data();
+        if (!product?.ingredients || !Array.isArray(product.ingredients)) {
+          logger.info(`
+            No ingredients found for product: ${mapping.productName}
+            `);
+          continue;
+        }
+
+        const quantity = parseInt(lineItem.quantity) || 1;
+        logger.info(`
+          Processing ${quantity}x ${mapping.productName}
+          with ${product.ingredients.length} ingredients
+          `);
+
+        // Process each ingredient in the product recipe
+        for (const ingredient of product.ingredients) {
+          if (!ingredient.inventoryItemId || !ingredient.quantity) {
+            continue;
+          }
+
+          const consumedQuantity = ingredient.quantity * quantity;
+
+          // Update inventory item stock
+          const inventoryItemRef = db.collection("inventory_items")
+            .doc(ingredient.inventoryItemId);
+          const inventoryDoc = await inventoryItemRef.get();
+
+          if (inventoryDoc.exists) {
+            const inventoryData = inventoryDoc.data();
+            const currentStock = inventoryData?.currentStock || 0;
+            const newStock = Math.max(0, currentStock - consumedQuantity);
+
+            await inventoryItemRef.update({
+              currentStock: newStock,
+              updatedAt: new Date(),
+            });
+
+            // Log the stock movement
+            await db.collection("inventory_stock_movements").add({
+              inventoryItemId: ingredient.inventoryItemId,
+              type: "OUT",
+              quantity: consumedQuantity,
+              reason: "Square sale consumption",
+              description: `
+              Order ${order.id}: ${quantity}x ${mapping.productName}
+              `,
+              previousStock: currentStock,
+              newStock: newStock,
+              createdAt: new Date(),
+              createdBy: "square-webhook",
+            });
+
+            logger.info(`
+              Updated inventory: ${inventoryData?.name}, 
+              consumed: ${consumedQuantity},
+              new stock: ${newStock}
+              `);
+          }
+        }
+
+        itemsUpdated++;
+      } catch (itemError) {
+        const errorMessage = `
+        Failed to process line item ${lineItem.uid}: ${itemError}
+        `;
+        logger.error(errorMessage);
+        errors.push(errorMessage);
+      }
+    }
+
+    // Update the product mapping's last sync time
+    const relevantMappings = mappings.filter((mapping) =>
+      order.line_items.some(
+        (item) => item.catalog_object_id === mapping.squareItemVariationId
+      )
+    );
+
+    for (const mapping of relevantMappings) {
+      await db.collection("product_square_mappings").doc(mapping.id).update({
+        lastSyncedAt: new Date(),
+      });
+    }
+
+    logger.info(`
+      Webhook processing complete. Items updated: ${itemsUpdated}, 
+      Errors: ${errors.length}
+      `);
+    return errors.length === 0;
+  } catch (error) {
+    logger.error("Error processing webhook event:", error);
+    return false;
+  }
+}
+
+/**
+ * Log webhook events for tracking and debugging
+ * @param {SquareWebhookEvent} webhookEvent - The Square webhook event to log.
+ * @param {boolean} success
+ * Indicates if the webhook was processed successfully.
+ * @param {string} [errorMessage] - Optional error message if processing failed.
+ */
+async function logWebhookEvent(
+  webhookEvent: SquareWebhookEvent,
+  success: boolean,
+  errorMessage?: string
+): Promise<void> {
+  try {
+    await db.collection("square_webhook_logs").add({
+      eventId: webhookEvent.event_id,
+      eventType: webhookEvent.type,
+      merchantId: webhookEvent.merchant_id,
+      processed: true,
+      processedAt: new Date(),
+      success: success,
+      errorMessage: errorMessage || null,
+      receivedAt: new Date(),
+      createdBy: "square-webhook",
+    });
+  } catch (error) {
+    logger.error("Error logging webhook event:", error);
+  }
+}

@@ -1,0 +1,361 @@
+.square-config-dialog {
+  .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e0e0e0;
+    margin: -24px -24px 0 -24px;
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .header-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+        
+        &.square-icon {
+          color: #006aff; // Square brand color
+        }
+      }
+
+      .header-text {
+        h2 {
+          margin: 0;
+          font-size: 20px;
+          font-weight: 500;
+        }
+
+        .subtitle {
+          color: #666;
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .dialog-content {
+    padding: 24px;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    .step-content {
+      padding: 24px 0;
+
+      .step-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+
+        mat-icon {
+          font-size: 24px;
+          width: 24px;
+          height: 24px;
+          color: #1976d2;
+        }
+
+        h3 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 500;
+        }
+      }
+
+      .step-description {
+        margin-bottom: 24px;
+        color: #666;
+        line-height: 1.5;
+
+        a {
+          color: #1976d2;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .full-width {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+
+      // Credentials Form
+      .credentials-form {
+        .environment-option {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .env-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            .env-label {
+              font-weight: 500;
+            }
+
+            .env-description {
+              font-size: 12px;
+              color: #666;
+            }
+          }
+        }
+
+        .test-connection-section {
+          margin: 24px 0;
+          text-align: center;
+
+          button {
+            min-width: 200px;
+
+            mat-icon {
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+
+      // Location Form
+      .location-form {
+        .location-option {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+
+          .location-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .location-name {
+              font-weight: 500;
+            }
+
+            .location-address {
+              font-size: 12px;
+              color: #666;
+            }
+          }
+        }
+
+        .location-info-card {
+          margin-top: 16px;
+          background-color: #f8f9fa;
+
+          .selected-location-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            mat-icon {
+              color: #1976d2;
+              margin-top: 2px;
+            }
+
+            p {
+              margin: 0 0 8px 0;
+              line-height: 1.4;
+
+              &.location-note {
+                color: #666;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+
+      // Settings Form
+      .settings-form {
+        .setting-item {
+          margin-bottom: 24px;
+
+          .setting-description {
+            margin: 8px 0 0 0;
+            color: #666;
+            font-size: 14px;
+          }
+        }
+
+        .sync-option {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .sync-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            .sync-label {
+              font-weight: 500;
+            }
+
+            .sync-description {
+              font-size: 12px;
+              color: #666;
+            }
+          }
+        }
+      }
+
+      .sync-info-card {
+        margin-top: 24px;
+
+        .sync-info {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+
+          h4 {
+            margin: 0 0 12px 0;
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          ul {
+            margin: 0;
+            padding-left: 16px;
+
+            li {
+              margin-bottom: 8px;
+              line-height: 1.4;
+
+              strong {
+                color: #1976d2;
+              }
+            }
+          }
+        }
+      }
+
+      .step-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 32px;
+        padding-top: 16px;
+        border-top: 1px solid #e0e0e0;
+
+        button {
+          min-width: 100px;
+
+          mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Stepper customizations
+:host ::ng-deep {
+  .mat-stepper-horizontal {
+    .mat-step-header {
+      .mat-step-icon {
+        background-color: #e0e0e0;
+        color: #666;
+
+        &.mat-step-icon-selected {
+          background-color: #1976d2;
+          color: white;
+        }
+
+        &.mat-step-icon-state-done {
+          background-color: #4caf50;
+          color: white;
+        }
+      }
+
+      .mat-step-label {
+        color: #666;
+
+        &.mat-step-label-active {
+          color: #1976d2;
+        }
+
+        &.mat-step-label-selected {
+          color: #1976d2;
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .square-config-dialog {
+    .dialog-content {
+      padding: 16px;
+
+      .step-content {
+        padding: 16px 0;
+
+        .step-header {
+          h3 {
+            font-size: 16px;
+          }
+        }
+
+        .step-actions {
+          flex-direction: column;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  :host ::ng-deep {
+    .mat-stepper-horizontal {
+      .mat-step-header {
+        .mat-step-label {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .square-config-dialog {
+    .dialog-header {
+      .header-content {
+        gap: 12px;
+
+        .header-icon {
+          font-size: 28px;
+          width: 28px;
+          height: 28px;
+        }
+
+        .header-text h2 {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .dialog-content {
+      .step-content {
+        .credentials-form .test-connection-section button {
+          min-width: auto;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

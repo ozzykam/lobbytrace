@@ -2,7 +2,16 @@
   <!-- Header Section -->
   <div class="flex justify-between items-center mb-6">
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Inventory Management</h1>
+      <div class="flex items-center gap-2">
+        <h1 class="text-2xl font-bold text-gray-900">Inventory Management</h1>
+        <button 
+          mat-icon-button 
+          (click)="openInventorySettings()"
+          matTooltip="Inventory Settings"
+          matTooltipPosition="right">
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
       <p class="text-gray-600 mt-1">Track and manage your coffee shop inventory items</p>
     </div>
     
@@ -14,6 +23,28 @@
           <span class="text-sm font-medium">{{lowStockItems().length}} Low Stock</span>
         </div>
       }
+      
+      <button 
+        mat-stroked-button 
+        color="accent"
+        (click)="configureSquareIntegration()"
+        class="flex items-center gap-2"
+        matTooltip="Configure Square integration for automatic inventory updates"
+        matTooltipPosition="below">
+        <mat-icon>storefront</mat-icon>
+        Square Setup
+      </button>
+      
+      <button 
+        mat-stroked-button 
+        color="accent"
+        (click)="manageProductMappings()"
+        class="flex items-center gap-2"
+        matTooltip="Map products to Square items for automatic inventory updates"
+        matTooltipPosition="below">
+        <mat-icon>link</mat-icon>
+        Product Mapping
+      </button>
       
       <button 
         mat-stroked-button 
@@ -113,7 +144,7 @@
                     <div class="text-xs text-gray-500">{{item.currentPhysicalStock * item.unitsPerPhysicalItem}} {{item.recipeUnit}}</div>
                   </div>
                   @if (getStockStatus(item) === 'low') {
-                    <mat-icon class="text-red-500 text-sm" matTooltip="Low stock warning">warning</mat-icon>
+                    <mat-icon class="text-red-500 text-sm" matTooltip="Low stock warning" matTooltipPosition="above">warning</mat-icon>
                   }
                 </div>
               </td>
@@ -184,7 +215,8 @@
                     mat-icon-button 
                     color="accent"
                     (click)="adjustStock(item)"
-                    matTooltip="Adjust stock">
+                    matTooltip="Adjust stock"
+                    matTooltipPosition="above">
                     <mat-icon>tune</mat-icon>
                   </button>
                   
@@ -192,7 +224,8 @@
                     mat-icon-button 
                     color="primary"
                     (click)="editItem(item)"
-                    matTooltip="Edit item">
+                    matTooltip="Edit item"
+                    matTooltipPosition="above">
                     <mat-icon>edit</mat-icon>
                   </button>
                   
@@ -200,7 +233,8 @@
                     mat-icon-button 
                     color="warn"
                     (click)="deleteItem(item)"
-                    matTooltip="Delete item">
+                    matTooltip="Delete item"
+                    matTooltipPosition="above">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
