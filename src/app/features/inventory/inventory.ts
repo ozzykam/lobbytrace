@@ -21,8 +21,6 @@ import { InventoryItem, InventoryCategory, INVENTORY_CATEGORIES } from '../../sh
 import { InventoryFormDialogComponent } from './inventory-form-dialog/inventory-form-dialog.component';
 import { CsvImportDialogComponent } from './csv-import-dialog/csv-import-dialog.component';
 import { StockAdjustmentDialogComponent } from './stock-adjustment-dialog/stock-adjustment-dialog.component';
-import { SquareConfigDialogComponent } from './square-config-dialog/square-config-dialog.component';
-import { ProductMappingDialogComponent } from './product-mapping-dialog/product-mapping-dialog.component';
 
 @Component({
   selector: 'app-inventory',
@@ -208,38 +206,6 @@ export class Inventory implements OnInit {
     this.router.navigate(['/admin/inventory-settings']);
   }
 
-  configureSquareIntegration() {
-    const dialogRef = this.dialog.open(SquareConfigDialogComponent, {
-      width: '800px',
-      maxWidth: '95vw',
-      disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.showSuccess('Square integration configured successfully');
-        // Optionally refresh data or show status
-      }
-    });
-  }
-
-  manageProductMappings() {
-    const dialogRef = this.dialog.open(ProductMappingDialogComponent, {
-      width: '1000px',
-      maxWidth: '95vw',
-      height: '700px',
-      maxHeight: '90vh',
-      disableClose: false
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.showSuccess('Product mappings updated successfully');
-        // Optionally refresh data to show any inventory changes
-        this.loadData();
-      }
-    });
-  }
 
   // Helper methods
   getStockStatus(item: InventoryItem): 'low' | 'normal' | 'high' {

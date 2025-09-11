@@ -1,9 +1,70 @@
 /* LobbyTrace Global Styles */
 
+/* Import Angular Material Core Theme - Updated for v20+ */
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+/* Include Material core styles */
+@include mat.core();
+
+/* Define Material Design 3 color tokens */
+$lobby-light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+    tertiary: mat.$green-palette,
+  ),
+  typography: (
+    brand-family: 'Inter',
+    plain-family: 'Inter',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+/* Apply the theme to all components */
+html {
+  @include mat.all-component-themes($lobby-light-theme);
+}
+
 /* Import Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Prevent Tailwind from overriding Material components */
+@layer base {
+  /* Preserve Material button styles */
+  .mat-mdc-button,
+  .mat-mdc-raised-button,
+  .mat-mdc-outlined-button,
+  .mat-mdc-unelevated-button,
+  .mat-mdc-fab,
+  .mat-mdc-mini-fab,
+  .mat-mdc-icon-button {
+    font-family: inherit !important;
+  }
+  
+  /* Preserve Material form field styles */
+  .mat-mdc-form-field {
+    font-family: inherit !important;
+    
+    .mat-mdc-form-field-focus-overlay {
+      background-color: transparent !important;
+    }
+  }
+  
+  /* Preserve Material card styles */
+  .mat-mdc-card {
+    font-family: inherit !important;
+  }
+  
+  /* Fix Material tooltip z-index */
+  .mat-mdc-tooltip {
+    z-index: 100000 !important;
+  }
+}
 
 /* Tailwind Components Layer - Custom Components */
 @layer components {
@@ -86,47 +147,9 @@
   }
 }
 
-/* Color Palette Variables - Now synced with Tailwind */
+/* Essential CSS Variables for legacy compatibility */
 :root {
-  /* Primary Colors */
-  --color-primary: #3F51B5;           /* Slate Blue */
-  --color-primary-light: #757ce8;     /* Lighter variant */
-  --color-primary-dark: #303f9f;      /* Darker variant */
-  
-  /* Secondary Colors */
-  --color-secondary: #5C6BC0;         /* Indigo Gray */
-  --color-secondary-light: #8e99f3;   /* Lighter variant */
-  --color-secondary-dark: #26418f;    /* Darker variant */
-  
-  /* Accent Colors */
-  --color-accent: #81C784;            /* Mint Green */
-  --color-accent-light: #b2fab4;      /* Lighter variant */
-  --color-accent-dark: #519657;       /* Darker variant */
-  
-  /* Status Colors */
-  --color-error: #E53935;             /* Tomato Red */
-  --color-error-light: #ff6659;       /* Lighter variant */
-  --color-error-dark: #ab000d;        /* Darker variant */
-  
-  --color-warning: #FF9800;           /* Orange for warnings */
-  --color-success: var(--color-accent); /* Use mint green for success */
-  
-  /* Background & Surface Colors */
-  --color-background: #FFFFFF;        /* White */
-  --color-surface: #FAFAFA;           /* Light gray for cards */
-  --color-surface-dark: #F5F5F5;      /* Darker surface */
-  
-  /* Text Colors */
-  --color-text-primary: #212121;      /* Dark gray */
-  --color-text-secondary: #757575;    /* Medium gray */
-  --color-text-disabled: #BDBDBD;     /* Light gray */
-  --color-text-inverse: #FFFFFF;      /* White text */
-  
-  /* Border Colors */
-  --color-border: #E0E0E0;            /* Light border */
-  --color-border-dark: #BDBDBD;       /* Darker border */
-  
-  /* Shadows */
+  /* Keep only essential variables that don't conflict with Material theme */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -165,126 +188,17 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Utility Classes */
-.text-primary { color: var(--color-primary) !important; }
-.text-secondary { color: var(--color-secondary) !important; }
-.text-accent { color: var(--color-accent) !important; }
-.text-error { color: var(--color-error) !important; }
-.text-success { color: var(--color-success) !important; }
-.text-warning { color: var(--color-warning) !important; }
+/* Legacy utility classes - now use Tailwind or Material equivalents */
 
-.bg-primary { background-color: var(--color-primary) !important; }
-.bg-secondary { background-color: var(--color-secondary) !important; }
-.bg-accent { background-color: var(--color-accent) !important; }
-.bg-error { background-color: var(--color-error) !important; }
-.bg-surface { background-color: var(--color-surface) !important; }
-
-/* Button Base Styles */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  min-height: 44px;
-  
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-.btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-text-inverse);
-  
-  &:hover:not(:disabled) {
-    background-color: var(--color-primary-dark);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-}
-
-.btn-secondary {
-  background-color: var(--color-secondary);
-  color: var(--color-text-inverse);
-  
-  &:hover:not(:disabled) {
-    background-color: var(--color-secondary-dark);
-  }
-}
-
-.btn-accent {
-  background-color: var(--color-accent);
-  color: var(--color-text-primary);
-  
-  &:hover:not(:disabled) {
-    background-color: var(--color-accent-dark);
-  }
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  
-  &:hover:not(:disabled) {
-    background-color: var(--color-primary);
-    color: var(--color-text-inverse);
-  }
-}
-
-/* Form Styles */
+/* Custom utility classes that work with Material */
 .form-group {
   margin-bottom: 1.5rem;
 }
 
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.form-input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid var(--color-border);
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.2s ease-in-out;
-  background-color: var(--color-background);
-  
-  &:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.1);
-  }
-  
-  &.error {
-    border-color: var(--color-error);
-  }
-}
-
-.form-error {
-  color: var(--color-error);
-  font-size: 12px;
-  margin-top: 0.25rem;
-}
-
-/* Card Styles */
-.card {
-  background-color: var(--color-background);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
+/* Enhanced card styling that complements Material */
+.enhanced-card {
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-md) !important;
 }
 
 /* Loading Spinner */
@@ -302,70 +216,53 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-/* Material Dialog Overrides */
+/* Material Dialog Enhancements */
 .cdk-overlay-container {
   .cdk-overlay-backdrop {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5) !important;
     backdrop-filter: blur(4px);
   }
 }
 
-.custom-dialog {
-  .mat-mdc-dialog-container {
+/* Enhanced Dialog Styling */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-shape: 12px;
+  
+  .mat-mdc-dialog-surface {
     border-radius: 12px !important;
-    box-shadow: var(--shadow-xl) !important;
-    
-    .mat-mdc-dialog-surface {
-      border-radius: 12px;
-      background: var(--color-background);
-    }
-    
-    .mat-mdc-dialog-title {
-      color: var(--color-text-primary);
-      font-weight: 600;
-      margin-bottom: 0;
-    }
-    
-    .mat-mdc-dialog-content {
-      color: var(--color-text-secondary);
-    }
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15) !important;
   }
 }
 
-.confirmation-dialog {
-  .mat-mdc-dialog-container {
-    .mat-mdc-dialog-surface {
-      padding: 24px;
-    }
-  }
+/* Dialog Content Spacing */
+.mat-mdc-dialog-content {
+  padding: 0 24px !important;
+  margin: 16px 0 !important;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
-.alert-dialog {
-  .mat-mdc-dialog-container {
-    .mat-mdc-dialog-surface {
-      padding: 24px;
-    }
-  }
-  
-  &.alert-error .mat-mdc-dialog-title {
-    color: var(--color-error);
-  }
-  
-  &.alert-warning .mat-mdc-dialog-title {
-    color: var(--color-warning);
-  }
-  
-  &.alert-success .mat-mdc-dialog-title {
-    color: var(--color-accent);
-  }
+.mat-mdc-dialog-title {
+  padding: 24px 24px 0 24px !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
 }
 
-/* Dialog Button Overrides */
 .mat-mdc-dialog-actions {
-  .mat-mdc-button {
-    &.btn {
-      min-height: 40px;
-      border-radius: 8px;
+  padding: 8px 24px 24px 24px !important;
+  margin: 0 !important;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Form Field Improvements in Dialogs */
+.mat-mdc-dialog-content {
+  .mat-mdc-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+    
+    .mat-mdc-form-field-subscript-wrapper {
+      margin-top: 4px;
     }
   }
 }
