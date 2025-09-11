@@ -147,13 +147,102 @@ html {
   }
 }
 
-/* Essential CSS Variables for legacy compatibility */
+/* Enhanced CSS Variables - Coffee Shop Theme */
 :root {
-  /* Keep only essential variables that don't conflict with Material theme */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  /* Primary Coffee Theme Colors */
+  --color-primary: #3F51B5;
+  --color-primary-light: #757ce8;
+  --color-primary-dark: #303f9f;
+  --color-primary-contrast: #ffffff;
+  
+  /* Secondary Colors */
+  --color-secondary: #5C6BC0;
+  --color-secondary-light: #8e99f3;
+  --color-secondary-dark: #26418f;
+  --color-secondary-contrast: #ffffff;
+  
+  /* Accent Colors */
+  --color-accent: #81C784;
+  --color-accent-light: #b2fab4;
+  --color-accent-dark: #519657;
+  --color-accent-contrast: #000000;
+  
+  /* Coffee-Themed Accent Colors */
+  --color-coffee-bean: #3C2415;
+  --color-coffee-medium: #8B4513;
+  --color-coffee-light: #D2691E;
+  --color-cream: #F5F5DC;
+  --color-espresso: #704214;
+  
+  /* Semantic Colors */
+  --color-error: #E53935;
+  --color-error-light: #ff6659;
+  --color-error-dark: #ab000d;
+  --color-warning: #FF9800;
+  --color-warning-light: #ffb74d;
+  --color-warning-dark: #f57c00;
+  --color-success: #81C784;
+  --color-success-light: #a5d6a7;
+  --color-success-dark: #66bb6a;
+  --color-info: #5C6BC0;
+  --color-info-light: #7986cb;
+  --color-info-dark: #3f51b5;
+  
+  /* Surface and Background Colors */
+  --color-surface: #FAFAFA;
+  --color-surface-dark: #F5F5F5;
+  --color-background: #FEFEFE;
+  --color-background-dark: #F8F8F8;
+  --color-card: #FFFFFF;
+  --color-dialog: #FFFFFF;
+  
+  /* Text Colors */
+  --color-text-primary: #212121;
+  --color-text-secondary: #757575;
+  --color-text-tertiary: #9E9E9E;
+  --color-text-disabled: #BDBDBD;
+  --color-text-inverse: #FFFFFF;
+  --color-text-hint: #9E9E9E;
+  
+  /* Border and Divider Colors */
+  --color-border: #E0E0E0;
+  --color-border-light: #EEEEEE;
+  --color-border-dark: #BDBDBD;
+  --color-divider: #E0E0E0;
+  
+  /* Interactive Colors */
+  --color-hover: rgba(63, 81, 181, 0.04);
+  --color-focus: rgba(63, 81, 181, 0.12);
+  --color-pressed: rgba(63, 81, 181, 0.16);
+  --color-selected: rgba(63, 81, 181, 0.08);
+  --color-disabled: #F5F5F5;
+  
+  /* Enhanced Shadow System */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  
+  /* Coffee Shop Specific Variables */
+  --inventory-low-stock: #ff5722;
+  --inventory-medium-stock: #ff9800;
+  --inventory-high-stock: #4caf50;
+  --sales-positive: #4caf50;
+  --sales-negative: #f44336;
+  --profit-margin: #2196f3;
+  
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
 }
 
 /* Base Styles */
@@ -171,9 +260,12 @@ html, body {
   line-height: 1.6;
 }
 
-/* Material Icons Support */
-.material-icons {
-  font-family: 'Material Icons';
+/* Material Icons Support - Enhanced */
+.material-icons,
+.material-icons-outlined,
+.material-icons-round,
+.material-icons-sharp,
+.material-icons-two-tone {
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -186,9 +278,72 @@ html, body {
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+.material-icons { font-family: 'Material Icons'; }
+.material-icons-outlined { font-family: 'Material Icons Outlined'; }
+.material-icons-round { font-family: 'Material Icons Round'; }
+.material-icons-sharp { font-family: 'Material Icons Sharp'; }
+.material-icons-two-tone { font-family: 'Material Icons Two Tone'; }
+
+/* Material Icon Size Variants */
+.material-icons.md-18,
+.material-icons-outlined.md-18,
+.material-icons-round.md-18,
+.material-icons-sharp.md-18,
+.material-icons-two-tone.md-18 { font-size: 18px; }
+
+.material-icons.md-20,
+.material-icons-outlined.md-20,
+.material-icons-round.md-20,
+.material-icons-sharp.md-20,
+.material-icons-two-tone.md-20 { font-size: 20px; }
+
+.material-icons.md-36,
+.material-icons-outlined.md-36,
+.material-icons-round.md-36,
+.material-icons-sharp.md-36,
+.material-icons-two-tone.md-36 { font-size: 36px; }
+
+.material-icons.md-48,
+.material-icons-outlined.md-48,
+.material-icons-round.md-48,
+.material-icons-sharp.md-48,
+.material-icons-two-tone.md-48 { font-size: 48px; }
+
 /* Legacy utility classes - now use Tailwind or Material equivalents */
+
+/* Enhanced Material Icon Utilities */
+@layer utilities {
+  /* Material Icon Color Classes */
+  .icon-primary { color: var(--color-primary) !important; }
+  .icon-secondary { color: var(--color-secondary) !important; }
+  .icon-accent { color: var(--color-accent) !important; }
+  .icon-success { color: var(--color-success) !important; }
+  .icon-warning { color: var(--color-warning) !important; }
+  .icon-error { color: var(--color-error) !important; }
+  .icon-info { color: var(--color-info) !important; }
+  
+  /* Coffee theme icon colors */
+  .icon-coffee-bean { color: var(--color-coffee-bean) !important; }
+  .icon-coffee-medium { color: var(--color-coffee-medium) !important; }
+  .icon-coffee-light { color: var(--color-coffee-light) !important; }
+  .icon-espresso { color: var(--color-espresso) !important; }
+  
+  /* Inventory-specific icon colors */
+  .icon-low-stock { color: var(--inventory-low-stock) !important; }
+  .icon-medium-stock { color: var(--inventory-medium-stock) !important; }
+  .icon-high-stock { color: var(--inventory-high-stock) !important; }
+  
+  /* Icon size utilities */
+  .icon-xs { font-size: 16px !important; }
+  .icon-sm { font-size: 20px !important; }
+  .icon-md { font-size: 24px !important; }
+  .icon-lg { font-size: 28px !important; }
+  .icon-xl { font-size: 32px !important; }
+  .icon-2xl { font-size: 48px !important; }
+}
 
 /* Custom utility classes that work with Material */
 .form-group {
@@ -199,6 +354,39 @@ html, body {
 .enhanced-card {
   border-radius: 12px !important;
   box-shadow: var(--shadow-md) !important;
+}
+
+/* Status Badge Components */
+.status-badge {
+  @apply inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium;
+  
+  &.success {
+    @apply bg-success-50 text-success-700 border border-success-200;
+  }
+  
+  &.warning {
+    @apply bg-warning-50 text-warning-700 border border-warning-200;
+  }
+  
+  &.error {
+    @apply bg-error-50 text-error-700 border border-error-200;
+  }
+  
+  &.info {
+    @apply bg-info-50 text-info-700 border border-info-200;
+  }
+  
+  &.low-stock {
+    @apply bg-red-50 text-red-700 border border-red-200;
+  }
+  
+  &.medium-stock {
+    @apply bg-yellow-50 text-yellow-700 border border-yellow-200;
+  }
+  
+  &.high-stock {
+    @apply bg-green-50 text-green-700 border border-green-200;
+  }
 }
 
 /* Loading Spinner */
