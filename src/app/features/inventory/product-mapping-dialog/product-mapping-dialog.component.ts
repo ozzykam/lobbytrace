@@ -13,10 +13,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { 
   SquareIntegrationService, 
   ProductMapping, 
-  SquareCatalogObject 
+  SquareCatalogObject,
+  SquareItem
 } from '../../../core/services/square-integration.service';
 import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../shared/models/product.models';
@@ -37,7 +40,9 @@ import { Product } from '../../../shared/models/product.models';
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatChipsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatPaginatorModule,
+    MatButtonToggleModule
   ],
   templateUrl: './product-mapping-dialog.component.html',
   styleUrl: './product-mapping-dialog.component.scss'
@@ -58,6 +63,18 @@ export class ProductMappingDialogComponent implements OnInit {
   squareItems = signal<SquareCatalogObject[]>([]);
   existingMappings = signal<ProductMapping[]>([]);
   suggestions = signal<any[]>([]);
+  allSquareItems: SquareCatalogObject[] = [];
+  
+  // Pagination
+  pageSize = signal(20);
+  currentPage = signal(0);
+  totalSquareItems = signal(0);
+  showAllItems = signal(false);
+  availablePageSizes = [10, 20, 50, 100];
+  
+  // Performance optimization lookups
+  private squareItemLookup = new Map<string, SquareCatalogObject>();
+  private parentItemLookup = new Map<string, SquareCatalogObject>();
 
   // Forms
   manualMappingForm: FormGroup;
@@ -87,26 +104,82 @@ export class ProductMappingDialogComponent implements OnInit {
         return;
       }
 
-      // Load all data in parallel
-      const [products, squareItems, mappings] = await Promise.all([
+      // Load products and mappings first (faster)
+      const [products, mappings] = await Promise.all([
         this.productService.getProducts().toPromise(),
-        this.squareService.getSquareCatalog(config).toPromise(),
         this.squareService.getProductMappings().toPromise()
       ]);
 
       this.products.set(products || []);
-      this.squareItems.set((squareItems || []).filter(item => item.type === 'ITEM_VARIATION'));
       this.existingMappings.set(mappings || []);
 
-      // Generate suggestions
-      this.generateSuggestions();
+      // Load Square items separately (slower operation)
+      this.loadSquareItemsAsync(config);
 
     } catch (error) {
       console.error('Error loading mapping data:', error);
       this.showError('Failed to load data');
+      this.isLoading.set(false);
+    }
+  }
+
+  private async loadSquareItemsAsync(config: any) {
+    try {
+      const squareItems = await this.squareService.getSquareCatalog(config).toPromise();
+      const allSquareItems = squareItems || [];
+      
+      // Store all items for reference
+      this.allSquareItems = allSquareItems;
+      
+      // Filter to variations only
+      const allVariations = allSquareItems.filter(item => item.type === 'ITEM_VARIATION');
+      this.totalSquareItems.set(allVariations.length);
+      
+      // Create lookup maps for better performance
+      this.createSquareItemLookups(allSquareItems);
+      
+      // Load first page
+      this.loadSquareItemsPage();
+
+      // Generate limited suggestions in the background
+      setTimeout(() => this.generateSuggestions(), 100);
+
+    } catch (error) {
+      console.error('Error loading Square items:', error);
+      this.showError('Failed to load Square items');
     } finally {
       this.isLoading.set(false);
     }
+  }
+
+  private loadSquareItemsPage() {
+    const allVariations = this.allSquareItems.filter(item => item.type === 'ITEM_VARIATION');
+    
+    if (this.showAllItems()) {
+      // Show all items
+      this.squareItems.set(allVariations);
+    } else {
+      // Show paginated items
+      const startIndex = this.currentPage() * this.pageSize();
+      const endIndex = startIndex + this.pageSize();
+      const pageItems = allVariations.slice(startIndex, endIndex);
+      this.squareItems.set(pageItems);
+    }
+  }
+
+  private createSquareItemLookups(allSquareItems: SquareCatalogObject[]) {
+    // Create fast lookup maps
+    this.squareItemLookup.clear();
+    this.parentItemLookup.clear();
+    
+    allSquareItems.forEach(item => {
+      this.squareItemLookup.set(item.id, item);
+      
+      if (item.type === 'ITEM') {
+        // Map this item as parent for its variations
+        this.parentItemLookup.set(item.id, item);
+      }
+    });
   }
 
   private generateSuggestions() {
@@ -228,8 +301,70 @@ export class ProductMappingDialogComponent implements OnInit {
     this.dialogRef.close(true);
   }
 
-  getSquareItemDisplayName(squareItem: SquareCatalogObject): string {
-    return squareItem.item_variation_data?.name || squareItem.id;
+  // Pagination methods
+  nextPage() {
+    const maxPage = Math.ceil(this.totalSquareItems() / this.pageSize()) - 1;
+    if (this.currentPage() < maxPage) {
+      this.currentPage.set(this.currentPage() + 1);
+      this.loadSquareItemsPage();
+    }
+  }
+
+  previousPage() {
+    if (this.currentPage() > 0) {
+      this.currentPage.set(this.currentPage() - 1);
+      this.loadSquareItemsPage();
+    }
+  }
+
+  goToPage(page: number) {
+    const maxPage = Math.ceil(this.totalSquareItems() / this.pageSize()) - 1;
+    if (page >= 0 && page <= maxPage) {
+      this.currentPage.set(page);
+      this.loadSquareItemsPage();
+    }
+  }
+
+  changePageSize(newSize: number) {
+    this.pageSize.set(newSize);
+    this.currentPage.set(0); // Reset to first page
+    this.loadSquareItemsPage();
+  }
+
+  toggleShowAll() {
+    this.showAllItems.set(!this.showAllItems());
+    this.loadSquareItemsPage();
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.totalSquareItems() / this.pageSize());
+  }
+
+  getCurrentPageRange(): string {
+    if (this.showAllItems()) {
+      return `Showing all ${this.totalSquareItems()} items`;
+    }
+    
+    const start = this.currentPage() * this.pageSize() + 1;
+    const end = Math.min(start + this.pageSize() - 1, this.totalSquareItems());
+    return `Showing ${start}-${end} of ${this.totalSquareItems()} items`;
+  }
+
+  getSquareItemDisplayName(squareCatalogObject: SquareCatalogObject): string {
+    if (squareCatalogObject.type === 'ITEM_VARIATION' && squareCatalogObject.item_variation_data) {
+      // Use fast lookup instead of array.find
+      const parentItemId = squareCatalogObject.item_variation_data.item_id;
+      const parentItem = this.parentItemLookup.get(parentItemId);
+      
+      const variationName = squareCatalogObject.item_variation_data.name || 'Unnamed Variation';
+      const parentName = parentItem?.item_data?.name || 'Unknown Item';
+      
+      // Format: "Parent Item Name" "Variation Name" - ID
+      return `${parentName} ${variationName} - ${squareCatalogObject.id}`;
+    } else if (squareCatalogObject.type === 'ITEM' && squareCatalogObject.item_data) {
+      return `${squareCatalogObject.item_data.name} - ${squareCatalogObject.id}`;
+    }
+    return squareCatalogObject.id;
   }
 
   getUnmappedProducts(): Product[] {

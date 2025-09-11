@@ -519,12 +519,9 @@ async function processWebhookEvent(
       logger.warn("No product mappings found");
       return false;
     }
-    // Find the product mapping for this Square item
-    const mapping = mappings.find((m) =>
-      m.squareItemVariationId === lineItem.catalog_object_id &&
-      m.syncEnabled
-    );
+
     const errors: string[] = [];
+    let itemsUpdated = 0;
 
     // Process each line item in the order
     for (const lineItem of order.line_items) {
@@ -546,7 +543,7 @@ async function processWebhookEvent(
 
         // Get the product to access its recipe
         const productDoc = await db.collection("products")
-          .doc(mapping.productId)
+          .doc(mapping.productId!)
           .get();
         if (!productDoc.exists) {
           errors.push(`Product not found: ${mapping.productName}`);
@@ -675,3 +672,195 @@ async function logWebhookEvent(
     logger.error("Error logging webhook event:", error);
   }
 }
+
+/**
+ * Square API Proxy Functions
+ * These functions proxy Square API calls to avoid CORS issues
+ */
+
+// Test Square API connection
+export const testSquareConnection = onCall({
+  cors: true,
+}, async (request: CallableRequest) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "User must be authenticated");
+  }
+
+  const {accessToken, environment} = request.data;
+
+  if (!accessToken || !environment) {
+    throw new HttpsError("invalid-argument", "Missing required parameters");
+  }
+
+  try {
+    const baseUrl = environment === "production"?
+      "https://connect.squareup.com":
+      "https://connect.squareupsandbox.com";
+
+    const response = await fetch(`${baseUrl}/v2/locations`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Square-Version": "2023-10-18",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      return {success: true};
+    } else {
+      const errorData = await response.text();
+      logger.error("Square API error:", errorData);
+      return {success: false, error: errorData};
+    }
+  } catch (error) {
+    logger.error("Error testing Square connection:", error);
+    return {success: false, error: String(error)};
+  }
+});
+
+// Get Square locations
+export const getSquareLocations = onCall({
+  cors: true,
+}, async (request: CallableRequest) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "User must be authenticated");
+  }
+
+  const {accessToken, environment} = request.data;
+
+  if (!accessToken || !environment) {
+    throw new HttpsError("invalid-argument", "Missing required parameters");
+  }
+
+  try {
+    const baseUrl = environment === "production"?
+      "https://connect.squareup.com":
+      "https://connect.squareupsandbox.com";
+
+    const response = await fetch(`${baseUrl}/v2/locations`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Square-Version": "2023-10-18",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return {success: true, locations: data.locations || []};
+    } else {
+      const errorData = await response.text();
+      logger.error("Square API error:", errorData);
+      return {success: false, error: errorData};
+    }
+  } catch (error) {
+    logger.error("Error fetching Square locations:", error);
+    return {success: false, error: String(error)};
+  }
+});
+
+// Get Square catalog items
+export const getSquareCatalog = onCall({
+  cors: true,
+}, async (request: CallableRequest) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "User must be authenticated");
+  }
+
+  const {accessToken, environment} = request.data;
+
+  if (!accessToken || !environment) {
+    throw new HttpsError("invalid-argument", "Missing required parameters");
+  }
+
+  try {
+    const baseUrl = environment === "production"?
+      "https://connect.squareup.com":
+      "https://connect.squareupsandbox.com";
+
+    const response = await fetch(`${baseUrl}/v2/catalog/search`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Square-Version": "2023-10-18",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        object_types: ["ITEM", "ITEM_VARIATION"],
+        include_deleted_objects: false,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return {success: true, objects: data.objects || []};
+    } else {
+      const errorData = await response.text();
+      logger.error("Square API error:", errorData);
+      return {success: false, error: errorData};
+    }
+  } catch (error) {
+    logger.error("Error fetching Square catalog:", error);
+    return {success: false, error: String(error)};
+  }
+});
+
+// Get Square inventory counts
+export const getSquareInventory = onCall({
+  cors: true,
+}, async (request: CallableRequest) => {
+  if (!request.auth) {
+    throw new HttpsError("unauthenticated", "User must be authenticated");
+  }
+
+  const {
+    accessToken,
+    environment,
+    locationId,
+    catalogObjectIds,
+  } = request.data;
+
+  if (!accessToken || !environment || !locationId) {
+    throw new HttpsError("invalid-argument", "Missing required parameters");
+  }
+
+  try {
+    const baseUrl = environment === "production"?
+      "https://connect.squareup.com":
+      "https://connect.squareupsandbox.com";
+
+    const body: any = {
+      location_ids: [locationId],
+      states: ["IN_STOCK"],
+    };
+
+    if (catalogObjectIds && catalogObjectIds.length > 0) {
+      body.catalog_object_ids = catalogObjectIds;
+    }
+
+    const response = await fetch(
+      `${baseUrl}/v2/inventory/counts/batch-retrieve`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Square-Version": "2023-10-18",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+    if (response.ok) {
+      const data = await response.json();
+      return {success: true, counts: data.counts || []};
+    } else {
+      const errorData = await response.text();
+      logger.error("Square API error:", errorData);
+      return {success: false, error: errorData};
+    }
+  } catch (error) {
+    logger.error("Error fetching Square inventory:", error);
+    return {success: false, error: String(error)};
+  }
+});

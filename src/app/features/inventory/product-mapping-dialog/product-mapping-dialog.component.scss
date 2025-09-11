@@ -207,6 +207,49 @@
           height: 16px;
           color: #1976d2;
         }
+        
+        span {
+          display: block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 400px;
+        }
+      }
+
+      // Pagination Controls
+      .pagination-controls {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+        background-color: #f9fafb;
+        margin-bottom: 16px;
+
+        .pagination-info {
+          color: #6b7280;
+          font-size: 0.875rem;
+        }
+
+        .pagination-actions {
+          .page-size-field {
+            width: 100px;
+          }
+
+          mat-button-toggle-group {
+            height: 36px;
+            
+            mat-button-toggle {
+              font-size: 0.875rem;
+              padding: 0 12px;
+            }
+          }
+        }
+
+        .pagination-nav {
+          button {
+            margin: 0 4px;
+          }
+        }
       }
 
       .form-actions {

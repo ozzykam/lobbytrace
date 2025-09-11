@@ -11,6 +11,8 @@ import {
   query,
   Timestamp
 } from '@angular/fire/firestore';
+import { Functions, httpsCallable } from '@angular/fire/functions';
+import { Auth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
 import { InventoryService } from './inventory.service';
 import { ProductService } from './product.service';
@@ -151,6 +153,8 @@ export interface SyncResult {
 })
 export class SquareIntegrationService {
   private http = inject(HttpClient);
+  private functions = inject(Functions);
+  private auth = inject(Auth);
   private authService = inject(AuthService);
   private inventoryService = inject(InventoryService);
   private productService = inject(ProductService);
@@ -202,14 +206,11 @@ export class SquareIntegrationService {
   }
 
   saveSquareConfig(config: Omit<SquareConfig, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>): Observable<string> {
-    return this.authService.userProfile$.pipe(
-      switchMap(user => {
-        if (!user) {
-          throw new Error('User not authenticated');
-        }
-        return from(this.saveSquareConfigAsync(config, user.uid));
-      })
-    );
+    const currentUser = this.auth.currentUser;
+    if (!currentUser || !currentUser.uid) {
+      throw new Error('User not authenticated or missing user ID');
+    }
+    return from(this.saveSquareConfigAsync(config, currentUser.uid));
   }
 
   private async saveSquareConfigAsync(
@@ -226,7 +227,7 @@ export class SquareIntegrationService {
         ...config,
         createdAt: now,
         updatedAt: now,
-        createdBy: userId
+        createdBy: userId || 'system'
       };
       
       if (!snapshot.empty) {
@@ -248,51 +249,64 @@ export class SquareIntegrationService {
   // SQUARE API INTEGRATION
 
   testConnection(config: SquareConfig): Observable<boolean> {
-    const headers = this.getSquareHeaders(config.accessToken);
-    const baseUrl = this.SQUARE_API_BASE[config.environment];
+    const testSquareConnection = httpsCallable(this.functions, 'testSquareConnection');
     
-    return this.http.get(`${baseUrl}/v2/locations`, { headers }).pipe(
-      map(() => true),
-      catchError(() => of(false))
+    return from(testSquareConnection({
+      accessToken: config.accessToken,
+      environment: config.environment
+    })).pipe(
+      map((result: any) => result.data?.success === true),
+      catchError((error) => {
+        console.error('Error testing Square connection:', error);
+        return of(false);
+      })
     );
   }
 
   getSquareLocations(config: SquareConfig): Observable<any[]> {
-    const headers = this.getSquareHeaders(config.accessToken);
-    const baseUrl = this.SQUARE_API_BASE[config.environment];
+    const getSquareLocations = httpsCallable(this.functions, 'getSquareLocations');
     
-    return this.http.get<any>(`${baseUrl}/v2/locations`, { headers }).pipe(
-      map(response => response.locations || [])
+    return from(getSquareLocations({
+      accessToken: config.accessToken,
+      environment: config.environment
+    })).pipe(
+      map((result: any) => result.data?.locations || []),
+      catchError((error) => {
+        console.error('Error getting Square locations:', error);
+        return of([]);
+      })
     );
   }
 
   getSquareCatalog(config: SquareConfig): Observable<SquareCatalogObject[]> {
-    const headers = this.getSquareHeaders(config.accessToken);
-    const baseUrl = this.SQUARE_API_BASE[config.environment];
+    const getSquareCatalog = httpsCallable(this.functions, 'getSquareCatalog');
     
-    return this.http.post<any>(`${baseUrl}/v2/catalog/search`, {
-      object_types: ['ITEM', 'ITEM_VARIATION'],
-      include_deleted_objects: false
-    }, { headers }).pipe(
-      map(response => response.objects || [])
+    return from(getSquareCatalog({
+      accessToken: config.accessToken,
+      environment: config.environment
+    })).pipe(
+      map((result: any) => result.data?.objects || []),
+      catchError((error) => {
+        console.error('Error getting Square catalog:', error);
+        return of([]);
+      })
     );
   }
 
   getSquareInventoryCounts(config: SquareConfig, catalogObjectIds?: string[]): Observable<SquareInventoryItem[]> {
-    const headers = this.getSquareHeaders(config.accessToken);
-    const baseUrl = this.SQUARE_API_BASE[config.environment];
+    const getSquareInventory = httpsCallable(this.functions, 'getSquareInventory');
     
-    const body: any = {
-      location_ids: [config.locationId],
-      states: ['IN_STOCK']
-    };
-    
-    if (catalogObjectIds) {
-      body.catalog_object_ids = catalogObjectIds;
-    }
-    
-    return this.http.post<any>(`${baseUrl}/v2/inventory/counts/batch-retrieve`, body, { headers }).pipe(
-      map(response => response.counts || [])
+    return from(getSquareInventory({
+      accessToken: config.accessToken,
+      environment: config.environment,
+      locationId: config.locationId,
+      catalogObjectIds: catalogObjectIds
+    })).pipe(
+      map((result: any) => result.data?.counts || []),
+      catchError((error) => {
+        console.error('Error getting Square inventory:', error);
+        return of([]);
+      })
     );
   }
 
@@ -330,14 +344,11 @@ export class SquareIntegrationService {
   }
 
   saveProductMapping(mapping: Omit<ProductMapping, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>): Observable<string> {
-    return this.authService.userProfile$.pipe(
-      switchMap(user => {
-        if (!user) {
-          throw new Error('User not authenticated');
-        }
-        return from(this.saveProductMappingAsync(mapping, user.uid));
-      })
-    );
+    const currentUser = this.auth.currentUser;
+    if (!currentUser || !currentUser.uid) {
+      throw new Error('User not authenticated or missing user ID');
+    }
+    return from(this.saveProductMappingAsync(mapping, currentUser.uid));
   }
 
   deleteProductMapping(mappingId: string): Observable<void> {
@@ -388,7 +399,7 @@ export class SquareIntegrationService {
         ...mapping,
         createdAt: now,
         updatedAt: now,
-        createdBy: userId
+        createdBy: userId || 'system'
       };
       
       const docRef = await addDoc(mappingsCollection, this.convertToFirestore(mappingData));

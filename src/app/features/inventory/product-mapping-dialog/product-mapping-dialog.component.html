@@ -118,6 +118,7 @@
                   <span class="product-name">{{ suggestion.lobbyTraceProduct.name }}</span>
                   <span *ngIf="suggestion.lobbyTraceProduct.variation" class="product-variation">
                     {{ suggestion.lobbyTraceProduct.variation }}
+                    {{ suggestion.lobbyTraceProduct.token ? ('(' + suggestion.lobbyTraceProduct.token + ')') : '' }}
                   </span>
                 </div>
               </mat-cell>
@@ -185,7 +186,7 @@
                   <mat-select formControlName="productId" placeholder="Select a product">
                     <mat-option *ngFor="let product of getUnmappedProducts()" [value]="product.id">
                       <div class="product-option">
-                        <span class="product-name">{{ product.name }}</span>
+                        <span class="product-name">{{product.token}} - {{ product.name }}</span>
                         <span *ngIf="product.variation" class="product-variation">{{ product.variation }}</span>
                         <span class="product-category">{{ product.category }}</span>
                       </div>
@@ -196,13 +197,56 @@
                   </mat-error>
                 </mat-form-field>
 
+                <!-- Square Item Pagination Controls -->
+                <div class="pagination-controls mb-4">
+                  <div class="flex justify-between items-center">
+                    <div class="pagination-info">
+                      <span class="text-sm text-gray-600">{{ getCurrentPageRange() }}</span>
+                    </div>
+                    
+                    <div class="pagination-actions flex items-center gap-2">
+                      <!-- Page Size Selector -->
+                      <mat-form-field appearance="outline" class="page-size-field">
+                        <mat-label>Page Size</mat-label>
+                        <mat-select [value]="pageSize()" (selectionChange)="changePageSize($event.value)" [disabled]="showAllItems()">
+                          <mat-option *ngFor="let size of availablePageSizes" [value]="size">
+                            {{ size }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      
+                      <!-- Show All Toggle -->
+                      <mat-button-toggle-group [value]="showAllItems()" (valueChange)="toggleShowAll()">
+                        <mat-button-toggle [value]="false">Paginated</mat-button-toggle>
+                        <mat-button-toggle [value]="true">Show All</mat-button-toggle>
+                      </mat-button-toggle-group>
+                    </div>
+                  </div>
+                  
+                  <!-- Pagination Navigation (only show when not showing all) -->
+                  @if (!showAllItems()) {
+                    <div class="pagination-nav flex items-center justify-center mt-2 gap-2">
+                      <button mat-icon-button [disabled]="currentPage() === 0" (click)="previousPage()">
+                        <mat-icon>chevron_left</mat-icon>
+                      </button>
+                      
+                      <span class="text-sm">
+                        Page {{ currentPage() + 1 }} of {{ getTotalPages() }}
+                      </span>
+                      
+                      <button mat-icon-button [disabled]="currentPage() >= getTotalPages() - 1" (click)="nextPage()">
+                        <mat-icon>chevron_right</mat-icon>
+                      </button>
+                    </div>
+                  }
+                </div>
+
                 <!-- Square Item Selection -->
                 <mat-form-field appearance="outline" class="full-width">
                   <mat-label>Square Item</mat-label>
                   <mat-select formControlName="squareItemId" placeholder="Select a Square item">
                     <mat-option *ngFor="let item of getUnmappedSquareItems()" [value]="item.id">
                       <div class="square-item-option">
-                        <mat-icon class="square-icon">storefront</mat-icon>
                         <span>{{ getSquareItemDisplayName(item) }}</span>
                       </div>
                     </mat-option>
