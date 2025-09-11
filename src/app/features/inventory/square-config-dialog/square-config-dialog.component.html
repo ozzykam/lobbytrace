@@ -1,0 +1,295 @@
+<div class="square-config-dialog">
+  <div mat-dialog-title class="dialog-header">
+    <div class="header-content">
+      <mat-icon class="header-icon square-icon">storefront</mat-icon>
+      <div class="header-text">
+        <h2>Square Integration Setup</h2>
+        <span class="subtitle">Connect your Square account for automatic inventory updates</span>
+      </div>
+    </div>
+    <button mat-icon-button (click)="onCancel()" [disabled]="isLoading()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <mat-stepper [selectedIndex]="currentStep()" orientation="horizontal" #stepper>
+      
+      <!-- Step 1: Credentials -->
+      <mat-step [completed]="credentialsForm.valid && isConfigValid()">
+        <ng-template matStepLabel>Credentials</ng-template>
+        
+        <div class="step-content">
+          <div class="step-header">
+            <mat-icon>vpn_key</mat-icon>
+            <h3>Square API Credentials</h3>
+          </div>
+          
+          <p class="step-description">
+            Enter your Square application credentials. You can find these in your 
+            <a href="https://developer.squareup.com/apps" target="_blank">Square Developer Dashboard</a>.
+          </p>
+
+          <form [formGroup]="credentialsForm" class="credentials-form">
+            <!-- Environment Selection -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Environment</mat-label>
+              <mat-select formControlName="environment">
+                <mat-option *ngFor="let env of environments" [value]="env.value">
+                  <div class="environment-option">
+                    <mat-icon [color]="env.value === 'production' ? 'primary' : 'accent'">
+                      {{ getEnvironmentIcon(env.value) }}
+                    </mat-icon>
+                    <div class="env-details">
+                      <span class="env-label">{{ env.label }}</span>
+                      <span class="env-description">{{ env.description }}</span>
+                    </div>
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Application ID -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Application ID</mat-label>
+              <input matInput 
+                     formControlName="applicationId" 
+                     placeholder="sq0idp-...">
+              <mat-icon matSuffix>apps</mat-icon>
+              <mat-error *ngIf="credentialsForm.get('applicationId')?.hasError('required')">
+                Application ID is required
+              </mat-error>
+              <mat-error *ngIf="credentialsForm.get('applicationId')?.hasError('minlength')">
+                Application ID seems too short
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Access Token -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Access Token</mat-label>
+              <input matInput 
+                     type="password"
+                     formControlName="accessToken" 
+                     placeholder="EAAAl...">
+              <mat-icon matSuffix>security</mat-icon>
+              <mat-error *ngIf="credentialsForm.get('accessToken')?.hasError('required')">
+                Access Token is required
+              </mat-error>
+              <mat-error *ngIf="credentialsForm.get('accessToken')?.hasError('minlength')">
+                Access Token seems too short
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Test Connection Button -->
+            <div class="test-connection-section">
+              <button mat-raised-button 
+                      color="accent"
+                      type="button"
+                      (click)="testConnection()"
+                      [disabled]="credentialsForm.invalid || isTesting()">
+                <mat-icon *ngIf="isTesting()">hourglass_empty</mat-icon>
+                <mat-icon *ngIf="!isTesting() && !isConfigValid()">wifi</mat-icon>
+                <mat-icon *ngIf="!isTesting() && isConfigValid()" color="primary">check_circle</mat-icon>
+                {{ isTesting() ? 'Testing...' : (isConfigValid() ? 'Connection Verified' : 'Test Connection') }}
+              </button>
+            </div>
+          </form>
+
+          <div class="step-actions">
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="nextStep()"
+                    [disabled]="!credentialsForm.valid || !isConfigValid()">
+              Next
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Step 2: Location -->
+      <mat-step [completed]="locationForm.valid">
+        <ng-template matStepLabel>Location</ng-template>
+        
+        <div class="step-content">
+          <div class="step-header">
+            <mat-icon>location_on</mat-icon>
+            <h3>Select Square Location</h3>
+          </div>
+          
+          <p class="step-description">
+            Choose which Square location to sync inventory with. This determines which inventory counts will be used.
+          </p>
+
+          <form [formGroup]="locationForm" class="location-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Square Location</mat-label>
+              <mat-select formControlName="locationId">
+                <mat-option *ngFor="let location of availableLocations()" [value]="location.id">
+                  <div class="location-option">
+                    <div class="location-details">
+                      <span class="location-name">{{ location.name }}</span>
+                      <span class="location-address">
+                        {{ location.address?.address_line_1 }}, 
+                        {{ location.address?.locality }}, 
+                        {{ location.address?.administrative_district_level_1 }}
+                      </span>
+                    </div>
+                    <mat-icon *ngIf="location.status === 'ACTIVE'" color="primary">check_circle</mat-icon>
+                  </div>
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="locationForm.get('locationId')?.hasError('required')">
+                Please select a location
+              </mat-error>
+            </mat-form-field>
+
+            <mat-card *ngIf="locationForm.get('locationId')?.value" class="location-info-card">
+              <mat-card-content>
+                <div class="selected-location-info">
+                  <mat-icon>info</mat-icon>
+                  <div>
+                    <p><strong>Selected Location:</strong> 
+                       {{ getLocationDisplayName(getSelectedLocation()) }}
+                    </p>
+                    <p class="location-note">
+                      Inventory counts from this location will be synced with your LobbyTrace inventory.
+                    </p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </form>
+
+          <div class="step-actions">
+            <button mat-button (click)="previousStep()">
+              <mat-icon>navigate_before</mat-icon>
+              Back
+            </button>
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="nextStep()"
+                    [disabled]="!locationForm.valid">
+              Next
+              <mat-icon>navigate_next</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Step 3: Settings -->
+      <mat-step [completed]="settingsForm.valid">
+        <ng-template matStepLabel>Settings</ng-template>
+        
+        <div class="step-content">
+          <div class="step-header">
+            <mat-icon>settings</mat-icon>
+            <h3>Sync Settings</h3>
+          </div>
+          
+          <p class="step-description">
+            Configure how and when inventory should be synchronized between Square and LobbyTrace.
+          </p>
+
+          <form [formGroup]="settingsForm" class="settings-form">
+            <!-- Auto Sync Toggle -->
+            <div class="setting-item">
+              <mat-slide-toggle formControlName="autoSyncEnabled" color="primary">
+                Enable Automatic Sync
+              </mat-slide-toggle>
+              <p class="setting-description">
+                Automatically update LobbyTrace inventory when Square inventory changes.
+              </p>
+            </div>
+
+            <!-- Sync Frequency -->
+            <mat-form-field appearance="outline" class="full-width" 
+                           *ngIf="settingsForm.get('autoSyncEnabled')?.value">
+              <mat-label>Sync Frequency</mat-label>
+              <mat-select formControlName="syncFrequency">
+                <mat-option *ngFor="let freq of syncFrequencies" [value]="freq.value">
+                  <div class="sync-option">
+                    <mat-icon>{{ getSyncIcon(freq.value) }}</mat-icon>
+                    <div class="sync-details">
+                      <span class="sync-label">{{ freq.label }}</span>
+                      <span class="sync-description">{{ freq.description }}</span>
+                    </div>
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Webhook Signature Key -->
+            <mat-form-field appearance="outline" class="full-width" 
+                           *ngIf="settingsForm.get('syncFrequency')?.value === 'realtime'">
+              <mat-label>Webhook Signature Key (Optional)</mat-label>
+              <input matInput 
+                     formControlName="webhookSignatureKey" 
+                     placeholder="For webhook verification">
+              <mat-icon matSuffix>enhanced_encryption</mat-icon>
+              <mat-hint>Used to verify webhook authenticity (recommended for production)</mat-hint>
+            </mat-form-field>
+          </form>
+
+          <div class="sync-info-card">
+            <mat-card>
+              <mat-card-content>
+                <div class="sync-info">
+                  <mat-icon color="primary">info</mat-icon>
+                  <div>
+                    <h4>How Sync Works</h4>
+                    <ul>
+                      <li><strong>Real-time:</strong> Uses Square webhooks for instant updates</li>
+                      <li><strong>Scheduled:</strong> Periodically checks Square for changes</li>
+                      <li><strong>Manual:</strong> Sync only when you trigger it manually</li>
+                    </ul>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Webhook Setup Info -->
+          <div class="webhook-info-card" *ngIf="settingsForm.get('syncFrequency')?.value === 'realtime'">
+            <mat-card>
+              <mat-card-content>
+                <div class="webhook-info">
+                  <mat-icon color="primary">webhook</mat-icon>
+                  <div>
+                    <h4>Webhook Configuration</h4>
+                    <p>For real-time sync, Square will send webhook events to your server. 
+                       The webhook endpoint will be automatically configured when you save this configuration.</p>
+                    <div class="webhook-details">
+                      <strong>Webhook Events:</strong>
+                      <ul>
+                        <li>order.created - New orders</li>
+                        <li>order.updated - Order changes</li>
+                        <li>order.fulfillment.updated - Order fulfillment</li>
+                        <li>inventory.count.updated - Inventory changes</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="step-actions">
+            <button mat-button (click)="previousStep()">
+              <mat-icon>navigate_before</mat-icon>
+              Back
+            </button>
+            <button mat-raised-button 
+                    color="primary"
+                    (click)="saveConfiguration()"
+                    [disabled]="!isAllFormsValid() || isLoading()">
+              <mat-icon *ngIf="isLoading()">hourglass_empty</mat-icon>
+              <mat-icon *ngIf="!isLoading()">save</mat-icon>
+              {{ isLoading() ? 'Saving...' : 'Save Configuration' }}
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </mat-dialog-content>
+</div>

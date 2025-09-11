@@ -1,0 +1,262 @@
+<div class="inventory-settings">
+  <div class="page-header">
+    <div class="header-content">
+      <mat-icon class="header-icon">settings</mat-icon>
+      <div class="header-text">
+        <h1>Inventory Settings</h1>
+        <p>Configure global defaults for inventory management</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-container" *ngIf="!isLoading(); else loadingTemplate">
+    <!-- Current Settings Overview -->
+    <mat-card class="overview-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>info</mat-icon>
+          Current Configuration
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="overview-grid">
+          <div class="overview-item">
+            <span class="label">Default Stock Level</span>
+            <span class="value primary">{{ getPercentageDisplay(currentSettings()?.defaultStockLevelPercentage || 0.5) }}</span>
+          </div>
+          <div class="overview-item">
+            <span class="label">Last Updated</span>
+            <span class="value">{{ formatDate(currentSettings()?.updatedAt) }}</span>
+          </div>
+          <div class="overview-item">
+            <span class="label">Updated By</span>
+            <span class="value">{{ currentSettings()?.updatedBy || 'System' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Inventory Statistics -->
+    <mat-card class="stats-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>assessment</mat-icon>
+          Inventory Statistics
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <mat-icon color="primary">inventory_2</mat-icon>
+            <div class="stat-content">
+              <span class="stat-value">{{ inventoryStats().totalItems }}</span>
+              <span class="stat-label">Total Items</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <mat-icon color="accent">public</mat-icon>
+            <div class="stat-content">
+              <span class="stat-value">{{ inventoryStats().itemsUsingGlobalDefault }}</span>
+              <span class="stat-label">Using Global Default</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <mat-icon color="warn">tune</mat-icon>
+            <div class="stat-content">
+              <span class="stat-value">{{ inventoryStats().itemsUsingCustomLevels }}</span>
+              <span class="stat-label">Custom Levels</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <mat-icon [color]="getStockLevelColor(inventoryStats().averageStockLevel)">show_chart</mat-icon>
+            <div class="stat-content">
+              <span class="stat-value">{{ getPercentageDisplay(inventoryStats().averageStockLevel) }}</span>
+              <span class="stat-label">Avg Stock Level</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Settings Form -->
+    <mat-card class="settings-form-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>tune</mat-icon>
+          Default Stock Level Configuration
+        </mat-card-title>
+        <mat-card-subtitle>
+          Set the global default minimum stock level percentage for new inventory items
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="settingsForm" (ngSubmit)="onSaveSettings()">
+          <!-- Current Selection Display -->
+          <div class="current-selection">
+            <span class="selection-label">Current Selection:</span>
+            <mat-chip-set>
+              <mat-chip [color]="getCurrentPresetLabel() === 'Custom' ? 'accent' : 'primary'" selected>
+                {{ getCurrentPresetLabel() }} - {{ getPercentageDisplay(settingsForm.get('defaultStockLevelPercentage')?.value || 0.5) }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Preset Buttons -->
+          <div class="presets-section">
+            <h3>Quick Presets</h3>
+            <div class="presets-grid">
+              <button type="button"
+                      mat-stroked-button
+                      *ngFor="let preset of stockLevelPresets"
+                      [color]="isPresetSelected(preset.value) ? 'primary' : ''"
+                      (click)="onPresetClick(preset)"
+                      [matTooltip]="preset.description"
+                      class="preset-button">
+                <div class="preset-content">
+                  <span class="preset-label">{{ preset.label }}</span>
+                  <span class="preset-description">{{ preset.description }}</span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Slider Control -->
+          <div class="slider-section">
+            <h3>Custom Percentage</h3>
+            <div class="slider-container">
+              <mat-slider 
+                min="10" 
+                max="200" 
+                step="5" 
+                discrete 
+                showTickMarks>
+                <input 
+                  matSliderThumb 
+                  [value]="settingsForm.get('defaultStockLevelPercentage')?.value || 50"
+                  (input)="onSliderChange($event)">
+              </mat-slider>
+              <div class="slider-labels">
+                <span>0%</span>
+                <span>50%</span>
+                <span>100%</span>
+                <span>150%</span>
+                <span>200%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Numeric Input -->
+          <mat-form-field  class="percentage-input">
+            <mat-label>Stock Level Percentage</mat-label>
+            <input matInput 
+                   type="number" 
+                   step="1"
+                   min="10"
+                   max="200"
+                   formControlName="defaultStockLevelPercentage">
+            <span matSuffix>%</span>
+            <mat-hint>Enter a value between 10% and 200%</mat-hint>
+            <mat-error *ngIf="settingsForm.get('defaultStockLevelPercentage')?.hasError('required')">
+              Stock level percentage is required
+            </mat-error>
+            <mat-error *ngIf="settingsForm.get('defaultStockLevelPercentage')?.hasError('min')">
+              Minimum value is 10%
+            </mat-error>
+            <mat-error *ngIf="settingsForm.get('defaultStockLevelPercentage')?.hasError('max')">
+              Maximum value is 200%
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Impact Information -->
+          <div class="impact-info">
+            <mat-icon color="primary">info</mat-icon>
+            <div class="impact-content">
+              <h4>Impact of This Change</h4>
+              <p>{{ getStockLevelImpactText() }}</p>
+              <p class="impact-note">
+                <strong>Note:</strong> This setting only affects new items and items using the global default. 
+                Items with custom stock levels will remain unchanged.
+              </p>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button 
+                color="primary" 
+                (click)="onSaveSettings()"
+                [disabled]="settingsForm.invalid || isSaving()">
+          <mat-icon *ngIf="isSaving()">hourglass_empty</mat-icon>
+          <mat-icon *ngIf="!isSaving()">save</mat-icon>
+          {{ isSaving() ? 'Saving...' : 'Save Settings' }}
+        </button>
+        
+        <button mat-button 
+                color="accent"
+                (click)="recalculateAllStockLevels()"
+                [disabled]="isLoading() || isSaving()"
+                matTooltip="Recalculate minimum stock levels for all items using global default">
+          <mat-icon>refresh</mat-icon>
+          Recalculate Stock Levels
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Help & Guidelines -->
+    <mat-card class="help-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>help</mat-icon>
+          Stock Level Guidelines
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="guidelines">
+          <div class="guideline-item">
+            <mat-icon color="primary">lightbulb</mat-icon>
+            <div>
+              <h4>How It Works</h4>
+              <p>The stock level percentage determines the minimum inventory level as a percentage of the units per case. For example, 50% of a 12-unit case = 6 units minimum.</p>
+            </div>
+          </div>
+          
+          <div class="guideline-item">
+            <mat-icon color="accent">tips_and_updates</mat-icon>
+            <div>
+              <h4>Recommended Settings</h4>
+              <ul>
+                <li><strong>20-30%:</strong> For non-critical items with reliable suppliers</li>
+                <li><strong>50%:</strong> Standard setting for most items (recommended)</li>
+                <li><strong>70-100%:</strong> For critical items or unreliable supply chains</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="guideline-item">
+            <mat-icon color="warn">warning</mat-icon>
+            <div>
+              <h4>Important Notes</h4>
+              <ul>
+                <li>Items with custom stock levels are not affected by global changes</li>
+                <li>Higher percentages provide more safety buffer but tie up more capital</li>
+                <li>Consider your storage space and cash flow when setting levels</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Loading Template -->
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Loading inventory settings...</p>
+    </div>
+  </ng-template>
+</div>

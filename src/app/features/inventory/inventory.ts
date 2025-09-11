@@ -1,6 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +21,8 @@ import { InventoryItem, InventoryCategory, INVENTORY_CATEGORIES } from '../../sh
 import { InventoryFormDialogComponent } from './inventory-form-dialog/inventory-form-dialog.component';
 import { CsvImportDialogComponent } from './csv-import-dialog/csv-import-dialog.component';
 import { StockAdjustmentDialogComponent } from './stock-adjustment-dialog/stock-adjustment-dialog.component';
+import { SquareConfigDialogComponent } from './square-config-dialog/square-config-dialog.component';
+import { ProductMappingDialogComponent } from './product-mapping-dialog/product-mapping-dialog.component';
 
 @Component({
   selector: 'app-inventory',
@@ -47,6 +50,7 @@ export class Inventory implements OnInit {
   private inventoryService = inject(InventoryService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   // Component state
   inventoryItems = signal<InventoryItem[]>([]);
@@ -196,6 +200,43 @@ export class Inventory implements OnInit {
       if (result) {
         this.loadData();
         this.showSuccess('CSV import completed successfully');
+      }
+    });
+  }
+
+  openInventorySettings() {
+    this.router.navigate(['/admin/inventory-settings']);
+  }
+
+  configureSquareIntegration() {
+    const dialogRef = this.dialog.open(SquareConfigDialogComponent, {
+      width: '800px',
+      maxWidth: '95vw',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.showSuccess('Square integration configured successfully');
+        // Optionally refresh data or show status
+      }
+    });
+  }
+
+  manageProductMappings() {
+    const dialogRef = this.dialog.open(ProductMappingDialogComponent, {
+      width: '1000px',
+      maxWidth: '95vw',
+      height: '700px',
+      maxHeight: '90vh',
+      disableClose: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.showSuccess('Product mappings updated successfully');
+        // Optionally refresh data to show any inventory changes
+        this.loadData();
       }
     });
   }
