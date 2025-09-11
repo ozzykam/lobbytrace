@@ -16,7 +16,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProductService } from '../../core/services/product.service';
 import { InventoryService } from '../../core/services/inventory.service';
-import { Product, InventoryItem, ProductCategory, ProductIngredient } from '../../shared/models/product.models';
+import { SquareIntegrationService } from '../../core/services/square-integration.service';
+import { Product, InventoryItem, ProductCategory, ProductIngredient, SquareImportResult } from '../../shared/models/product.models';
 import { ProductFormDialogComponent } from './product-form-dialog/product-form-dialog.component';
 import { CsvImportDialogComponent } from './csv-import-dialog/csv-import-dialog.component';
 
@@ -44,6 +45,7 @@ import { CsvImportDialogComponent } from './csv-import-dialog/csv-import-dialog.
 export class Products implements OnInit {
   private productService = inject(ProductService);
   private inventoryService = inject(InventoryService);
+  private squareService = inject(SquareIntegrationService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
 
@@ -54,6 +56,7 @@ export class Products implements OnInit {
   selectedCategory = signal<ProductCategory | 'all'>('all');
   searchTerm = signal('');
   isLoading = signal(false);
+  isSquareImporting = signal(false);
 
   // Table columns
   displayedColumns = ['token', 'name', 'variation', 'size', 'temperature', 'toGoStatus', 'category', 'price', 'ingredients', 'actions'];
@@ -186,6 +189,37 @@ export class Products implements OnInit {
     });
   }
 
+  // Square Import
+  async downloadFromSquare() {
+    this.isSquareImporting.set(true);
+    try {
+      const result = await this.squareService.importProductsFromSquare().toPromise();
+      
+      if (result) {
+        this.loadData(); // Refresh products list
+        
+        // Show detailed import results
+        let message = `Import completed: ${result.imported} new, ${result.updated} updated`;
+        if (result.skipped > 0) {
+          message += `, ${result.skipped} skipped`;
+        }
+        
+        this.showSuccess(message);
+        
+        // Show errors if any
+        if (result.errors && result.errors.length > 0) {
+          console.warn('Import errors:', result.errors);
+          this.showError(`${result.errors.length} import errors occurred. Check console for details.`);
+        }
+      }
+    } catch (error) {
+      console.error('Error importing from Square:', error);
+      this.showError('Failed to import products from Square');
+    } finally {
+      this.isSquareImporting.set(false);
+    }
+  }
+
   // Helper methods
   getIngredientsSummary(ingredients: ProductIngredient[]): string {
     if (!ingredients || ingredients.length === 0) {
@@ -198,7 +232,7 @@ export class Products implements OnInit {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).format(price);
+    }).format(price/100);
   }
 
   private showSuccess(message: string) {

@@ -47,35 +47,39 @@ export interface ProductIngredient {
 
 export interface Product {
   id: string;
-  token?: string; // From CSV - original Square token
-  name: string;
-  variation?: string; // '10oz (To Go)', '16oz (Here)', etc.
-  sku?: string;
-  description?: string;
-  category: string; // 'Drinks', 'Bakery', 'Breakfast', etc.
-  reportingCategory?: string;
-  price: number;
-  isActive: boolean;
-  isArchived: boolean;
+  
+  // SQUARE-MANAGED FIELDS (Read-only in LobbyTrace)
+  token?: string; // Square catalog object ID - our sync key
+  squareItemId?: string; // Square parent item ID
+  squareVariationId?: string; // Square variation ID
+  name: string; // From Square
+  variation?: string; // From Square: '10oz (To Go)', '16oz (Here)', etc.
+  sku?: string; // From Square
+  description?: string; // From Square
+  category: string; // From Square: 'Drinks', 'Bakery', 'Breakfast', etc.
+  reportingCategory?: string; // From Square
+  price: number; // From Square (in cents)
+  isActive: boolean; // From Square
+  isArchived: boolean; // From Square
   
   // Drink-specific attributes (extracted from variation for Drinks category)
   size?: DrinkSize; // '10oz', '16oz', etc.
   temperature?: DrinkTemperature; // 'Hot', 'Iced'
   toGoStatus?: ToGoStatus; // 'Here', 'To-Go'
   
-  // Ingredient specifications - this is what you want to customize
-  ingredients: ProductIngredient[];
+  // Square modifiers
+  modifiers?: ProductModifier[];
   
-  // Preparation details
+  // LOBBYTRACE-MANAGED FIELDS (Editable)
+  ingredients: ProductIngredient[]; // Recipe management
   preparationTime?: number; // minutes
   preparationInstructions?: string;
-  
-  // Nutritional info (optional)
   calories?: number;
   allergens?: string[];
   
-  // Modifiers from CSV
-  modifiers?: ProductModifier[];
+  // Sync metadata
+  lastSyncedFromSquare?: Date;
+  squareDataHash?: string; // To detect changes
   
   // Meta fields
   createdAt: Date;
@@ -108,6 +112,33 @@ export interface CreateProductRequest {
 
 export interface UpdateProductRequest extends Partial<CreateProductRequest> {
   id: string;
+}
+
+// For Square product import/sync
+export interface SquareProductImportRequest {
+  token: string; // Square variation ID
+  squareItemId: string; // Square parent item ID
+  squareVariationId: string; // Square variation ID
+  name: string;
+  variation?: string;
+  sku?: string;
+  description?: string;
+  category: string;
+  reportingCategory?: string;
+  price: number; // in cents
+  isActive: boolean;
+  isArchived: boolean;
+  size?: DrinkSize;
+  temperature?: DrinkTemperature;
+  toGoStatus?: ToGoStatus;
+  modifiers?: ProductModifier[];
+}
+
+export interface SquareImportResult {
+  imported: number;
+  updated: number;
+  skipped: number;
+  errors: string[];
 }
 
 // For CSV import - Updated to match CSV format

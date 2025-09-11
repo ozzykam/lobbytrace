@@ -101,6 +101,12 @@ export class ProductFormDialogComponent implements OnInit {
     });
   }
 
+  // Check if a field is managed by Square and should be read-only
+  isSquareManagedField(fieldName: string): boolean {
+    return !!(this.product && (this.product.token || this.product.squareItemId) && 
+           ['token', 'name', 'variation', 'description', 'category', 'price', 'size', 'temperature', 'toGoStatus'].includes(fieldName));
+  }
+
   ngOnInit() {
     if (this.mode === 'edit' && this.product) {
       this.populateForm(this.product);
@@ -121,7 +127,7 @@ export class ProductFormDialogComponent implements OnInit {
       variation: product.variation || '',
       description: product.description || '',
       category: product.category,
-      price: product.price,
+      price: product.price / 100, // Convert cents to dollars for display
       size: product.size || '',
       temperature: product.temperature || '',
       toGoStatus: product.toGoStatus || '',
@@ -129,6 +135,19 @@ export class ProductFormDialogComponent implements OnInit {
       preparationInstructions: product.preparationInstructions || '',
       allergens: product.allergens || []
     });
+
+    // Make Square-managed fields read-only if product has Square data
+    if (product.token || product.squareItemId) {
+      this.productForm.get('token')?.disable();
+      this.productForm.get('name')?.disable();
+      this.productForm.get('variation')?.disable();
+      this.productForm.get('description')?.disable();
+      this.productForm.get('category')?.disable();
+      this.productForm.get('price')?.disable();
+      this.productForm.get('size')?.disable();
+      this.productForm.get('temperature')?.disable();
+      this.productForm.get('toGoStatus')?.disable();
+    }
 
     // Clear existing ingredients and add product ingredients
     this.ingredientsArray.clear();
@@ -269,7 +288,7 @@ export class ProductFormDialogComponent implements OnInit {
           variation: formValue.variation || undefined,
           description: formValue.description || undefined,
           category: formValue.category,
-          price: formValue.price,
+          price: Math.round(formValue.price * 100), // Convert dollars to cents
           size: formValue.size || undefined,
           temperature: formValue.temperature || undefined,
           toGoStatus: formValue.toGoStatus || undefined,
@@ -282,22 +301,27 @@ export class ProductFormDialogComponent implements OnInit {
 
         await this.productService.createProduct(createRequest).toPromise();
       } else {
+        // For Square-managed products, only update LobbyTrace-managed fields
         const updateRequest: UpdateProductRequest = {
           id: this.product!.id,
-          name: formValue.name,
-          variation: formValue.variation || undefined,
-          description: formValue.description || undefined,
-          category: formValue.category,
-          price: formValue.price,
-          size: formValue.size || undefined,
-          temperature: formValue.temperature || undefined,
-          toGoStatus: formValue.toGoStatus || undefined,
           ingredients,
           preparationTime: formValue.preparationTime || undefined,
           preparationInstructions: formValue.preparationInstructions || undefined,
-          allergens: formValue.allergens || [],
-          token: formValue.token || undefined
+          allergens: formValue.allergens || []
         };
+
+        // Only include Square-managed fields if not from Square
+        if (!this.isSquareManagedField('name')) {
+          updateRequest.name = formValue.name;
+          updateRequest.variation = formValue.variation || undefined;
+          updateRequest.description = formValue.description || undefined;
+          updateRequest.category = formValue.category;
+          updateRequest.price = Math.round(formValue.price * 100); // Convert dollars to cents
+          updateRequest.size = formValue.size || undefined;
+          updateRequest.temperature = formValue.temperature || undefined;
+          updateRequest.toGoStatus = formValue.toGoStatus || undefined;
+          updateRequest.token = formValue.token || undefined;
+        }
 
         await this.productService.updateProduct(updateRequest).toPromise();
       }

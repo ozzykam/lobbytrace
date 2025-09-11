@@ -14,6 +14,7 @@ import {
   limit,
   Timestamp
 } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
 import { Observable, from, map, switchMap, of } from 'rxjs';
 import { 
   Product, 
@@ -37,6 +38,7 @@ import { AuthService } from './auth.service';
 })
 export class ProductService {
   private firestore = inject(Firestore);
+  private auth = inject(Auth);
   private authService = inject(AuthService);
 
   private productsCollection = collection(this.firestore, 'products');
@@ -89,17 +91,18 @@ export class ProductService {
 
   // Create new product
   createProduct(productData: CreateProductRequest): Observable<string> {
-    return this.authService.userProfile$.pipe(
-      switchMap(user => {
-        if (!user) {
-          throw new Error('User not authenticated');
-        }
-        return from(this.createProductAsync(productData, user.uid));
-      })
-    );
+    return from(this.createProductAsync(productData));
   }
 
-  private async createProductAsync(productData: CreateProductRequest, userId: string): Promise<string> {
+  private async createProductAsync(productData: CreateProductRequest): Promise<string> {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      throw new Error('User not authenticated');
+    }
+    return this.createProductWithUser(productData, currentUser.uid);
+  }
+
+  private async createProductWithUser(productData: CreateProductRequest, userId: string): Promise<string> {
     try {
       const now = new Date();
       const product: Omit<Product, 'id'> = {
@@ -122,14 +125,7 @@ export class ProductService {
 
   // Update product
   updateProduct(updateData: UpdateProductRequest): Observable<void> {
-    return this.authService.userProfile$.pipe(
-      switchMap(user => {
-        if (!user) {
-          throw new Error('User not authenticated');
-        }
-        return from(this.updateProductAsync(updateData));
-      })
-    );
+    return from(this.updateProductAsync(updateData));
   }
 
   private async updateProductAsync(updateData: UpdateProductRequest): Promise<void> {
@@ -207,17 +203,18 @@ export class ProductService {
 
   // Create inventory item
   createInventoryItem(itemData: Omit<InventoryItem, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>): Observable<string> {
-    return this.authService.userProfile$.pipe(
-      switchMap(user => {
-        if (!user) {
-          throw new Error('User not authenticated');
-        }
-        return from(this.createInventoryItemAsync(itemData, user.uid));
-      })
-    );
+    return from(this.createInventoryItemAsync(itemData));
   }
 
-  private async createInventoryItemAsync(
+  private async createInventoryItemAsync(itemData: Omit<InventoryItem, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>): Promise<string> {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      throw new Error('User not authenticated');
+    }
+    return this.createInventoryItemWithUser(itemData, currentUser.uid);
+  }
+
+  private async createInventoryItemWithUser(
     itemData: Omit<InventoryItem, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>, 
     userId: string
   ): Promise<string> {
@@ -242,17 +239,18 @@ export class ProductService {
 
   // Parse CSV and import products
   importProductsFromCsv(csvData: string): Observable<{ success: number; errors: string[] }> {
-    return this.authService.userProfile$.pipe(
-      switchMap(user => {
-        if (!user) {
-          throw new Error('User not authenticated');
-        }
-        return from(this.importProductsFromCsvAsync(csvData, user.uid));
-      })
-    );
+    return from(this.importProductsFromCsvAsync(csvData));
   }
 
-  private async importProductsFromCsvAsync(csvData: string, userId: string): Promise<{ success: number; errors: string[] }> {
+  private async importProductsFromCsvAsync(csvData: string): Promise<{ success: number; errors: string[] }> {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      throw new Error('User not authenticated');
+    }
+    return this.importProductsFromCsvWithUser(csvData, currentUser.uid);
+  }
+
+  private async importProductsFromCsvWithUser(csvData: string, userId: string): Promise<{ success: number; errors: string[] }> {
     const results = { success: 0, errors: [] as string[] };
     
     try {
@@ -350,7 +348,7 @@ export class ProductService {
       token: csvToken,
     };
 
-    await this.createProductAsync(productData, userId);
+    await this.createProductWithUser(productData, userId);
   }
 
   private mapCsvCategoryToProductCategory(csvCategory: string): ProductCategory {

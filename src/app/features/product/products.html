@@ -8,6 +8,25 @@
     
     <div class="flex gap-3">
       <button 
+        mat-stroked-button 
+        color="primary"
+        (click)="downloadFromSquare()"
+        [disabled]="isSquareImporting()"
+        class="flex items-center gap-2"
+        matTooltip="Import products from your Square catalog">
+        @if (isSquareImporting()) {
+          <mat-spinner diameter="16"></mat-spinner>
+        } @else {
+          <mat-icon>storefront</mat-icon>
+        }
+        @if (isSquareImporting()) {
+          Importing...
+        } @else {
+          Sync With Square
+        }
+      </button>
+      
+      <button 
         mat-raised-button 
         color="accent"
         (click)="importFromCsv()"

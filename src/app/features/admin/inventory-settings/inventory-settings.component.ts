@@ -12,9 +12,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
 import { CsvInventoryImportService } from '../../../core/services/csv-inventory-import.service';
 import { InventoryService } from '../../../core/services/inventory.service';
 import { InventorySettings, InventoryItem } from '../../../shared/models/product.models';
+import { SquareConfigDialogComponent } from '../../inventory/square-config-dialog/square-config-dialog.component';
 
 @Component({
   selector: 'app-inventory-settings',
@@ -38,6 +40,7 @@ import { InventorySettings, InventoryItem } from '../../../shared/models/product
 })
 export class InventorySettingsComponent implements OnInit {
   private fb = inject(FormBuilder);
+  private dialog = inject(MatDialog);
   private csvImportService = inject(CsvInventoryImportService);
   private inventoryService = inject(InventoryService);
   private snackBar = inject(MatSnackBar);
@@ -297,5 +300,23 @@ export class InventorySettingsComponent implements OnInit {
     }
 
     return `This will affect ${stats.itemsUsingGlobalDefault} items using the global default. ${stats.itemsUsingCustomLevels} items have custom levels and won't be affected.`;
+  }
+
+  // Square Integration Configuration
+  configureSquareIntegration() {
+    const dialogRef = this.dialog.open(SquareConfigDialogComponent, {
+      // width: '800px',
+      maxWidth: '95vw',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.snackBar.open('Square integration configured successfully', 'Close', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
+      }
+    });
   }
 }

@@ -244,6 +244,32 @@
       }
     }
 
+    // Integration Card
+    .integration-card {
+      .integration-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        
+        .integration-button {
+          align-self: flex-start;
+          min-height: 48px;
+          padding: 12px 24px;
+          
+          mat-icon {
+            margin-right: 8px;
+          }
+        }
+        
+        .integration-description {
+          margin: 0;
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 14px;
+          line-height: 1.5;
+        }
+      }
+    }
+
     // Help Card
     .help-card {
       .guidelines {

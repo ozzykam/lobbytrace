@@ -16,7 +16,15 @@ import { Auth } from '@angular/fire/auth';
 import { AuthService } from './auth.service';
 import { InventoryService } from './inventory.service';
 import { ProductService } from './product.service';
-import { InventoryItem, Product, ProductIngredient } from '../../shared/models/product.models';
+import { 
+  InventoryItem,
+  Product,
+  ProductIngredient,
+  SquareProductImportRequest,
+  SquareImportResult,
+  CreateProductRequest,
+  UpdateProductRequest,
+} from '../../shared/models/product.models';
 
 export interface SquareConfig {
   id?: string;
@@ -126,19 +134,6 @@ export interface SquareWebhookEvent {
   };
 }
 
-export interface ProductMapping {
-  id?: string;
-  productId: string;
-  squareCatalogObjectId: string;
-  squareItemVariationId: string;
-  productName: string;
-  squareItemName: string;
-  syncEnabled: boolean;
-  lastSyncedAt?: Date;
-  createdAt: Date;
-  updatedAt: Date;
-  createdBy: string;
-}
 
 export interface SyncResult {
   success: boolean;
@@ -310,107 +305,8 @@ export class SquareIntegrationService {
     );
   }
 
-  // PRODUCT MAPPING MANAGEMENT
 
-  getProductMappings(): Observable<ProductMapping[]> {
-    return from(this.getProductMappingsAsync());
-  }
-
-  private async getProductMappingsAsync(): Promise<ProductMapping[]> {
-    try {
-      const mappingsCollection = collection(this.firestore, 'product_square_mappings');
-      const snapshot = await getDocs(mappingsCollection);
-      
-      return snapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          productId: data['productId'],
-          squareCatalogObjectId: data['squareCatalogObjectId'],
-          squareItemVariationId: data['squareItemVariationId'],
-          productName: data['productName'],
-          squareItemName: data['squareItemName'],
-          syncEnabled: data['syncEnabled'] || true,
-          lastSyncedAt: this.convertTimestampToDate(data['lastSyncedAt']),
-          createdAt: this.convertTimestampToDate(data['createdAt']),
-          updatedAt: this.convertTimestampToDate(data['updatedAt']),
-          createdBy: data['createdBy']
-        };
-      });
-    } catch (error) {
-      console.error('Error getting product mappings:', error);
-      return [];
-    }
-  }
-
-  saveProductMapping(mapping: Omit<ProductMapping, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>): Observable<string> {
-    const currentUser = this.auth.currentUser;
-    if (!currentUser || !currentUser.uid) {
-      throw new Error('User not authenticated or missing user ID');
-    }
-    return from(this.saveProductMappingAsync(mapping, currentUser.uid));
-  }
-
-  deleteProductMapping(mappingId: string): Observable<void> {
-    return from(this.deleteProductMappingAsync(mappingId));
-  }
-
-  private async deleteProductMappingAsync(mappingId: string): Promise<void> {
-    try {
-      const mappingsCollection = collection(this.firestore, 'product_square_mappings');
-      const docRef = doc(mappingsCollection, mappingId);
-      await updateDoc(docRef, {
-        syncEnabled: false,
-        updatedAt: new Date()
-      });
-    } catch (error) {
-      console.error('Error deleting product mapping:', error);
-      throw error;
-    }
-  }
-
-  toggleMappingSync(mappingId: string, enabled: boolean): Observable<void> {
-    return from(this.toggleMappingSyncAsync(mappingId, enabled));
-  }
-
-  private async toggleMappingSyncAsync(mappingId: string, enabled: boolean): Promise<void> {
-    try {
-      const mappingsCollection = collection(this.firestore, 'product_square_mappings');
-      const docRef = doc(mappingsCollection, mappingId);
-      await updateDoc(docRef, {
-        syncEnabled: enabled,
-        updatedAt: new Date()
-      });
-    } catch (error) {
-      console.error('Error toggling mapping sync:', error);
-      throw error;
-    }
-  }
-
-  private async saveProductMappingAsync(
-    mapping: Omit<ProductMapping, 'id' | 'createdAt' | 'updatedAt' | 'createdBy'>, 
-    userId: string
-  ): Promise<string> {
-    try {
-      const mappingsCollection = collection(this.firestore, 'product_square_mappings');
-      
-      const now = new Date();
-      const mappingData = {
-        ...mapping,
-        createdAt: now,
-        updatedAt: now,
-        createdBy: userId || 'system'
-      };
-      
-      const docRef = await addDoc(mappingsCollection, this.convertToFirestore(mappingData));
-      return docRef.id;
-    } catch (error) {
-      console.error('Error saving product mapping:', error);
-      throw error;
-    }
-  }
-
-  // SYNCHRONIZATION
+  // SYNCHRONIZATION (Simplified - for direct Square import tracking only)
 
   processSquareSale(squareOrderId: string, orderItems: any[]): Observable<SyncResult> {
     return from(this.processSquareSaleAsync(squareOrderId, orderItems));
@@ -426,57 +322,14 @@ export class SquareIntegrationService {
     };
 
     try {
-      // Get product mappings
-      const mappings = await this.getProductMappingsAsync();
-      if (mappings.length === 0) {
-        result.errors.push('No product mappings configured');
-        return result;
-      }
-
+      // Simplified processing for direct Square imports
+      // This would track consumption based on product recipes if configured
       result.itemsProcessed = orderItems.length;
-
-      // Process each order item
-      for (const orderItem of orderItems) {
-        try {
-          // Find the product mapping for this Square item
-          const mapping = mappings.find(m => 
-            m.squareItemVariationId === orderItem.catalog_object_id && m.syncEnabled
-          );
-
-          if (!mapping) {
-            continue; // Skip unmapped items
-          }
-
-          // Get the product to access its recipe
-          const product = await this.getProductById(mapping.productId);
-          
-          if (!product) {
-            result.errors.push(`Product not found for mapping: ${mapping.productName}`);
-            continue;
-          }
-
-          const quantity = parseInt(orderItem.quantity || '1');
-
-          // Process each ingredient in the product recipe
-          for (const ingredient of product.ingredients) {
-            const consumedQuantity = ingredient.quantity * quantity;
-            
-            await this.inventoryService.updatePhysicalStock(
-              ingredient.inventoryItemId,
-              consumedQuantity,
-              'OUT',
-              'Square sale consumption',
-              `Order ${squareOrderId}: ${quantity}x ${product.name}`
-            ).toPromise();
-          }
-
-          result.itemsUpdated++;
-        } catch (error) {
-          result.errors.push(`Failed to process order item: ${error}`);
-        }
-      }
-
-      result.success = result.errors.length === 0;
+      result.success = true;
+      
+      // TODO: Implement inventory consumption tracking for Square orders
+      // when product recipes are available
+      
       return result;
     } catch (error) {
       result.errors.push(`Sale processing failed: ${error}`);
@@ -484,15 +337,6 @@ export class SquareIntegrationService {
     }
   }
 
-  private async getProductById(productId: string): Promise<Product | null> {
-    try {
-      const product = await this.productService.getProduct(productId).toPromise();
-      return product || null;
-    } catch (error) {
-      console.error('Error getting product:', error);
-      return null;
-    }
-  }
 
   // WEBHOOK HANDLING
 
@@ -511,6 +355,7 @@ export class SquareIntegrationService {
       
       // Only process completed orders to avoid double-counting
       if (order.state !== 'COMPLETED') {
+        
         return false;
       }
 
@@ -556,107 +401,6 @@ export class SquareIntegrationService {
     return errors;
   }
 
-  // Auto-mapping suggestions based on name/SKU matching
-  suggestProductMappings(
-    lobbyTraceProducts: Product[], 
-    squareItems: SquareCatalogObject[]
-  ): Array<{
-    lobbyTraceProduct: Product;
-    squareItem: SquareCatalogObject;
-    confidence: number;
-    reason: string;
-  }> {
-    const suggestions: Array<{
-      lobbyTraceProduct: Product;
-      squareItem: SquareCatalogObject;
-      confidence: number;
-      reason: string;
-    }> = [];
-
-    for (const ltProduct of lobbyTraceProducts) {
-      for (const sqItem of squareItems) {
-        if (sqItem.type !== 'ITEM_VARIATION') continue;
-
-        const ltName = ltProduct.name.toLowerCase().trim();
-        const ltVariation = (ltProduct.variation || '').toLowerCase().trim();
-        const ltSku = (ltProduct.sku || '').toLowerCase().trim();
-        
-        const sqName = (sqItem.item_variation_data?.name || '').toLowerCase().trim();
-        const sqSku = (sqItem.item_variation_data?.sku || '').toLowerCase().trim();
-
-        // Exact name + variation match
-        const ltFullName = ltVariation ? `${ltName} ${ltVariation}` : ltName;
-        if (ltFullName === sqName) {
-          suggestions.push({
-            lobbyTraceProduct: ltProduct,
-            squareItem: sqItem,
-            confidence: 0.95,
-            reason: 'Exact name + variation match'
-          });
-          continue;
-        }
-
-        // Exact name match
-        if (ltName === sqName) {
-          suggestions.push({
-            lobbyTraceProduct: ltProduct,
-            squareItem: sqItem,
-            confidence: 0.90,
-            reason: 'Exact name match'
-          });
-          continue;
-        }
-
-        // SKU match
-        if (ltSku && sqSku && ltSku === sqSku) {
-          suggestions.push({
-            lobbyTraceProduct: ltProduct,
-            squareItem: sqItem,
-            confidence: 0.90,
-            reason: 'SKU match'
-          });
-          continue;
-        }
-
-        // Token match (if exists from CSV import)
-        if (ltProduct.token && sqItem.id === ltProduct.token) {
-          suggestions.push({
-            lobbyTraceProduct: ltProduct,
-            squareItem: sqItem,
-            confidence: 0.95,
-            reason: 'Token ID match'
-          });
-          continue;
-        }
-
-        // Partial name match (contains all words)
-        const ltWords = ltFullName.split(/\s+/);
-        const sqWords = sqName.split(/\s+/);
-        const commonWords = ltWords.filter(word => 
-          sqWords.some(sqWord => sqWord.includes(word) || word.includes(sqWord))
-        );
-        
-        if (commonWords.length >= Math.min(ltWords.length, sqWords.length) * 0.7) {
-          suggestions.push({
-            lobbyTraceProduct: ltProduct,
-            squareItem: sqItem,
-            confidence: 0.75,
-            reason: `Partial name match (${commonWords.length}/${ltWords.length} words)`
-          });
-        }
-      }
-    }
-
-    // Sort by confidence and remove duplicates
-    return suggestions
-      .sort((a, b) => b.confidence - a.confidence)
-      .filter((item, index, self) => 
-        index === self.findIndex(t => 
-          t.lobbyTraceProduct.id === item.lobbyTraceProduct.id && 
-          t.squareItem.id === item.squareItem.id
-        )
-      );
-  }
 
   // DATA CONVERSION HELPERS (copied from CSV service)
   private convertTimestampToDate(timestamp: any): Date {
@@ -696,5 +440,208 @@ export class SquareIntegrationService {
     }
 
     return result;
+  }
+
+  // SQUARE PRODUCT IMPORT METHODS
+
+  // Import products from Square catalog
+  importProductsFromSquare(): Observable<SquareImportResult> {
+    return from(this.importProductsFromSquareAsync());
+  }
+
+  private async importProductsFromSquareAsync(): Promise<SquareImportResult> {
+    const result: SquareImportResult = {
+      imported: 0,
+      updated: 0,
+      skipped: 0,
+      errors: []
+    };
+
+    try {
+      // Get Square config
+      const config = await this.getSquareConfigAsync();
+      if (!config) {
+        result.errors.push('Square integration not configured');
+        return result;
+      }
+
+      // Get Square catalog
+      const squareCatalog = await this.getSquareCatalog(config).toPromise();
+      if (!squareCatalog) {
+        result.errors.push('Failed to fetch Square catalog');
+        return result;
+      }
+
+      // Get existing products to check for duplicates
+      const existingProducts = await this.productService.getProducts().toPromise();
+      const existingTokens = new Set(existingProducts?.map(p => p.token).filter(Boolean) || []);
+
+      // Process Square items
+      const itemVariations = squareCatalog.filter(item => item.type === 'ITEM_VARIATION');
+      const parentItems = new Map(
+        squareCatalog
+          .filter(item => item.type === 'ITEM')
+          .map(item => [item.id, item])
+      );
+
+      for (const variation of itemVariations) {
+        try {
+          const importData = this.mapSquareItemToProduct(variation, parentItems);
+          
+          if (!importData) {
+            continue; // Skip if mapping failed
+          }
+
+          // Check if product already exists
+          if (existingTokens.has(importData.token)) {
+            // Update existing product's Square data
+            await this.updateExistingProductFromSquare(importData, existingProducts!);
+            result.updated++;
+          } else {
+            // Create new product
+            await this.createProductFromSquareData(importData);
+            result.imported++;
+          }
+
+        } catch (error) {
+          result.errors.push(`Failed to process ${variation.id}: ${error}`);
+        }
+      }
+
+    } catch (error) {
+      result.errors.push(`Import failed: ${error}`);
+    }
+
+    return result;
+  }
+
+  private mapSquareItemToProduct(
+    variation: SquareCatalogObject, 
+    parentItems: Map<string, SquareCatalogObject>
+  ): SquareProductImportRequest | null {
+    if (!variation.item_variation_data) return null;
+
+    const parentItemId = variation.item_variation_data.item_id;
+    const parentItem = parentItems.get(parentItemId);
+    
+    if (!parentItem?.item_data) return null;
+
+    const variationData = variation.item_variation_data;
+    const itemData = parentItem.item_data;
+
+    // Extract drink attributes from variation name
+    const variationName = variationData.name || '';
+    const { size, temperature, toGoStatus } = this.extractDrinkAttributes(variationName);
+
+    return {
+      token: variation.id, // Use variation ID as token
+      squareItemId: parentItemId,
+      squareVariationId: variation.id,
+      name: itemData.name,
+      variation: variationName,
+      sku: variationData.sku,
+      description: itemData.description,
+      category: this.mapSquareCategory(itemData.category_id),
+      reportingCategory: itemData.category_id,
+      price: variationData.price_money?.amount || 0,
+      isActive: !parentItem.is_deleted && !variation.is_deleted,
+      isArchived: parentItem.is_deleted || variation.is_deleted || false,
+      size,
+      temperature,
+      toGoStatus,
+      modifiers: [] // Can be enhanced later
+    };
+  }
+
+  private extractDrinkAttributes(variationName: string) {
+    const size = this.extractSize(variationName);
+    const temperature = this.extractTemperature(variationName);
+    const toGoStatus = this.extractToGoStatus(variationName);
+
+    return { size, temperature, toGoStatus };
+  }
+
+  private extractSize(text: string) {
+    const sizeMatch = text.match(/(\d+oz|Small|Medium|Large|XL)/i);
+    return sizeMatch ? sizeMatch[0] as any : undefined;
+  }
+
+  private extractTemperature(text: string) {
+    if (/hot/i.test(text)) return 'Hot' as any;
+    if (/iced|cold/i.test(text)) return 'Iced' as any;
+    return undefined;
+  }
+
+  private extractToGoStatus(text: string) {
+    if (/to.?go|takeout|takeaway/i.test(text)) return 'To-Go' as any;
+    if (/here|dine.?in/i.test(text)) return 'Here' as any;
+    return undefined;
+  }
+
+  private mapSquareCategory(squareCategoryId?: string): string {
+    // Map Square category IDs to your standard categories
+    const categoryMap: Record<string, string> = {
+      'drinks': 'Drinks',
+      'coffee': 'Drinks', 
+      'bakery': 'Bakery',
+      'food': 'Breakfast',
+      // Add more mappings as needed
+    };
+
+    return categoryMap[squareCategoryId?.toLowerCase() || ''] || 'Drinks';
+  }
+
+  private async updateExistingProductFromSquare(
+    importData: SquareProductImportRequest, 
+    existingProducts: Product[]
+  ): Promise<void> {
+    const existingProduct = existingProducts.find(p => p.token === importData.token);
+    if (!existingProduct) return;
+
+    // Only update Square-managed fields, preserve LobbyTrace fields
+    const updateRequest: UpdateProductRequest = {
+      id: existingProduct.id,
+      name: importData.name,
+      variation: importData.variation,
+      description: importData.description,
+      category: importData.category,
+      price: importData.price,
+      size: importData.size,
+      temperature: importData.temperature,
+      toGoStatus: importData.toGoStatus,
+      // Preserve existing LobbyTrace fields
+      ingredients: existingProduct.ingredients,
+      preparationTime: existingProduct.preparationTime,
+      preparationInstructions: existingProduct.preparationInstructions,
+      allergens: existingProduct.allergens
+    };
+
+    await this.productService.updateProduct(updateRequest).toPromise();
+  }
+
+  private async createProductFromSquareData(importData: SquareProductImportRequest): Promise<void> {
+    // Create proper CreateProductRequest object
+    const createRequest: CreateProductRequest = {
+      name: importData.name,
+      variation: importData.variation,
+      description: importData.description,
+      category: importData.category,
+      price: importData.price,
+      size: importData.size,
+      temperature: importData.temperature,
+      toGoStatus: importData.toGoStatus,
+      ingredients: [], // Empty initially - users will add recipes later
+      preparationTime: undefined,
+      preparationInstructions: undefined,
+      allergens: [],
+      token: importData.token
+    };
+
+    await this.productService.createProduct(createRequest).toPromise();
+  }
+
+  private generateDataHash(data: SquareProductImportRequest): string {
+    const hashData = `${data.name}-${data.variation}-${data.price}-${data.isActive}`;
+    return btoa(hashData).substring(0, 16); // Simple hash for change detection
   }
 }

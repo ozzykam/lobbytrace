@@ -12,7 +12,16 @@
     <!-- Basic Product Information -->
     <mat-card class="mb-4">
       <mat-card-header>
-        <mat-card-title class="text-lg">Basic Information - {{data.product?.token}} </mat-card-title>
+        <mat-card-title class="text-lg flex items-center gap-2">
+          <span>Basic Information</span>
+          @if (product && (product.token || product.squareItemId)) {
+            <mat-icon class="text-blue-600" matTooltip="This product is synced with Square - some fields are read-only">sync</mat-icon>
+            <span class="text-sm text-blue-600 font-normal">(Square-managed)</span>
+          }
+        </mat-card-title>
+        @if (product?.token) {
+          <mat-card-subtitle>Token ID: {{product?.token}}</mat-card-subtitle>
+        }
       </mat-card-header>
       <mat-card-content class="pt-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -24,7 +33,11 @@
               matInput 
               formControlName="name"
               placeholder="e.g., Americano, Croissant"
+              [readonly]="isSquareManagedField('name')"
               [class.mat-form-field-invalid]="isFieldInvalid('name')">
+            @if (isSquareManagedField('name')) {
+              <mat-hint>Managed by Square - read only</mat-hint>
+            }
             @if (isFieldInvalid('name')) {
               <mat-error>{{getFieldError('name')}}</mat-error>
             }
@@ -37,7 +50,11 @@
               matInput 
               formControlName="token"
               placeholder="unique token id"
+              [readonly]="isSquareManagedField('token')"
               [class.mat-form-field-invalid]="isFieldInvalid('token')">
+            @if (isSquareManagedField('token')) {
+              <mat-hint>Managed by Square - read only</mat-hint>
+            }
             @if (isFieldInvalid('token')) {
               <mat-error>{{getFieldError('token')}}</mat-error>
             }
@@ -50,7 +67,11 @@
               matInput 
               formControlName="variation"
               placeholder="e.g., 10oz (To Go), 16oz (Here)"
+              [readonly]="isSquareManagedField('variation')"
               [class.mat-form-field-invalid]="isFieldInvalid('variation')">
+            @if (isSquareManagedField('variation')) {
+              <mat-hint>Managed by Square - read only</mat-hint>
+            }
             @if (isFieldInvalid('variation')) {
               <mat-error>{{getFieldError('variation')}}</mat-error>
             }
@@ -59,11 +80,14 @@
           <!-- Category -->
           <mat-form-field class="w-full">
             <mat-label>Category *</mat-label>
-            <mat-select formControlName="category">
+            <mat-select formControlName="category" [disabled]="isSquareManagedField('category')">
               @for (category of categories; track category) {
                 <mat-option [value]="category">{{category}}</mat-option>
               }
             </mat-select>
+            @if (isSquareManagedField('category')) {
+              <mat-hint>Managed by Square - read only</mat-hint>
+            }
             @if (isFieldInvalid('category')) {
               <mat-error>{{getFieldError('category')}}</mat-error>
             }
@@ -79,8 +103,12 @@
               min="0"
               formControlName="price"
               placeholder="0.00"
+              [readonly]="isSquareManagedField('price')"
               [class.mat-form-field-invalid]="isFieldInvalid('price')">
             <span matTextPrefix>$</span>
+            @if (isSquareManagedField('price')) {
+              <mat-hint>Managed by Square - read only</mat-hint>
+            }
             @if (isFieldInvalid('price')) {
               <mat-error>{{getFieldError('price')}}</mat-error>
             }
@@ -100,34 +128,43 @@
             <!-- Size -->
             <mat-form-field class="w-full">
               <mat-label>Size</mat-label>
-              <mat-select formControlName="size">
+              <mat-select formControlName="size" [disabled]="isSquareManagedField('size')">
                 <mat-option value="">None</mat-option>
                 @for (size of drinkSizes; track size) {
                   <mat-option [value]="size">{{size}}</mat-option>
                 }
               </mat-select>
+              @if (isSquareManagedField('size')) {
+                <mat-hint>Managed by Square - read only</mat-hint>
+              }
             </mat-form-field>
 
             <!-- Temperature -->
             <mat-form-field class="w-full">
               <mat-label>Temperature</mat-label>
-              <mat-select formControlName="temperature">
+              <mat-select formControlName="temperature" [disabled]="isSquareManagedField('temperature')">
                 <mat-option value="">None</mat-option>
                 @for (temp of drinkTemperatures; track temp) {
                   <mat-option [value]="temp">{{temp}}</mat-option>
                 }
               </mat-select>
+              @if (isSquareManagedField('temperature')) {
+                <mat-hint>Managed by Square - read only</mat-hint>
+              }
             </mat-form-field>
 
             <!-- To-Go Status -->
             <mat-form-field class="w-full">
               <mat-label>To-Go Status</mat-label>
-              <mat-select formControlName="toGoStatus">
+              <mat-select formControlName="toGoStatus" [disabled]="isSquareManagedField('toGoStatus')">
                 <mat-option value="">None</mat-option>
                 @for (status of toGoStatuses; track status) {
                   <mat-option [value]="status">{{status}}</mat-option>
                 }
               </mat-select>
+              @if (isSquareManagedField('toGoStatus')) {
+                <mat-hint>Managed by Square - read only</mat-hint>
+              }
             </mat-form-field>
           </div>
         }
@@ -159,8 +196,12 @@
             formControlName="description"
             placeholder="Optional description of the product"
             rows="3"
+            [readonly]="isSquareManagedField('description')"
             [class.mat-form-field-invalid]="isFieldInvalid('description')">
           </textarea>
+          @if (isSquareManagedField('description')) {
+            <mat-hint>Managed by Square - read only</mat-hint>
+          }
           @if (isFieldInvalid('description')) {
             <mat-error>{{getFieldError('description')}}</mat-error>
           }
@@ -184,14 +225,15 @@
     </mat-card>
 
     <!-- Ingredient Specifications -->
-    <mat-card class="mb-4">
+    <mat-card class="mb-4 ring-2 ring-green-200 ring-offset-2">
       <mat-card-header>
         <mat-card-title class="text-lg flex items-center gap-2">
-          <mat-icon>restaurant</mat-icon>
-          Ingredient Specifications
+          <mat-icon class="text-green-600">restaurant</mat-icon>
+          Recipe & Ingredient Specifications
+          <span class="text-sm text-green-600 font-normal">(LobbyTrace-managed)</span>
         </mat-card-title>
         <mat-card-subtitle>
-          Define what inventory items are needed to make this product
+          Define what inventory items are needed to make this product and track costs
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content class="pt-4">
