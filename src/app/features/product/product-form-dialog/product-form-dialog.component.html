@@ -1,18 +1,19 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   
   <!-- Dialog Header -->
-  <div mat-dialog-title class="flex items-center gap-3">
-    <mat-icon class="text-primary">{{ mode === 'create' ? 'add_circle' : 'edit' }}</mat-icon>
+  <div mat-dialog-title class="dialog-header">
+    <mat-icon>{{ mode === 'create' ? 'add_circle' : 'edit' }}</mat-icon>
     <span>{{ mode === 'create' ? 'Create New Product' : 'Edit Product' }}</span>
   </div>
 
   <!-- Dialog Content -->
-  <div mat-dialog-content class="max-h-[80vh] overflow-y-auto">
+  <div mat-dialog-content class="dialog-content">
     
     <!-- Basic Product Information -->
-    <mat-card class="mb-4">
+    <div class="form-section">
+      <mat-card>
       <mat-card-header>
-        <mat-card-title class="text-lg flex items-center gap-2">
+        <mat-card-title class="flex items-center gap-2">
           <span>Basic Information</span>
           @if (product && (product.token || product.squareItemId)) {
             <mat-icon class="text-blue-600" matTooltip="This product is synced with Square - some fields are read-only">sync</mat-icon>
@@ -24,10 +25,10 @@
         }
       </mat-card-header>
       <mat-card-content class="pt-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-row">
           
           <!-- Product Name -->
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <mat-label>Product Name *</mat-label>
             <input 
               matInput 
@@ -44,7 +45,7 @@
           </mat-form-field>
 
           <!-- Token ID -->
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <mat-label>Token ID</mat-label>
             <input 
               matInput 
@@ -60,8 +61,11 @@
             }
           </mat-form-field>
 
+        </div>
+        
+        <div class="form-row">
           <!-- Variation -->
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <mat-label>Variation</mat-label>
             <input 
               matInput 
@@ -78,7 +82,7 @@
           </mat-form-field>
 
           <!-- Category -->
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <mat-label>Category *</mat-label>
             <mat-select formControlName="category" [disabled]="isSquareManagedField('category')">
               @for (category of categories; track category) {
@@ -94,7 +98,7 @@
           </mat-form-field>
 
           <!-- Price -->
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <mat-label>Price *</mat-label>
             <input 
               matInput 
@@ -117,16 +121,18 @@
 
         <!-- Drink Attributes Section (only show if category is drink-related) -->
         @if (productForm.get('category')?.value && ['Drinks', 'Non Coffee Drinks', 'Signature Drinks'].includes(productForm.get('category')?.value)) {
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 p-4 bg-blue-50 rounded-lg">
-            <div class="md:col-span-3 mb-2">
+          <div class="form-row p-4 bg-blue-50 rounded-lg">
+            <div class="form-field-full mb-2">
               <h4 class="text-sm font-medium text-blue-900 flex items-center gap-2">
                 <mat-icon class="text-blue-600">local_cafe</mat-icon>
                 Drink Attributes (Auto-extracted from variation)
               </h4>
             </div>
-
+          </div>
+          
+          <div class="form-row">
             <!-- Size -->
-            <mat-form-field class="w-full">
+            <mat-form-field>
               <mat-label>Size</mat-label>
               <mat-select formControlName="size" [disabled]="isSquareManagedField('size')">
                 <mat-option value="">None</mat-option>
@@ -140,7 +146,7 @@
             </mat-form-field>
 
             <!-- Temperature -->
-            <mat-form-field class="w-full">
+            <mat-form-field>
               <mat-label>Temperature</mat-label>
               <mat-select formControlName="temperature" [disabled]="isSquareManagedField('temperature')">
                 <mat-option value="">None</mat-option>
@@ -154,7 +160,7 @@
             </mat-form-field>
 
             <!-- To-Go Status -->
-            <mat-form-field class="w-full">
+            <mat-form-field>
               <mat-label>To-Go Status</mat-label>
               <mat-select formControlName="toGoStatus" [disabled]="isSquareManagedField('toGoStatus')">
                 <mat-option value="">None</mat-option>
@@ -169,10 +175,9 @@
           </div>
         }
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-
+        <div class="form-row">
           <!-- Preparation Time -->
-          <mat-form-field class="w-full">
+          <mat-form-field>
             <mat-label>Preparation Time</mat-label>
             <input 
               matInput 
@@ -189,7 +194,7 @@
         </div>
 
         <!-- Description -->
-        <mat-form-field class="w-full mt-4">
+        <mat-form-field class="form-field-full">
           <mat-label>Description</mat-label>
           <textarea 
             matInput 
@@ -208,7 +213,7 @@
         </mat-form-field>
 
         <!-- Preparation Instructions -->
-        <mat-form-field class="w-full">
+        <mat-form-field class="form-field-full">
           <mat-label>Preparation Instructions</mat-label>
           <textarea 
             matInput 
@@ -222,12 +227,14 @@
           }
         </mat-form-field>
       </mat-card-content>
-    </mat-card>
+      </mat-card>
+    </div>
 
     <!-- Ingredient Specifications -->
-    <mat-card class="mb-4 ring-2 ring-green-200 ring-offset-2">
+    <div class="form-section">
+      <mat-card class="ring-2 ring-green-200 ring-offset-2">
       <mat-card-header>
-        <mat-card-title class="text-lg flex items-center gap-2">
+        <mat-card-title class="flex items-center gap-2">
           <mat-icon class="text-green-600">restaurant</mat-icon>
           Recipe & Ingredient Specifications
           <span class="text-sm text-green-600 font-normal">(LobbyTrace-managed)</span>
@@ -254,10 +261,9 @@
                 <mat-icon>close</mat-icon>
               </button>
 
-              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                
+              <div class="form-row">
                 <!-- Inventory Item Selection -->
-                <mat-form-field class="md:col-span-2">
+                <mat-form-field style="flex: 2;">
                   <mat-label>Inventory Item *</mat-label>
                   <mat-select 
                     formControlName="inventoryItemId"
@@ -308,7 +314,7 @@
               </div>
 
               <!-- Notes -->
-              <mat-form-field class="w-full mt-3">
+              <mat-form-field class="form-field-full">
                 <mat-label>Notes (Optional)</mat-label>
                 <input 
                   matInput 
@@ -362,7 +368,8 @@
           </div>
         </div>
       </mat-card-content>
-    </mat-card>
+      </mat-card>
+    </div>
 
     <!-- Allergens (Optional Enhancement for Future) -->
     <!-- This section can be expanded later with allergen management -->
@@ -370,7 +377,7 @@
   </div>
 
   <!-- Dialog Actions -->
-  <div mat-dialog-actions class="flex justify-end gap-3 pt-4 border-t">
+  <div mat-dialog-actions class="dialog-actions">
     <button 
       type="button"
       mat-button 

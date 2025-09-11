@@ -18,9 +18,9 @@
     <div class="flex gap-3">
       <!-- Low Stock Alert Badge -->
       @if (lowStockItems().length > 0) {
-        <div class="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-700 rounded-lg border border-red-200">
-          <mat-icon class="text-red-600">warning</mat-icon>
-          <span class="text-sm font-medium">{{lowStockItems().length}} Low Stock</span>
+        <div class="status-badge low-stock">
+          <mat-icon class="icon-sm icon-low-stock">warning</mat-icon>
+          <span>{{lowStockItems().length}} Low Stock</span>
         </div>
       }
       
